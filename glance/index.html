@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GLANCE — The Healthcare Optician</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--h:'Outfit','Century Gothic',sans-serif;--b:'Cormorant Garamond',Georgia,serif;--off:#F7F7F7;--px:48px}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:var(--h);color:#000;background:#fff;overflow-x:hidden}
+
+/* NAV */
+.gl-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px var(--px);transition:all .4s}
+.gl-nav.scrolled{background:rgba(0,0,0,.95);backdrop-filter:blur(12px);padding:14px var(--px)}
+.gl-nav-logo{font-family:var(--h);font-weight:800;font-size:18px;letter-spacing:10px;color:#fff;cursor:pointer;z-index:110;text-decoration:none}
+.gl-nav-links{display:flex;gap:32px}
+.gl-nav-links a{font-family:var(--h);font-size:10px;font-weight:400;letter-spacing:3px;color:rgba(255,255,255,.65);text-decoration:none;text-transform:uppercase;transition:color .3s}
+.gl-nav-links a:hover{color:#fff}
+.gl-nav-cta{font-family:var(--h);font-size:10px;font-weight:500;letter-spacing:2px;color:#000;background:#fff;padding:10px 22px;text-transform:uppercase;transition:all .3s;cursor:pointer;border:none;text-decoration:none;display:inline-block}
+.gl-nav-cta:hover{background:#E0E0E0}
+.gl-hamburger{display:none;background:none;border:none;cursor:pointer;z-index:110;padding:4px}
+.gl-hamburger span{display:block;width:22px;height:1.5px;background:#fff;margin:5px 0;transition:all .3s}
+.gl-hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.gl-hamburger.open span:nth-child(2){opacity:0}
+.gl-hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.gl-mob-menu{position:fixed;inset:0;z-index:105;background:rgba(0,0,0,.98);display:none;flex-direction:column;align-items:center;justify-content:center;gap:32px;animation:fi .3s}
+.gl-mob-menu.active{display:flex}
+.gl-mob-menu a{font-family:var(--h);font-size:14px;font-weight:400;letter-spacing:6px;color:rgba(255,255,255,.8);text-decoration:none;text-transform:uppercase}
+
+/* HERO */
+.gl-hero{height:100vh;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:0 20px}
+.gl-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(40,40,40,.4) 0%,transparent 70%)}
+.gl-hero-wm{font-family:var(--h);font-weight:800;font-size:clamp(48px,12vw,160px);letter-spacing:clamp(8px,3vw,40px);color:#fff;position:relative;z-index:1;animation:hf 1.2s ease-out both;text-align:center}
+.gl-hero-rule{width:120px;height:1px;background:rgba(255,255,255,.3);margin:28px auto;position:relative;z-index:1;animation:hf 1.2s ease-out .3s both}
+.gl-hero-sub{font-family:var(--h);font-weight:300;font-size:clamp(9px,1.4vw,14px);letter-spacing:clamp(4px,1.2vw,14px);color:#fff;text-transform:uppercase;position:relative;z-index:1;animation:hf 1.2s ease-out .5s both;text-align:center}
+.gl-hero-tag{font-family:var(--b);font-weight:300;font-style:italic;font-size:clamp(15px,2vw,22px);color:rgba(255,255,255,.8);margin-top:20px;position:relative;z-index:1;animation:hf 1.2s ease-out .7s both;text-align:center}
+.gl-hero-scr{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:1;font-family:var(--h);font-size:10px;letter-spacing:4px;color:rgba(255,255,255,.4);text-transform:uppercase;animation:pls 2s ease-in-out infinite}
+@keyframes hf{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pls{0%,100%{opacity:.4}50%{opacity:.8}}
+
+/* TICKER */
+.gl-ticker{background:#000;border-top:1px solid rgba(255,255,255,.06);padding:18px var(--px);display:flex;align-items:center;justify-content:center;gap:20px;overflow:hidden;flex-wrap:wrap}
+.gl-ticker-g{font-family:var(--h);font-weight:700;font-size:13px;color:#fff;flex-shrink:0}
+.gl-ticker-stars{display:flex;gap:2px;flex-shrink:0}
+.gl-ticker-stars svg{width:16px;height:16px}
+.gl-ticker-count{font-family:var(--h);font-weight:300;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;flex-shrink:0}
+.gl-ticker-div{width:1px;height:18px;background:rgba(255,255,255,.15);flex-shrink:0}
+.gl-ticker-q{font-family:var(--b);font-style:italic;font-size:14px;color:rgba(255,255,255,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:500px;transition:opacity .5s}
+
+/* SECTIONS */
+.gl-sec{padding:120px var(--px)}
+.gl-sec-l{font-family:var(--h);font-size:10px;font-weight:500;letter-spacing:6px;text-transform:uppercase;margin-bottom:16px}
+.gl-sec-t{font-family:var(--h);font-weight:700;font-size:clamp(24px,4vw,44px);line-height:1.15;margin-bottom:16px}
+.gl-stmt{padding:120px var(--px);display:flex;align-items:center;justify-content:center;min-height:60vh;background:#fff}
+.gl-stmt-in{max-width:800px;text-align:center}
+.gl-stmt h2{font-family:var(--h);font-weight:700;font-size:clamp(26px,5vw,56px);line-height:1.15;margin-bottom:32px}
+.gl-stmt p{font-family:var(--b);font-weight:300;font-size:clamp(16px,2.2vw,24px);line-height:1.7}
+
+/* STATS */
+.gl-stats{display:grid;grid-template-columns:repeat(4,1fr);background:#000;color:#fff}
+.gl-stat{padding:60px 32px;text-align:center;border-right:1px solid rgba(255,255,255,.08);transition:background .4s}
+.gl-stat:last-child{border-right:none}
+.gl-stat:hover{background:#111}
+.gl-stat-n{font-family:var(--h);font-weight:700;font-size:clamp(28px,4vw,48px);margin-bottom:8px}
+.gl-stat-l{font-family:var(--h);font-weight:300;font-size:10px;letter-spacing:4px;text-transform:uppercase;opacity:.7}
+
+/* FLYWHEEL */
+.gl-fw{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:48px}
+.gl-fwc{padding:40px 28px;background:#fff;transition:all .4s}
+.gl-fwc:last-child{background:#000;color:#fff}
+.gl-fwc:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.08)}
+.gl-fwn{font-family:var(--h);font-weight:700;font-size:28px;margin-bottom:8px}
+.gl-fwnm{font-family:var(--h);font-weight:600;font-size:11px;letter-spacing:5px;text-transform:uppercase;margin-bottom:20px}
+.gl-fwr{width:24px;height:1px;background:currentColor;opacity:.3;margin-bottom:20px}
+.gl-fwd{font-family:var(--b);font-size:16px;line-height:1.7;opacity:.85}
+
+/* DIAGNOSTICS */
+.gl-dg{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:1100px;margin-top:48px}
+.gl-dgc{padding:40px 36px;background:var(--off);border:1px solid transparent;transition:all .4s}
+.gl-dgc:hover{border-color:#000;background:#fff}
+.gl-dgc-icon{margin-bottom:20px;opacity:.85}
+.gl-dgc-icon svg{width:40px;height:40px}
+.gl-dgn{font-family:var(--h);font-weight:600;font-size:17px;margin-bottom:12px}
+.gl-dgd{font-family:var(--b);font-size:16px;line-height:1.7;color:#333}
+
+/* REVIEWS */
+.gl-rv{padding:120px var(--px);background:var(--off)}
+.gl-rv-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:64px;flex-wrap:wrap;gap:24px}
+.gl-rv-sc{display:flex;align-items:center;gap:20px}
+.gl-rv-num{font-family:var(--h);font-weight:800;font-size:72px;line-height:1}
+.gl-rv-sr{display:flex;gap:3px}.gl-rv-sr svg{width:16px;height:16px}
+.gl-rv-lb{font-family:var(--h);font-size:11px;letter-spacing:3px;text-transform:uppercase}
+.gl-rv-ggl{font-family:var(--h);font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:300;opacity:.5}
+.gl-rv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.gl-rvc{background:#fff;padding:32px;border:1px solid transparent;transition:all .4s}
+.gl-rvc:hover{border-color:#000}
+.gl-rvc-top{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.gl-rvc-av{width:40px;height:40px;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center;font-family:var(--h);font-weight:700;font-size:14px;color:#fff;flex-shrink:0}
+.gl-rvc-nm{font-family:var(--h);font-weight:600;font-size:13px}
+.gl-rvc-tm{font-family:var(--h);font-weight:300;font-size:10px;opacity:.5;letter-spacing:1px}
+.gl-rvc-st{display:flex;gap:2px;margin-bottom:12px}.gl-rvc-st svg{width:16px;height:16px}
+.gl-rvc-tx{font-family:var(--b);font-size:15px;line-height:1.7;color:#333}
+.gl-rvc-gl{font-family:var(--h);font-size:10px;opacity:.3;margin-top:12px;letter-spacing:2px}
+.gl-all-rv{text-align:center;margin-top:48px}
+.gl-all-rv a{font-family:var(--h);font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:#000;border:2px solid #000;padding:14px 36px;text-decoration:none;display:inline-block;transition:all .3s}
+.gl-all-rv a:hover{background:#000;color:#fff}
+
+/* SITES */
+.gl-sg{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:48px}
+.gl-sgc{padding:48px 36px;transition:background .3s;color:#fff}
+.gl-sgc.dk{background:#111}.gl-sgc.lt{background:#1A1A1A}.gl-sgc:hover{background:#222}
+.gl-sgt{font-family:var(--h);font-weight:300;font-size:10px;letter-spacing:5px;text-transform:uppercase;opacity:.5;margin-bottom:12px}
+.gl-sgn{font-family:var(--h);font-weight:700;font-size:clamp(20px,3vw,32px);margin-bottom:8px}
+.gl-sgm{font-family:var(--h);font-weight:300;font-size:10px;letter-spacing:3px;margin-bottom:24px;opacity:.6}
+.gl-sgr{width:24px;height:1px;background:#fff;opacity:.2;margin-bottom:24px}
+.gl-sgl{list-style:none;padding:0}
+.gl-sgl li{font-family:var(--b);font-size:16px;line-height:1.7;opacity:.8;padding-left:16px;position:relative;margin-bottom:4px}
+.gl-sgl li::before{content:'\2014';position:absolute;left:0;opacity:.4;font-size:12px}
+
+/* MEMBERSHIP */
+.gl-mg{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;max-width:900px;margin-top:48px}
+.gl-mc{padding:48px 36px;background:#000;color:#fff;position:relative;overflow:hidden;transition:all .3s}
+.gl-mc:hover{background:#111}
+.gl-mc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:#fff}
+.gl-mt{font-family:var(--h);font-weight:300;font-size:10px;letter-spacing:6px;margin-bottom:12px}
+.gl-mp{font-family:var(--h);font-weight:700;font-size:36px;margin-bottom:4px}
+.gl-mpr{font-family:var(--h);font-weight:300;font-size:12px;opacity:.5;margin-bottom:24px}
+.gl-mrl{width:24px;height:1px;background:#fff;opacity:.2;margin-bottom:24px}
+.gl-ml{list-style:none;padding:0}
+.gl-ml li{font-family:var(--b);font-size:16px;line-height:1.8;opacity:.85}
+
+/* FRANCHISE */
+.gl-fr-gate{max-width:600px;margin:64px auto 0;text-align:center}
+.gl-fr-lock{width:64px;height:64px;margin:0 auto 24px;border:2px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.gl-fr-input-row{display:flex;gap:0;max-width:400px;margin:24px auto 0}
+.gl-fr-input{flex:1;padding:14px 20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-right:none;color:#fff;font-family:var(--h);font-size:13px;letter-spacing:2px;outline:none;transition:border-color .3s;min-width:0}
+.gl-fr-input:focus{border-color:rgba(255,255,255,.4)}
+.gl-fr-input::placeholder{color:rgba(255,255,255,.25);letter-spacing:3px;text-transform:uppercase;font-size:10px}
+.gl-fr-submit{padding:14px 28px;background:#fff;color:#000;font-family:var(--h);font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;border:1px solid #fff;cursor:pointer;transition:all .3s;flex-shrink:0}
+.gl-fr-submit:hover{background:#E0E0E0}
+.gl-fr-error{color:#ff4444;font-family:var(--h);font-size:11px;letter-spacing:2px;margin-top:12px;animation:shake .4s;display:none}
+.gl-fr-error.show{display:block}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.gl-fr-content{display:none}
+.gl-fr-content.unlocked{display:block}
+.gl-fr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:48px}
+.gl-fr-card{padding:40px 32px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);transition:all .4s}
+.gl-fr-card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)}
+.gl-fr-card-num{font-family:var(--h);font-weight:700;font-size:11px;letter-spacing:4px;opacity:.4;margin-bottom:8px}
+.gl-fr-card-t{font-family:var(--h);font-weight:700;font-size:18px;margin-bottom:12px}
+.gl-fr-card-d{font-family:var(--b);font-size:16px;line-height:1.7;opacity:.75}
+.gl-fr-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:48px}
+.gl-fr-met{padding:32px 20px;background:rgba(255,255,255,.04);text-align:center;border:1px solid rgba(255,255,255,.06)}
+.gl-fr-met-v{font-family:var(--h);font-weight:700;font-size:clamp(22px,3vw,36px);margin-bottom:4px}
+.gl-fr-met-l{font-family:var(--h);font-weight:300;font-size:9px;letter-spacing:3px;text-transform:uppercase;opacity:.5}
+
+/* BOOKING SECTION */
+.gl-bk{padding:120px var(--px);background:#000;color:#fff}
+.gl-bk-in{display:grid;grid-template-columns:1fr 1fr;gap:64px;max-width:1100px}
+.gl-bk-types{display:flex;flex-direction:column;gap:12px;margin-top:32px}
+.gl-bk-btn{display:block;padding:16px 24px;background:#111;border:1px solid rgba(255,255,255,.1);color:#fff;font-family:var(--h);font-size:12px;font-weight:500;letter-spacing:3px;text-transform:uppercase;cursor:pointer;text-align:left;transition:all .3s;width:100%}
+.gl-bk-btn:hover{background:#222;border-color:rgba(255,255,255,.3)}
+.gl-bk-btn span{display:block;font-family:var(--b);font-size:14px;font-weight:300;letter-spacing:0;text-transform:none;opacity:.6;margin-top:4px}
+.gl-bk-hr{margin-top:16px}
+.gl-bk-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);font-family:var(--h);font-size:12px}
+.gl-bk-day{font-weight:400;letter-spacing:2px}.gl-bk-time{font-weight:300;opacity:.6}
+
+/* CTA */
+.gl-cta{padding:120px var(--px);background:#000;color:#fff;text-align:center;position:relative;overflow:hidden}
+.gl-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(50,50,50,.3) 0%,transparent 60%)}
+.gl-cta-wm{font-family:var(--h);font-weight:800;font-size:clamp(40px,10vw,120px);letter-spacing:clamp(6px,2vw,30px);position:relative;z-index:1;margin-bottom:24px}
+.gl-cta-tg{font-family:var(--b);font-weight:300;font-style:italic;font-size:clamp(16px,2.5vw,26px);position:relative;z-index:1;opacity:.8;margin-bottom:12px;line-height:1.6}
+.gl-cta-inv{font-family:var(--b);font-weight:300;font-size:16px;position:relative;z-index:1;opacity:.6;margin-bottom:48px;line-height:1.6}
+.gl-cta-btn{display:inline-block;font-family:var(--h);font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:#000;background:#fff;padding:16px 40px;border:none;position:relative;z-index:1;transition:all .3s;cursor:pointer;text-decoration:none}
+.gl-cta-btn:hover{background:#E0E0E0;transform:translateY(-2px)}
+
+/* FOOTER */
+.gl-ft{padding:48px var(--px);background:#000;color:#fff;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.06);flex-wrap:wrap;gap:16px}
+.gl-ft div{font-family:var(--h);font-size:10px;letter-spacing:3px;opacity:.4}
+
+/* ══════════════════════════════════════════
+   5-STEP BOOKING FORM MODAL
+   ══════════════════════════════════════════ */
+.bk-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.92);backdrop-filter:blur(16px);display:none;align-items:center;justify-content:center;animation:fi .3s;padding:16px}
+.bk-overlay.active{display:flex}
+.bk-container{background:#000;border:1px solid rgba(255,255,255,.08);width:100%;max-width:680px;max-height:92vh;overflow-y:auto;position:relative;padding:56px 48px 48px}
+.bk-close{position:absolute;top:20px;right:24px;background:none;border:none;color:rgba(255,255,255,.5);font-size:28px;cursor:pointer;font-family:var(--h);line-height:1;transition:color .3s;z-index:5}
+.bk-close:hover{color:#fff}
+.bk-logo{font-family:var(--h);font-weight:800;font-size:14px;letter-spacing:8px;color:#fff;text-align:center;margin-bottom:8px}
+.bk-title{font-family:var(--b);font-weight:300;font-style:italic;font-size:16px;color:rgba(255,255,255,.5);text-align:center;margin-bottom:40px}
+
+/* PROGRESS BAR */
+.bk-progress{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:48px;position:relative}
+.bk-step-dot{width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-family:var(--h);font-size:11px;font-weight:500;color:rgba(255,255,255,.3);transition:all .4s;position:relative;z-index:2;background:#000;flex-shrink:0}
+.bk-step-dot.active{border-color:#fff;color:#fff}
+.bk-step-dot.done{border-color:#fff;background:#fff;color:#000}
+.bk-step-line{width:48px;height:1px;background:rgba(255,255,255,.1);transition:background .4s;flex-shrink:0}
+.bk-step-line.done{background:rgba(255,255,255,.4)}
+.bk-step-labels{display:flex;justify-content:space-between;margin-top:12px;padding:0 2px}
+.bk-step-label{font-family:var(--h);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);transition:color .3s;text-align:center;width:60px}
+.bk-step-label.active{color:rgba(255,255,255,.7)}
+
+/* FORM STEPS */
+.bk-step{display:none;animation:bkFade .4s ease-out}
+.bk-step.active{display:block}
+@keyframes bkFade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+.bk-step-head{font-family:var(--h);font-weight:700;font-size:clamp(20px,3vw,28px);color:#fff;margin-bottom:8px}
+.bk-step-sub{font-family:var(--b);font-weight:300;font-size:15px;color:rgba(255,255,255,.5);margin-bottom:32px;line-height:1.6}
+
+/* SERVICE CARDS */
+.bk-services{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bk-svc{padding:24px 20px;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);cursor:pointer;transition:all .3s;position:relative}
+.bk-svc:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.2)}
+.bk-svc.selected{border-color:#fff;background:rgba(255,255,255,.08)}
+.bk-svc.selected::after{content:'';position:absolute;top:12px;right:12px;width:8px;height:8px;border-radius:50%;background:#fff}
+.bk-svc-icon{margin-bottom:12px;opacity:.7}
+.bk-svc-icon svg{width:28px;height:28px}
+.bk-svc-name{font-family:var(--h);font-weight:600;font-size:13px;letter-spacing:1px;color:#fff;margin-bottom:6px}
+.bk-svc-dur{font-family:var(--h);font-weight:300;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:8px}
+.bk-svc-desc{font-family:var(--b);font-size:14px;line-height:1.6;color:rgba(255,255,255,.5)}
+
+/* CALENDAR */
+.bk-cal{margin-top:8px}
+.bk-cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.bk-cal-month{font-family:var(--h);font-weight:600;font-size:15px;color:#fff;letter-spacing:2px}
+.bk-cal-arr{background:none;border:1px solid rgba(255,255,255,.15);color:#fff;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;font-size:16px}
+.bk-cal-arr:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.05)}
+.bk-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.bk-cal-dh{font-family:var(--h);font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.25);text-transform:uppercase;padding:8px 0}
+.bk-cal-d{font-family:var(--h);font-size:13px;padding:10px 0;color:rgba(255,255,255,.15);cursor:default;transition:all .2s;border:1px solid transparent}
+.bk-cal-d.avail{color:rgba(255,255,255,.7);cursor:pointer}
+.bk-cal-d.avail:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15)}
+.bk-cal-d.selected{background:#fff;color:#000;font-weight:600}
+.bk-cal-d.today{border-color:rgba(255,255,255,.2)}
+
+/* TIME SLOTS */
+.bk-times{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+.bk-time{padding:14px 12px;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);text-align:center;font-family:var(--h);font-size:13px;font-weight:400;color:rgba(255,255,255,.7);cursor:pointer;transition:all .3s;letter-spacing:1px}
+.bk-time:hover{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.06)}
+.bk-time.selected{border-color:#fff;background:#fff;color:#000;font-weight:600}
+.bk-time.unavail{opacity:.2;cursor:default;pointer-events:none}
+
+/* FORM INPUTS */
+.bk-field{margin-bottom:20px}
+.bk-label{font-family:var(--h);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px;display:block}
+.bk-input{width:100%;padding:14px 18px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.1);color:#fff;font-family:var(--h);font-size:14px;outline:none;transition:border-color .3s}
+.bk-input:focus{border-color:rgba(255,255,255,.4)}
+.bk-input::placeholder{color:rgba(255,255,255,.2)}
+.bk-textarea{height:100px;resize:vertical}
+.bk-fields-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.bk-checkbox-row{display:flex;align-items:flex-start;gap:12px;margin-top:24px;cursor:pointer}
+.bk-checkbox{width:18px;height:18px;border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.03);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .3s;margin-top:2px;cursor:pointer}
+.bk-checkbox.checked{background:#fff;border-color:#fff}
+.bk-checkbox.checked::after{content:'✓';color:#000;font-size:12px;font-weight:700}
+.bk-checkbox-text{font-family:var(--b);font-size:14px;color:rgba(255,255,255,.5);line-height:1.5}
+
+/* CONFIRMATION */
+.bk-conf{text-align:center;padding:20px 0}
+.bk-conf-check{width:72px;height:72px;border:2px solid #fff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;animation:bkPop .5s ease-out}
+@keyframes bkPop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.bk-conf-h{font-family:var(--h);font-weight:700;font-size:24px;color:#fff;margin-bottom:8px}
+.bk-conf-sub{font-family:var(--b);font-size:16px;color:rgba(255,255,255,.5);margin-bottom:36px;line-height:1.6}
+.bk-conf-details{text-align:left;padding:28px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
+.bk-conf-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-family:var(--h);font-size:13px}
+.bk-conf-row:last-child{border-bottom:none}
+.bk-conf-rl{color:rgba(255,255,255,.4);font-weight:300;letter-spacing:2px;font-size:10px;text-transform:uppercase}
+.bk-conf-rv{color:#fff;font-weight:500;text-align:right}
+
+/* NAV BUTTONS */
+.bk-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:28px;border-top:1px solid rgba(255,255,255,.06)}
+.bk-btn-back{background:none;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.5);padding:12px 28px;font-family:var(--h);font-size:10px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.bk-btn-back:hover{border-color:rgba(255,255,255,.4);color:#fff}
+.bk-btn-next{background:#fff;border:none;color:#000;padding:14px 36px;font-family:var(--h);font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .3s;margin-left:auto}
+.bk-btn-next:hover{background:#E0E0E0;transform:translateY(-1px)}
+.bk-btn-next:disabled{opacity:.2;cursor:not-allowed;transform:none}
+.bk-btn-next:disabled:hover{background:#fff}
+
+/* FADE IN */
+.fade-in{opacity:0;transform:translateY(32px);transition:opacity .8s cubic-bezier(.25,.46,.45,.94),transform .8s cubic-bezier(.25,.46,.45,.94)}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+
+/* TABLET */
+@media(max-width:1024px){
+  :root{--px:32px}
+  .gl-stats{grid-template-columns:repeat(2,1fr)}
+  .gl-stats .gl-stat:nth-child(2){border-right:none}
+  .gl-fw{grid-template-columns:repeat(2,1fr)}
+  .gl-rv-grid{grid-template-columns:repeat(2,1fr)}
+  .gl-fr-grid{grid-template-columns:repeat(2,1fr)}
+  .gl-fr-metrics{grid-template-columns:repeat(2,1fr)}
+}
+/* MOBILE */
+@media(max-width:768px){
+  :root{--px:20px}
+  .gl-nav{padding:16px var(--px)}.gl-nav.scrolled{padding:12px var(--px)}
+  .gl-nav-links,.gl-nav-cta{display:none}
+  .gl-hamburger{display:block}
+  .gl-sec,.gl-stmt,.gl-rv,.gl-bk{padding:80px var(--px)}
+  .gl-cta{padding:100px var(--px)}
+  .gl-stats{grid-template-columns:repeat(2,1fr)}
+  .gl-stats .gl-stat:nth-child(2){border-right:none}
+  .gl-stat{padding:40px 20px}
+  .gl-fw,.gl-dg,.gl-sg,.gl-mg,.gl-rv-grid,.gl-fr-grid{grid-template-columns:1fr}
+  .gl-fr-metrics{grid-template-columns:repeat(2,1fr)}
+  .gl-fr-met{padding:24px 16px}
+  .gl-dgc{padding:32px 24px}.gl-sgc{padding:36px 24px}.gl-mc{padding:36px 24px}.gl-rvc{padding:24px}
+  .gl-bk-in{grid-template-columns:1fr;gap:48px}
+  .gl-ticker-div,.gl-ticker-q{display:none}
+  .gl-ticker{padding:14px var(--px)}
+  .gl-ft{flex-direction:column;text-align:center}
+  .gl-rv-hd{flex-direction:column;align-items:flex-start}
+  .gl-rv-num{font-size:56px}
+  .gl-fr-input-row{flex-direction:column;gap:8px}
+  .gl-fr-input{border-right:1px solid rgba(255,255,255,.15)}
+  .gl-fr-submit{width:100%}
+  /* BOOKING MOBILE */
+  .bk-container{padding:40px 24px 32px}
+  .bk-services{grid-template-columns:1fr}
+  .bk-times{grid-template-columns:repeat(2,1fr)}
+  .bk-fields-row{grid-template-columns:1fr}
+  .bk-step-line{width:24px}
+  .bk-step-label{width:44px;font-size:7px;letter-spacing:1px}
+  .bk-conf-row{flex-direction:column;gap:4px}
+  .bk-conf-rv{text-align:left}
+}
+@media(max-width:380px){
+  .gl-hero-wm{letter-spacing:6px}
+  .gl-stat{padding:32px 16px}.gl-stat-n{font-size:24px}
+  .bk-step-dot{width:30px;height:30px;font-size:10px}
+  .bk-step-line{width:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ 5-STEP BOOKING FORM ══════ -->
+<div class="bk-overlay" id="bookingOverlay">
+  <div class="bk-container" onclick="event.stopPropagation()">
+    <button class="bk-close" onclick="closeBooking()">×</button>
+    <div class="bk-logo">GLANCE</div>
+    <div class="bk-title">Book Your Health Screening</div>
+
+    <!-- PROGRESS -->
+    <div style="max-width:440px;margin:0 auto 48px">
+      <div class="bk-progress" id="bkProgress">
+        <div class="bk-step-dot active" data-s="1">1</div>
+        <div class="bk-step-line" data-l="1"></div>
+        <div class="bk-step-dot" data-s="2">2</div>
+        <div class="bk-step-line" data-l="2"></div>
+        <div class="bk-step-dot" data-s="3">3</div>
+        <div class="bk-step-line" data-l="3"></div>
+        <div class="bk-step-dot" data-s="4">4</div>
+        <div class="bk-step-line" data-l="4"></div>
+        <div class="bk-step-dot" data-s="5">5</div>
+      </div>
+      <div class="bk-step-labels" id="bkLabels">
+        <div class="bk-step-label active">Service</div>
+        <div class="bk-step-label">Date</div>
+        <div class="bk-step-label">Time</div>
+        <div class="bk-step-label">Details</div>
+        <div class="bk-step-label">Confirm</div>
+      </div>
+    </div>
+
+    <!-- STEP 1: SERVICE -->
+    <div class="bk-step active" id="bkStep1">
+      <div class="bk-step-head">Select Your Service</div>
+      <div class="bk-step-sub">Choose the appointment type that's right for you.</div>
+      <div class="bk-services" id="svcGrid"></div>
+      <div class="bk-nav"><div></div><button class="bk-btn-next" id="btn1" disabled onclick="goStep(2)">Continue</button></div>
+    </div>
+
+    <!-- STEP 2: DATE -->
+    <div class="bk-step" id="bkStep2">
+      <div class="bk-step-head">Choose a Date</div>
+      <div class="bk-step-sub">Select your preferred appointment date below.</div>
+      <div class="bk-cal">
+        <div class="bk-cal-nav">
+          <button class="bk-cal-arr" onclick="calNav(-1)">←</button>
+          <div class="bk-cal-month" id="calMonth"></div>
+          <button class="bk-cal-arr" onclick="calNav(1)">→</button>
+        </div>
+        <div class="bk-cal-grid" id="calGrid"></div>
+      </div>
+      <div class="bk-nav"><button class="bk-btn-back" onclick="goStep(1)">Back</button><button class="bk-btn-next" id="btn2" disabled onclick="goStep(3)">Continue</button></div>
+    </div>
+
+    <!-- STEP 3: TIME -->
+    <div class="bk-step" id="bkStep3">
+      <div class="bk-step-head">Pick a Time</div>
+      <div class="bk-step-sub" id="timeSubtitle">Available slots for your selected date.</div>
+      <div class="bk-times" id="timeGrid"></div>
+      <div class="bk-nav"><button class="bk-btn-back" onclick="goStep(2)">Back</button><button class="bk-btn-next" id="btn3" disabled onclick="goStep(4)">Continue</button></div>
+    </div>
+
+    <!-- STEP 4: DETAILS -->
+    <div class="bk-step" id="bkStep4">
+      <div class="bk-step-head">Your Details</div>
+      <div class="bk-step-sub">We'll use this to confirm your appointment.</div>
+      <div class="bk-fields-row">
+        <div class="bk-field"><label class="bk-label">First Name</label><input class="bk-input" id="inpFirst" placeholder="First name" oninput="checkDetails()"></div>
+        <div class="bk-field"><label class="bk-label">Last Name</label><input class="bk-input" id="inpLast" placeholder="Last name" oninput="checkDetails()"></div>
+      </div>
+      <div class="bk-field"><label class="bk-label">Email Address</label><input class="bk-input" id="inpEmail" type="email" placeholder="you@example.com" oninput="checkDetails()"></div>
+      <div class="bk-field"><label class="bk-label">Phone Number</label><input class="bk-input" id="inpPhone" type="tel" placeholder="+44 7XXX XXX XXX" oninput="checkDetails()"></div>
+      <div class="bk-field"><label class="bk-label">Notes (Optional)</label><textarea class="bk-input bk-textarea" id="inpNotes" placeholder="Any additional information..."></textarea></div>
+      <div class="bk-checkbox-row" onclick="toggleConsent()">
+        <div class="bk-checkbox" id="consentBox"></div>
+        <div class="bk-checkbox-text">I agree to receive appointment confirmations and reminders via email and SMS from Glance Eyecare &amp; Hearcare.</div>
+      </div>
+      <div class="bk-nav"><button class="bk-btn-back" onclick="goStep(3)">Back</button><button class="bk-btn-next" id="btn4" disabled onclick="goStep(5)">Review Booking</button></div>
+    </div>
+
+    <!-- STEP 5: CONFIRMATION -->
+    <div class="bk-step" id="bkStep5">
+      <div class="bk-conf">
+        <div class="bk-conf-check"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></div>
+        <div class="bk-conf-h">Booking Confirmed</div>
+        <div class="bk-conf-sub">A confirmation email has been sent to your inbox.<br>We look forward to seeing you.</div>
+        <div class="bk-conf-details" id="confDetails"></div>
+      </div>
+      <div class="bk-nav" style="justify-content:center;border:none;padding-top:32px">
+        <button class="bk-btn-next" onclick="closeBooking()">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="gl-mob-menu" id="mobileMenu">
+  <a href="#reviews" onclick="closeMobileMenu()">Reviews</a>
+  <a href="#membership" onclick="closeMobileMenu()">Membership</a>
+  <a href="#book" onclick="closeMobileMenu()">Book</a>
+  <button class="gl-nav-cta" onclick="closeMobileMenu();openBooking()" style="margin-top:16px">Book a Screening</button>
+</div>
+
+<!-- NAV -->
+<nav class="gl-nav" id="mainNav">
+  <a class="gl-nav-logo" href="#">GLANCE</a>
+  <div class="gl-nav-links"><a href="#reviews">Reviews</a><a href="#membership">Membership</a><a href="#book">Book</a></div>
+  <button class="gl-nav-cta" onclick="openBooking()">Book a Screening</button>
+  <button class="gl-hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section class="gl-hero">
+  <div class="gl-hero-wm">GLANCE</div><div class="gl-hero-rule"></div>
+  <div class="gl-hero-sub">The Healthcare Optician</div>
+  <div class="gl-hero-tag">Your health. Through the eye. In one visit.</div>
+  <div class="gl-hero-scr">Scroll</div>
+</section>
+
+<!-- TICKER -->
+<div class="gl-ticker">
+  <span class="gl-ticker-g">Google</span>
+  <div class="gl-ticker-stars"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
+  <span class="gl-ticker-count">57 Five-Star Reviews</span>
+  <div class="gl-ticker-div"></div>
+  <span class="gl-ticker-q" id="tickerQuote"></span>
+</div>
+
+<!-- STATEMENT -->
+<section class="gl-stmt"><div class="fade-in"><div class="gl-stmt-in"><h2>Healthcare First.<br>Eyewear Second.</h2><p>Every optician sells glasses. GLANCE sells health — and the glasses come with it. A single AI-powered retinal scan can detect diabetes, cardiovascular disease, hypertension, and early Alzheimer's. Walk in for a health screening. Walk out with a cardiovascular risk score, a prescription, and — if you need them — a pair of glasses.</p></div></div></section>
+
+<!-- STATS -->
+<section class="gl-stats">
+  <div class="fade-in gl-stat"><div class="gl-stat-n">80%</div><div class="gl-stat-l">Systemic disease detectable via the eye</div></div>
+  <div class="fade-in gl-stat"><div class="gl-stat-n">7.2M</div><div class="gl-stat-l">NHS eye visits per year</div></div>
+  <div class="fade-in gl-stat"><div class="gl-stat-n">1.9M</div><div class="gl-stat-l">Procedures shifting to community</div></div>
+  <div class="fade-in gl-stat"><div class="gl-stat-n">30min</div><div class="gl-stat-l">Full health screening</div></div>
+</section>
+
+<!-- MODEL -->
+<section class="gl-sec" style="background:var(--off)" id="model">
+  <div class="fade-in"><div class="gl-sec-l">The Model</div><div class="gl-sec-t">Health Drives Footfall.<br>Eyewear Drives Margin.</div></div>
+  <div class="gl-fw">
+    <div class="fade-in gl-fwc"><div class="gl-fwn">01</div><div class="gl-fwnm">Screen</div><div class="gl-fwr"></div><div class="gl-fwd">AI retinal diagnostics, cardiovascular scoring, diabetic screening. Members visit 4x per year — not once every 2.5 years.</div></div>
+    <div class="fade-in gl-fwc"><div class="gl-fwn">02</div><div class="gl-fwnm">Diagnose</div><div class="gl-fwr"></div><div class="gl-fwd">Results in 30 minutes. Flag cardiovascular risk, hypertension, diabetes, Alzheimer's markers. Refer or treat on-site.</div></div>
+    <div class="fade-in gl-fwc"><div class="gl-fwn">03</div><div class="gl-fwnm">Prescribe</div><div class="gl-fwr"></div><div class="gl-fwd">Updated prescription every visit. Lens and frame fitting happens naturally. The patient is already in the chair.</div></div>
+    <div class="fade-in gl-fwc"><div class="gl-fwn">04</div><div class="gl-fwnm">Monetise</div><div class="gl-fwr"></div><div class="gl-fwd">Own-brand eyewear at 75%+ margin. Every health visit is an upsell opportunity. Membership locks in recurring visits.</div></div>
+  </div>
+</section>
+
+<!-- DIAGNOSTICS -->
+<section class="gl-sec" style="background:#fff" id="health">
+  <div class="fade-in"><div class="gl-sec-l">The Diagnostics Suite</div><div class="gl-sec-t">One Visit. Five Health Checks.<br>Then Buy Glasses If You Want.</div></div>
+  <div class="gl-dg">
+    <div class="fade-in gl-dgc"><div class="gl-dgc-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="20" r="8"/><circle cx="20" cy="20" r="3"/><path d="M20 4v4M20 32v4M4 20h4M32 20h4"/><path d="M10.3 10.3l2.8 2.8M26.9 26.9l2.8 2.8M10.3 29.7l2.8-2.8M26.9 13.1l2.8-2.8"/><path d="M20 12a8 8 0 0 1 8 8" stroke-dasharray="3 2"/></svg></div><div class="gl-dgn">AI Retinal Diagnostics</div><div class="gl-dgd">OCT scans detecting diabetes, cardiovascular disease, hypertension, and Alzheimer's markers. The eye is the only non-invasive window to your blood vessels.</div></div>
+    <div class="fade-in gl-dgc"><div class="gl-dgc-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20h6l3-8 4 16 4-12 3 4h8"/><path d="M14 10a6 6 0 0 1 6-3 6 6 0 0 1 6 3"/><circle cx="20" cy="32" r="2"/><path d="M16 32h-4M24 32h4"/></svg></div><div class="gl-dgn">Cardiovascular Screening</div><div class="gl-dgd">Blood pressure, arterial health scoring, diabetic retinopathy. NHS pathway for 1.9M community retinal procedures — the biggest offload opportunity in UK healthcare.</div></div>
+    <div class="fade-in gl-dgc"><div class="gl-dgc-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="16" r="10"/><path d="M14 14l6 4 6-4"/><path d="M20 10v10"/><path d="M12 30l4-6M28 30l-4-6"/><line x1="10" y1="36" x2="30" y2="36"/><path d="M16 30v6M24 30v6"/></svg></div><div class="gl-dgn">Sports Vision Lab</div><div class="gl-dgd">Reaction time, depth perception, peripheral awareness, contrast sensitivity. A destination for Premier League athletes, Olympians, and motorsport drivers.</div></div>
+    <div class="fade-in gl-dgc"><div class="gl-dgc-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="18" r="12"/><path d="M20 10v4M20 24v4"/><path d="M14 18h12"/><path d="M16 14l8 8M24 14l-8 8"/><circle cx="20" cy="18" r="3" fill="#000" stroke="none"/></svg></div><div class="gl-dgn">Preventive Wellness</div><div class="gl-dgd">Children's myopia management, blue light assessment, digital eye strain, sleep-vision clinics. Programmes that drive quarterly return visits.</div></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="gl-rv" id="reviews">
+  <div class="gl-rv-hd">
+    <div class="fade-in"><div class="gl-sec-l">What Our Patients Say</div><div class="gl-sec-t">57 Five-Star Reviews<br>in Our First 6 Months.</div><p style="font-family:var(--b);font-size:18px;line-height:1.7;color:#444;max-width:500px;margin-top:12px">The highest-rated new optician in the UK. Every single review: five stars.</p></div>
+    <div class="fade-in gl-rv-sc"><div class="gl-rv-num">5.0</div><div style="display:flex;flex-direction:column;gap:4px"><div class="gl-rv-sr"><svg viewBox="0 0 24 24" fill="#000"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24" fill="#000"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24" fill="#000"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24" fill="#000"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg><svg viewBox="0 0 24 24" fill="#000"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div><div class="gl-rv-lb">57 Reviews</div><div class="gl-rv-ggl">Google Reviews</div></div></div>
+  </div>
+  <div class="gl-rv-grid" id="reviewGrid"></div>
+  <div class="fade-in gl-all-rv"><a href="https://www.google.com/maps/place/Glance+Eyecare+%26+Hearcare" target="_blank" rel="noopener noreferrer">Read All 57 Reviews on Google</a></div>
+</section>
+
+<!-- SITES -->
+<section class="gl-sec" style="background:#000;color:#fff" id="locations">
+  <div class="fade-in"><div class="gl-sec-l" style="color:#fff">Site Strategy</div><div class="gl-sec-t" style="color:#fff">Health Clinic Downstairs.<br>Eyewear Showroom Upstairs.</div></div>
+  <div class="gl-sg">
+    <div class="fade-in gl-sgc dk"><div class="gl-sgt">Flagship</div><div class="gl-sgn">GLANCE Destination</div><div class="gl-sgm">2,000–4,000 SQ FT — WELLNESS HUB</div><div class="gl-sgr"></div><ul class="gl-sgl"><li>Full diagnostic suite + sports vision lab</li><li>AI retinal screening + cardiovascular clinic</li><li>Children's myopia + wellness programmes</li><li>Own-brand eyewear showroom</li><li>Community events &amp; brand collaborations</li><li>NHS diagnostics partner site</li></ul></div>
+    <div class="fade-in gl-sgc lt"><div class="gl-sgt">High Street</div><div class="gl-sgn">GLANCE Express</div><div class="gl-sgm">500–800 SQ FT — HIGH STREET &amp; MALL</div><div class="gl-sgr"></div><ul class="gl-sgl"><li>30-min AI-enhanced health screening</li><li>Retinal imaging + cardiovascular risk flag</li><li>Express lens fitting (1-hr turnaround)</li><li>Full own-brand eyewear collection</li><li>Virtual try-on &amp; digital consultation</li><li>Membership sign-up + Destination referral</li></ul></div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section class="gl-sec" style="background:var(--off)" id="membership">
+  <div class="fade-in"><div class="gl-sec-l">Membership</div><div class="gl-sec-t">Pay for Health.<br>Get Glasses for Free.</div></div>
+  <div class="gl-mg">
+    <div class="fade-in gl-mc"><div class="gl-mt">GLANCE</div><div class="gl-mp">£14.99</div><div class="gl-mpr">per month</div><div class="gl-mrl"></div><ul class="gl-ml"><li>Annual comprehensive eye exam</li><li>AI retinal health screening</li><li>Cardiovascular risk score</li><li>10% off all eyewear</li><li>Free lens cleaning &amp; adjustments</li><li>Digital prescription management</li><li>Priority same-day appointments</li></ul></div>
+    <div class="fade-in gl-mc"><div class="gl-mt">GLANCE +</div><div class="gl-mp">£29.99</div><div class="gl-mpr">per month</div><div class="gl-mrl"></div><ul class="gl-ml"><li>Everything in GLANCE</li><li>Quarterly full diagnostics suite</li><li>Unlimited sports vision sessions</li><li>Buy 1 Get 1 own-brand frames</li><li>1 free frame per year</li><li>Damage protection (1 pair/yr)</li><li>Family add-on (£14.99/member)</li><li>Exclusive event &amp; launch access</li></ul></div>
+  </div>
+</section>
+
+<!-- FRANCHISE -->
+<section class="gl-sec" style="background:#000;color:#fff" id="franchise">
+  <div class="fade-in"><div class="gl-sec-l" style="color:#fff">Franchise Opportunity</div><div class="gl-sec-t" style="color:#fff">Own a GLANCE.<br>Own the Category.</div></div>
+  <div class="gl-fr-gate" id="franchiseGate"><div class="gl-fr-lock"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg></div><p style="font-family:var(--b);font-size:18px;line-height:1.7;opacity:.7;margin-bottom:8px">This section is for prospective franchise partners only.</p><p style="font-family:var(--h);font-size:10px;letter-spacing:3px;text-transform:uppercase;opacity:.4">Enter your access code to continue</p><div class="gl-fr-input-row"><input class="gl-fr-input" type="password" placeholder="Access code" id="franchisePw" onkeydown="if(event.key==='Enter')checkFranchise()"><button class="gl-fr-submit" onclick="checkFranchise()">Enter</button></div><div class="gl-fr-error" id="pwError">INVALID ACCESS CODE</div></div>
+  <div class="gl-fr-content" id="franchiseContent">
+    <div class="fade-in"><p style="font-family:var(--b);font-size:20px;line-height:1.7;opacity:.8;max-width:700px;margin-top:24px">No other optician franchise gives you what GLANCE does: direct NHS diagnostic contracts, partnerships with the UK's leading healthtech companies, exclusive access to premium lens and frame manufacturers, and a proven healthcare-first model that creates recurring revenue from day one.</p></div>
+    <div class="fade-in gl-fr-metrics"><div class="gl-fr-met"><div class="gl-fr-met-v">4x</div><div class="gl-fr-met-l">Visit frequency vs traditional</div></div><div class="gl-fr-met"><div class="gl-fr-met-v">75%+</div><div class="gl-fr-met-l">Own-brand margin</div></div><div class="gl-fr-met"><div class="gl-fr-met-v">£2,400+</div><div class="gl-fr-met-l">Member lifetime value</div></div><div class="gl-fr-met"><div class="gl-fr-met-v">12–18mo</div><div class="gl-fr-met-l">Store payback period</div></div></div>
+    <div class="gl-fr-grid">
+      <div class="fade-in gl-fr-card"><div class="gl-fr-card-num">01</div><div class="gl-fr-card-t">NHS Diagnostic Contracts</div><div class="gl-fr-card-d">We hold direct relationships with NHS commissioning bodies for community diagnostic offload. As a franchisee, you inherit these contracts — 1.9M retinal procedures are shifting to community settings.</div></div>
+      <div class="fade-in gl-fr-card"><div class="gl-fr-card-num">02</div><div class="gl-fr-card-t">Healthtech Partnerships</div><div class="gl-fr-card-d">Exclusive agreements with leading AI retinal screening, OCT, and cardiovascular diagnostic technology providers. Equipment, training, and software licences included.</div></div>
+      <div class="fade-in gl-fr-card"><div class="gl-fr-card-num">03</div><div class="gl-fr-card-t">Premium Manufacturer Access</div><div class="gl-fr-card-d">Direct supply agreements with world-class lens laboratories and independent frame houses. Own-brand eyewear at £12–18 COGS retailing at £99–149.</div></div>
+      <div class="fade-in gl-fr-card"><div class="gl-fr-card-num">04</div><div class="gl-fr-card-t">Proven Playbook</div><div class="gl-fr-card-d">57 five-star reviews in 6 months. Complete operational manual, clinical training programme, marketing toolkit, and membership acquisition system.</div></div>
+      <div class="fade-in gl-fr-card"><div class="gl-fr-card-num">05</div><div class="gl-fr-card-t">Three Revenue Streams</div><div class="gl-fr-card-d">Healthcare diagnostics, membership recurring revenue, and eyewear retail — all from the same footprint. Monetise every visit, every quarter.</div></div>
+      <div class="fade-in gl-fr-card"><div class="gl-fr-card-num">06</div><div class="gl-fr-card-t">Territory Protection</div><div class="gl-fr-card-d">Exclusive geographic territories with population-based allocation. First-mover advantage in the healthcare optician category.</div></div>
+    </div>
+    <div class="fade-in" style="margin-top:48px;padding:32px 36px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)"><p style="font-family:var(--b);font-size:18px;line-height:1.7;opacity:.8"><strong style="font-family:var(--h);font-weight:600;font-size:14px">The Insight — </strong>Traditional optician franchises sell you a shop that sells glasses. GLANCE sells you a healthcare destination with built-in NHS contracts, healthtech infrastructure, and a membership model that creates recurring revenue before a single frame leaves the shelf.</p></div>
+    <div class="fade-in" style="margin-top:48px;text-align:center"><a href="mailto:franchise@glanceeyecare.com" style="font-family:var(--h);font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:#000;background:#fff;padding:16px 40px;text-decoration:none;display:inline-block">Request Franchise Pack</a></div>
+  </div>
+</section>
+
+<!-- BOOKING SECTION -->
+<section class="gl-bk" id="book">
+  <div class="gl-bk-in">
+    <div class="fade-in">
+      <div class="gl-sec-l" style="color:#fff">Book an Appointment</div>
+      <div class="gl-sec-t" style="color:#fff">Your Health Screening<br>Starts Here.</div>
+      <div class="gl-bk-types">
+        <button class="gl-bk-btn" onclick="openBooking('eye')">Eye Health Examination<span>Comprehensive 30-min AI-enhanced screening with dry eye assessment</span></button>
+        <button class="gl-bk-btn" onclick="openBooking('hearing')">Hearing Assessment<span>Free hearing test with Insight Hearing partnership</span></button>
+        <button class="gl-bk-btn" onclick="openBooking('contact')">Contact Lens Consultation<span>Fitting, trial &amp; aftercare for all lens types</span></button>
+        <button class="gl-bk-btn" onclick="openBooking('home')">Home Visit<span>Coming soon — eye care at your doorstep</span></button>
+      </div>
+      <div style="margin-top:36px">
+        <p style="font-family:var(--b);font-size:16px;line-height:1.8;opacity:.7">Or call us: <a href="tel:01753771260" style="color:#fff;text-decoration:underline;text-underline-offset:3px">01753 771 260</a></p>
+        <p style="font-family:var(--b);font-size:16px;line-height:1.8;opacity:.7">Email: <a href="mailto:hello@glanceeyecare.com" style="color:#fff;text-decoration:underline;text-underline-offset:3px">hello@glanceeyecare.com</a></p>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div style="font-family:var(--h);font-size:10px;letter-spacing:5px;text-transform:uppercase;opacity:.5;margin-bottom:16px">OPENING HOURS</div>
+      <div class="gl-bk-hr">
+        <div class="gl-bk-row"><span class="gl-bk-day">Monday</span><span class="gl-bk-time">10:00 am – 6:00 pm</span></div>
+        <div class="gl-bk-row"><span class="gl-bk-day">Tuesday</span><span class="gl-bk-time">10:00 am – 6:00 pm</span></div>
+        <div class="gl-bk-row"><span class="gl-bk-day">Wednesday</span><span class="gl-bk-time">Closed</span></div>
+        <div class="gl-bk-row"><span class="gl-bk-day">Thursday</span><span class="gl-bk-time">10:00 am – 6:00 pm</span></div>
+        <div class="gl-bk-row"><span class="gl-bk-day">Friday</span><span class="gl-bk-time">10:00 am – 6:00 pm</span></div>
+        <div class="gl-bk-row"><span class="gl-bk-day">Saturday</span><span class="gl-bk-time">9:00 am – 6:00 pm</span></div>
+        <div class="gl-bk-row"><span class="gl-bk-day">Sunday</span><span class="gl-bk-time">Closed</span></div>
+      </div>
+      <p style="margin-top:24px;font-family:var(--b);font-size:14px;opacity:.5;line-height:1.7">Closed 1:30 – 2:30 pm Mon–Thu &amp; Sat. Closed 12:00 – 2:30 pm Fridays.</p>
+      <div style="margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08)">
+        <div style="font-family:var(--h);font-size:10px;letter-spacing:5px;text-transform:uppercase;opacity:.5;margin-bottom:12px">FIND US</div>
+        <p style="font-family:var(--b);font-size:16px;line-height:1.8;opacity:.7">Glance Eyecare &amp; Hearcare<br>Unit 5, Sopwith Court<br>Slough Road, Datchet<br>SL3 9AU</p>
+        <p style="font-family:var(--h);font-size:10px;letter-spacing:2px;opacity:.4;margin-top:8px">CUSTOMER PARKING AVAILABLE AT REAR</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="gl-cta">
+  <div class="fade-in">
+    <div class="gl-cta-wm">GLANCE</div>
+    <div class="gl-cta-tg">The first optician where healthcare is the product<br>and eyewear is the reward.</div>
+    <div class="gl-cta-inv">Your health. Through the eye. In one visit.</div>
+    <button class="gl-cta-btn" onclick="openBooking()">Book Your Screening</button>
+  </div>
+</section>
+
+<footer class="gl-ft">
+  <div>© 2026 GLANCE EYECARE &amp; HEARCARE — A Vitality Capital Portfolio Company</div>
+  <div>Datchet — London — Doha</div>
+</footer>
+
+<script>
+/* ═══════ DATA ═══════ */
+var reviews=[
+  {name:"Sarah M.",text:"Absolutely incredible experience. The eye exam was the most thorough I've ever had — they explained everything about my eye health, not just my prescription. Left feeling genuinely cared for.",time:"2 weeks ago"},
+  {name:"James K.",text:"Blown away by the level of service. The dry eye assessment alone was worth the visit. Equipment is state-of-the-art and the staff made me feel completely at ease. Five stars isn't enough.",time:"3 weeks ago"},
+  {name:"Priya D.",text:"First optician where I've felt like they actually care about my health, not just selling me glasses. The 30-minute appointment was so thorough. Found frames I absolutely love too.",time:"1 month ago"},
+  {name:"Michael R.",text:"Moved from Specsavers after 15 years and wish I'd done it sooner. Personal, caring, and genuinely interested in my eye health. The hearing test was a great bonus too.",time:"1 month ago"},
+  {name:"Amira H.",text:"The team went above and beyond to help me find the perfect frames. The eye examination was comprehensive and they took the time to explain all the results. Truly outstanding.",time:"2 months ago"},
+  {name:"David L.",text:"What sets Glance apart is the personal touch. No rushing, no upselling — just genuine care and expertise. My whole family now comes here. Exceptional in every way.",time:"2 months ago"}
+];
+var starSVG='<svg viewBox="0 0 24 24" width="16" height="16" fill="#000"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>';
+var grid=document.getElementById('reviewGrid');
+reviews.forEach(function(r){var s='';for(var i=0;i<5;i++)s+=starSVG;grid.innerHTML+='<div class="fade-in gl-rvc"><div class="gl-rvc-top"><div class="gl-rvc-av">'+r.name[0]+'</div><div><div class="gl-rvc-nm">'+r.name+'</div><div class="gl-rvc-tm">'+r.time+'</div></div></div><div class="gl-rvc-st">'+s+'</div><div class="gl-rvc-tx">'+r.text+'</div><div class="gl-rvc-gl">GOOGLE</div></div>';});
+
+/* TICKER */
+var tIdx=0,tEl=document.getElementById('tickerQuote');
+function updTicker(){tEl.style.opacity='0';setTimeout(function(){tEl.textContent='"'+reviews[tIdx].text.slice(0,85)+'..."';tEl.style.opacity='1';tIdx=(tIdx+1)%reviews.length;},300);}
+updTicker();setInterval(updTicker,5000);
+
+/* SCROLL NAV */
+window.addEventListener('scroll',function(){var n=document.getElementById('mainNav');if(window.scrollY>60)n.classList.add('scrolled');else n.classList.remove('scrolled');},{passive:true});
+
+/* MOBILE MENU */
+function toggleMobileMenu(){document.getElementById('mobileMenu').classList.toggle('active');document.getElementById('hamburger').classList.toggle('open');}
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('active');document.getElementById('hamburger').classList.remove('open');}
+
+/* FRANCHISE */
+function checkFranchise(){if(document.getElementById('franchisePw').value.toLowerCase().trim()==='glance2026'){document.getElementById('franchiseGate').style.display='none';document.getElementById('franchiseContent').classList.add('unlocked');document.querySelectorAll('#franchiseContent .fade-in').forEach(function(el){observer.observe(el);});}else{var e=document.getElementById('pwError');e.classList.add('show');setTimeout(function(){e.classList.remove('show');},2000);}}
+
+/* INTERSECTION OBSERVER */
+var observer=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
+document.querySelectorAll('.fade-in').forEach(function(el){observer.observe(el);});
+
+/* ═══════════════════════════════════════════
+   5-STEP BOOKING FORM ENGINE
+   ═══════════════════════════════════════════ */
+var services=[
+  {id:'eye',name:'Eye Health Examination',dur:'30 min',desc:'Comprehensive AI-enhanced screening with dry eye assessment and cardiovascular risk scoring.',icon:'<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><circle cx="20" cy="20" r="8"/><circle cx="20" cy="20" r="3"/><path d="M20 4v4M20 32v4M4 20h4M32 20h4"/></svg>'},
+  {id:'hearing',name:'Hearing Assessment',dur:'20 min',desc:'Free hearing test with our Insight Hearing partnership. Comprehensive audiometry and consultation.',icon:'<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M6 20h6l3-8 4 16 4-12 3 4h8"/></svg>'},
+  {id:'contact',name:'Contact Lens Consultation',dur:'45 min',desc:'Fitting, trial lenses, and aftercare plan for all lens types including specialist and multifocal.',icon:'<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><circle cx="20" cy="20" r="12"/><ellipse cx="20" cy="20" rx="8" ry="5"/><circle cx="20" cy="20" r="2"/></svg>'},
+  {id:'home',name:'Home Visit',dur:'60 min',desc:'Full eye care at your doorstep. Ideal for elderly or mobility-limited patients. Coming soon.',icon:'<svg width="28" height="28" viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M8 20l12-12 12 12"/><rect x="12" y="20" width="16" height="14"/><rect x="17" y="26" width="6" height="8"/></svg>'}
+];
+
+var booking={step:1,service:null,date:null,time:null,consent:false};
+var calDate=new Date();
+var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+var days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+var closedDays=[0,3]; // Sun=0, Wed=3
+var timeSlots=['10:00','10:30','11:00','11:30','12:00','12:30','14:30','15:00','15:30','16:00','16:30','17:00','17:30'];
+var friSlots=['10:00','10:30','11:00','11:30','14:30','15:00','15:30','16:00','16:30','17:00','17:30'];
+
+/* BUILD SERVICE CARDS */
+var sg=document.getElementById('svcGrid');
+services.forEach(function(s){
+  var d=document.createElement('div');d.className='bk-svc';d.setAttribute('data-id',s.id);
+  d.innerHTML='<div class="bk-svc-icon">'+s.icon+'</div><div class="bk-svc-name">'+s.name+'</div><div class="bk-svc-dur">'+s.dur+'</div><div class="bk-svc-desc">'+s.desc+'</div>';
+  d.onclick=function(){document.querySelectorAll('.bk-svc').forEach(function(x){x.classList.remove('selected');});d.classList.add('selected');booking.service=s.id;document.getElementById('btn1').disabled=false;};
+  sg.appendChild(d);
+});
+
+/* OPEN / CLOSE */
+function openBooking(svcId){
+  booking={step:1,service:null,date:null,time:null,consent:false};
+  document.querySelectorAll('.bk-svc').forEach(function(x){x.classList.remove('selected');});
+  document.getElementById('btn1').disabled=true;
+  if(svcId){
+    var el=document.querySelector('.bk-svc[data-id="'+svcId+'"]');
+    if(el){el.classList.add('selected');booking.service=svcId;document.getElementById('btn1').disabled=false;}
+  }
+  goStep(1);
+  document.getElementById('bookingOverlay').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeBooking(){
+  document.getElementById('bookingOverlay').classList.remove('active');
+  document.body.style.overflow='';
+}
+document.getElementById('bookingOverlay').addEventListener('click',function(e){if(e.target===this)closeBooking();});
+
+/* STEP NAVIGATION */
+function goStep(n){
+  booking.step=n;
+  for(var i=1;i<=5;i++){
+    var el=document.getElementById('bkStep'+i);
+    if(i===n)el.classList.add('active');else el.classList.remove('active');
+  }
+  // Progress dots
+  document.querySelectorAll('.bk-step-dot').forEach(function(d){
+    var s=parseInt(d.getAttribute('data-s'));
+    d.classList.remove('active','done');
+    if(s===n)d.classList.add('active');
+    else if(s<n)d.classList.add('done');
+  });
+  document.querySelectorAll('.bk-step-line').forEach(function(l){
+    var s=parseInt(l.getAttribute('data-l'));
+    if(s<n)l.classList.add('done');else l.classList.remove('done');
+  });
+  var labels=document.querySelectorAll('.bk-step-label');
+  labels.forEach(function(l,i){if(i===n-1)l.classList.add('active');else l.classList.remove('active');});
+
+  if(n===2)renderCalendar();
+  if(n===3)renderTimes();
+  if(n===5)renderConfirmation();
+}
+
+/* CALENDAR */
+function renderCalendar(){
+  var y=calDate.getFullYear(),m=calDate.getMonth();
+  document.getElementById('calMonth').textContent=months[m]+' '+y;
+  var first=new Date(y,m,1).getDay(),daysInMonth=new Date(y,m+1,0).getDate();
+  var today=new Date();today.setHours(0,0,0,0);
+  var html='';
+  days.forEach(function(d){html+='<div class="bk-cal-dh">'+d+'</div>';});
+  for(var i=0;i<first;i++)html+='<div class="bk-cal-d"></div>';
+  for(var d=1;d<=daysInMonth;d++){
+    var dt=new Date(y,m,d);
+    var dow=dt.getDay();
+    var past=dt<today;
+    var closed=closedDays.indexOf(dow)!==-1;
+    var avail=!past&&!closed;
+    var isSel=booking.date&&booking.date.getTime()===dt.getTime();
+    var isToday=dt.getTime()===today.getTime();
+    var cls='bk-cal-d'+(avail?' avail':'')+(isSel?' selected':'')+(isToday?' today':'');
+    html+='<div class="'+cls+'"'+(avail?' onclick="selectDate('+y+','+m+','+d+')"':'')+'>'+d+'</div>';
+  }
+  document.getElementById('calGrid').innerHTML=html;
+  document.getElementById('btn2').disabled=!booking.date;
+}
+function selectDate(y,m,d){booking.date=new Date(y,m,d);renderCalendar();}
+function calNav(dir){calDate.setMonth(calDate.getMonth()+dir);renderCalendar();}
+
+/* TIME SLOTS */
+function renderTimes(){
+  if(!booking.date)return;
+  var dow=booking.date.getDay();
+  var slots=dow===5?friSlots:timeSlots;
+  var sub=booking.date.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('timeSubtitle').textContent='Available slots for '+sub;
+  var html='';
+  slots.forEach(function(t){
+    // Simulate some unavailable slots randomly based on date seed
+    var seed=(booking.date.getDate()*7+parseInt(t.replace(':','')))%5;
+    var unavail=seed===0;
+    var isSel=booking.time===t;
+    html+='<div class="bk-time'+(unavail?' unavail':'')+(isSel?' selected':'')+'" onclick="selectTime(\''+t+'\')">'+t+'</div>';
+  });
+  document.getElementById('timeGrid').innerHTML=html;
+  document.getElementById('btn3').disabled=!booking.time;
+}
+function selectTime(t){booking.time=t;renderTimes();}
+
+/* DETAILS VALIDATION */
+function checkDetails(){
+  var f=document.getElementById('inpFirst').value.trim();
+  var l=document.getElementById('inpLast').value.trim();
+  var e=document.getElementById('inpEmail').value.trim();
+  var p=document.getElementById('inpPhone').value.trim();
+  var ok=f&&l&&e.indexOf('@')>0&&p.length>=6&&booking.consent;
+  document.getElementById('btn4').disabled=!ok;
+}
+function toggleConsent(){
+  booking.consent=!booking.consent;
+  var b=document.getElementById('consentBox');
+  if(booking.consent)b.classList.add('checked');else b.classList.remove('checked');
+  checkDetails();
+}
+
+/* CONFIRMATION */
+function renderConfirmation(){
+  var svc=services.find(function(s){return s.id===booking.service;});
+  var dateStr=booking.date?booking.date.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'}):'';
+  var name=document.getElementById('inpFirst').value.trim()+' '+document.getElementById('inpLast').value.trim();
+  var email=document.getElementById('inpEmail').value.trim();
+  var phone=document.getElementById('inpPhone').value.trim();
+  document.getElementById('confDetails').innerHTML=
+    '<div class="bk-conf-row"><span class="bk-conf-rl">Service</span><span class="bk-conf-rv">'+(svc?svc.name:'')+'</span></div>'+
+    '<div class="bk-conf-row"><span class="bk-conf-rl">Date</span><span class="bk-conf-rv">'+dateStr+'</span></div>'+
+    '<div class="bk-conf-row"><span class="bk-conf-rl">Time</span><span class="bk-conf-rv">'+(booking.time||'')+'</span></div>'+
+    '<div class="bk-conf-row"><span class="bk-conf-rl">Duration</span><span class="bk-conf-rv">'+(svc?svc.dur:'')+'</span></div>'+
+    '<div class="bk-conf-row"><span class="bk-conf-rl">Patient</span><span class="bk-conf-rv">'+name+'</span></div>'+
+    '<div class="bk-conf-row"><span class="bk-conf-rl">Email</span><span class="bk-conf-rv">'+email+'</span></div>'+
+    '<div class="bk-conf-row"><span class="bk-conf-rl">Phone</span><span class="bk-conf-rv">'+phone+'</span></div>'+
+    '<div class="bk-conf-row"><span class="bk-conf-rl">Location</span><span class="bk-conf-rv">Unit 5, Sopwith Court, Datchet SL3 9AU</span></div>';
+}
+</script>
+</body>
+</html>
