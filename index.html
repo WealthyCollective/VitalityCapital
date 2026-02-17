@@ -535,7 +535,7 @@
         <ul class="nav-links">
             <li><a href="#verticals">Verticals</a></li>
             <li><a href="#about">Leadership</a></li>
-            <!--<li><a href="#pipeline">Pipeline</a></li>-->
+            <li><a href="#pipeline">Pipeline</a></li>
         </ul>
         <a href="mailto:hello@vitality.capital" class="nav-cta">Investor Relations</a>
     </nav>
@@ -740,8 +740,8 @@
     </section>
 
     <section class="pipeline-section" id="pipeline">
-       <div class="pipeline-container reveal">
-           <!-- <div id="pipeline-locked">
+        <div class="pipeline-container reveal">
+            <div id="pipeline-locked">
                 <div class="pipeline-lock"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
                 <h2 class="pipeline-title">Target <em>Pipeline</em></h2>
                 <p class="pipeline-description">Access our curated pipeline we've been building across healthcare, energy, and media verticals.</p>
@@ -750,7 +750,7 @@
                     <button onclick="checkPassword()" class="pipeline-btn">Request Access<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></button>
                 </div>
                 <p class="password-hint">Don't have access? <a href="mailto:hello@vitality.capital?subject=Pipeline Access Request">Request credentials</a></p>
-            </div> -->
+            </div>
 
             <div id="pipeline-unlocked" style="display: none;">
                 <div class="pipeline-header-unlocked">
@@ -852,7 +852,7 @@
             <div class="footer-links">
                 <a href="#verticals">Verticals</a>
                 <a href="#about">Leadership</a>
-                <!-- <a href="#pipeline">Pipeline</a> -->
+                <a href="#pipeline">Pipeline</a>
                 <a href="mailto:hello@vitality.capital">Contact</a>
                 <a href="https://www.linkedin.com/company/vitalitycapitalhq/posts/?feedView=all" target="_blank">LinkedIn</a>
             </div>
@@ -894,8 +894,18 @@
         function closeModal(e) { if (e.target === document.getElementById('ecgModal')) { document.getElementById('ecgModal').classList.remove('active'); document.body.style.overflow = ''; } }
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { document.getElementById('ecgModal').classList.remove('active'); document.body.style.overflow = ''; } });
 
-        function checkPassword() {
-            if (document.getElementById('pipeline-password').value === 'vitality2026') {
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function checkPassword() {
+            const storedHash = '9e3026b15a2813e0f5c8231a312cf1ce225b9d3a7ddf5642058a15af8240b268';
+            const inputHash = await hashPassword(document.getElementById('pipeline-password').value);
+            if (inputHash === storedHash) {
                 document.getElementById('pipeline-locked').style.display = 'none';
                 document.getElementById('pipeline-unlocked').style.display = 'block';
             } else {
