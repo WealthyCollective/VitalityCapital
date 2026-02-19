@@ -303,7 +303,7 @@ body {
   gap: 24px;
 }
 
-.foot-right a {
+.foot-right a, .foot-center a {
   font-size: 10px;
   color: rgba(255,255,255,0.35);
   text-decoration: none;
@@ -313,7 +313,25 @@ body {
   transition: color 0.3s;
 }
 
-.foot-right a:hover { color: var(--gold); }
+.foot-right a:hover, .foot-center a:hover { color: var(--gold); }
+
+.foot-center {
+  display: flex;
+  gap: 24px;
+}
+
+.foot-studio {
+  font-size: 10px;
+  color: rgba(255,255,255,0.25);
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.foot-studio span {
+  color: var(--gold);
+  font-weight: 500;
+}
 
 /* ═══ SUCCESS STATE ═══ */
 .success-msg {
@@ -415,11 +433,12 @@ body {
 
   <!-- Footer -->
   <div class="foot">
-    <div class="foot-left"© 2025 Islamic Images — The Peter Sanders Foundation</div>
-    <div class="foot-right">
+    <div class="foot-left">© 2025 Islamic Images — The Peter Sanders Foundation</div>
+    <div class="foot-center">
       <a href="https://petersanders.com" target="_blank">Peter Sanders</a>
       <a href="mailto:info@islamicimages.com">Contact</a>
     </div>
+    <div class="foot-studio">A <span>Vitality Capital</span> Studio Company</div>
   </div>
 
 </div>
