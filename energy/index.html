@@ -727,6 +727,685 @@
 </head>
 <body>
 
+<!-- PASSWORD GATE -->
+<div id="passwordGate" style="position:fixed;inset:0;z-index:9999;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-direction:column;">
+  <div style="max-width:380px;width:90%;text-align:center;">
+    <img src="https://i.postimg.cc/ZnG4dSDF/VC-01.png" alt="Vitality Capital" style="height:44px;margin-bottom:2.5rem;filter:brightness(10);opacity:0.8;">
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:#fff;margin-bottom:0.5rem;">AI Energy Intelligence</h2>
+    <p style="font-size:0.72rem;font-weight:450;color:var(--light);margin-bottom:2.5rem;letter-spacing:0.06em;">STRICTLY CONFIDENTIAL · AUTHORIZED ACCESS ONLY</p>
+    <div style="position:relative;">
+      <input id="pwInput" type="password" placeholder="Enter access code" autocomplete="off" style="width:100%;padding:0.85rem 1.2rem;font-family:'Futura PT','Outfit',sans-serif;font-size:0.85rem;font-weight:450;background:rgba(232,240,250,0.08);border:1px solid rgba(232,240,250,0.15);color:#fff;outline:none;letter-spacing:0.04em;transition:border-color 0.2s;">
+      <div id="pwError" style="position:absolute;left:0;bottom:-1.6rem;font-size:0.68rem;font-weight:450;color:#c0392b;opacity:0;transition:opacity 0.3s;"></div>
+    </div>
+    <button id="pwBtn" style="width:100%;margin-top:2rem;padding:0.8rem;font-family:'Futura PT','Outfit',sans-serif;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;background:#fff;color:var(--navy);border:none;cursor:pointer;transition:all 0.2s;">Enter</button>
+    <p style="font-size:0.58rem;color:rgba(208,223,239,0.35);margin-top:2rem;letter-spacing:0.05em;">Vitality Capital · February 2026</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  const HASH='a]Gk9$2pXw';
+  async function sha256(m){
+    const e=new TextEncoder().encode(m);
+    const h=await crypto.subtle.digest('SHA-256',e);
+    return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  }
+  const EXPECTED='b8e1e5202f0043de1ea02124cf54c4b2e2f8b7e7a3d5c6fa5e36a1aa8fc5e8d3';
+  let expected=null;
+  sha256('Energy2026
+<nav id="nav">
+  <a href="#" class="nav-brand">
+    <img src="https://i.postimg.cc/ZnG4dSDF/VC-01.png" alt="Vitality Capital" class="vc-logo">
+    <span class="nav-divider"></span>
+    <span class="nav-title">AI Energy Intelligence</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#opportunity">Opportunity</a></li>
+    <li><a href="#categories">Strategy</a></li>
+    <li><a href="#dfi">DFI Partnerships</a></li>
+    <li><a href="#acceleration">ECP & SIDF</a></li>
+    <li><a href="#partners">Partners</a></li>
+  </ul>
+  <a href="mailto:info@vitality.capital" class="nav-cta desktop-cta">Contact</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#opportunity">Opportunity</a>
+  <a href="#categories">Strategy</a>
+  <a href="#dfi">DFI Partnerships</a>
+  <a href="#acceleration">ECP & SIDF</a>
+  <a href="#partners">Partners</a>
+  <a href="mailto:info@vitality.capital" style="color:var(--blue);font-weight:500;">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <img src="https://i.postimg.cc/ZnG4dSDF/VC-01.png" alt="Vitality Capital" class="hero-logo">
+    <h1 class="hero-headline">AI Energy<br>Intelligence</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">The investment thesis for the world's most critical infrastructure transition. Vitality Capital deploys growth equity into the AI software layer that makes the energy transition possible.</p>
+    <div class="hero-meta">Vitality Capital  ·  February 2026  ·  Strictly Confidential</div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat">
+      <div class="stat-num">$200T</div>
+      <div class="stat-label">capital required for transition by 2050</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-num" style="transition-delay:0.2s">3×</div>
+      <div class="stat-label">power demand growth from AI by 2030</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-num" style="transition-delay:0.4s">90%</div>
+      <div class="stat-label">fall in solar generation cost over one decade</div>
+    </div>
+  </div>
+</section>
+
+<!-- OPPORTUNITY -->
+<section id="opportunity">
+  <div class="container">
+    <div class="section-label">The Scale of Opportunity</div>
+    <h2 class="section-title">The defining investment<br>theme of the next 30 years</h2>
+    <div class="rule"></div>
+    <p class="section-sub">We are at the most significant capital reallocation in industrial history. Every form of energy production, distribution, storage, and consumption is being rebuilt simultaneously — not incrementally.</p>
+
+    <div class="metrics-grid">
+      <div class="metric-card fade-up">
+        <div class="metric-n">$200T</div>
+        <div class="metric-l">Total transition capital needed</div>
+        <div class="metric-src">IEA, 2050 scenario</div>
+      </div>
+      <div class="metric-card fade-up" style="transition-delay:0.1s">
+        <div class="metric-n">$38T</div>
+        <div class="metric-l">Annual climate damage by 2050 on current trajectory</div>
+        <div class="metric-src">McKinsey, 2024</div>
+      </div>
+      <div class="metric-card fade-up" style="transition-delay:0.2s">
+        <div class="metric-n">1.7B</div>
+        <div class="metric-l">People without reliable clean energy today</div>
+        <div class="metric-src">IEA, 2024</div>
+      </div>
+      <div class="metric-card fade-up" style="transition-delay:0.3s">
+        <div class="metric-n">73%</div>
+        <div class="metric-l">Global CO₂ attributable to energy production</div>
+        <div class="metric-src">IEA, 2023</div>
+      </div>
+    </div>
+
+    <div class="opps-grid">
+      <div class="opp-card fade-up" style="transition-delay:0.1s">
+        <div class="opp-title">AI & Grid Intelligence</div>
+        <div class="opp-body">The fastest-growing segment. Demand forecasting, VPP orchestration, and V2G software scaling from pilot to grid-wide now. Pure software economics — 70–90% gross margins.</div>
+      </div>
+      <div class="opp-card fade-up" style="transition-delay:0.2s">
+        <div class="opp-title">Industrial Decarbonisation</div>
+        <div class="opp-body">Every major manufacturer has committed to Scope 1/2 elimination by 2035. EU CBAM 2026, SEC disclosure, TCFD — non-discretionary spend. High switching costs once embedded.</div>
+      </div>
+      <div class="opp-card fade-up" style="transition-delay:0.3s">
+        <div class="opp-title">EV Infrastructure Software</div>
+        <div class="opp-body">14 million EVs on road need 2× current charging infrastructure. MENA and EU dramatically underpenetrated. Smart charging and fleet optimisation is a structural gap.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRATEGIC FOCUS -->
+<section id="focus">
+  <div class="container">
+    <div class="section-label">Strategic Focus</div>
+    <h2 class="section-title">AI software over hardware.<br>Intelligence over infrastructure.</h2>
+    <div class="rule"></div>
+    <p class="section-sub">Growth equity alpha lives in the software layer — the intelligence that runs on top of assets others have built.</p>
+
+    <div class="focus-grid">
+      <div class="focus-col fade-up">
+        <div class="focus-label pass">Pass — Grid-Scale Hardware</div>
+        <div class="focus-item">
+          <div class="focus-item-title">10–15yr exit horizons</div>
+          <div class="focus-item-body">Fundamentally mismatched with 5–7yr growth equity cycles. Hardware assets exit via infrastructure funds, not strategic acquirers.</div>
+        </div>
+        <div class="focus-item">
+          <div class="focus-item-title">$100M+ deal minimums</div>
+          <div class="focus-item-body">Flow battery installations require capital at a scale where a $300M fund cannot lead, govern, or influence outcomes.</div>
+        </div>
+        <div class="focus-item">
+          <div class="focus-item-title">Commoditisation risk</div>
+          <div class="focus-item-body">Chinese manufacturers driving flow battery costs down 40% per year. Hardware margin compression is structural, not cyclical.</div>
+        </div>
+        <div class="focus-item">
+          <div class="focus-item-title">3–5yr before first revenue</div>
+          <div class="focus-item-body">Physical assets require permitting, construction, and grid interconnection before generating any return.</div>
+        </div>
+      </div>
+      <div class="focus-divider"></div>
+      <div class="focus-col fade-up" style="transition-delay:0.15s">
+        <div class="focus-label invest">Invest — AI Energy Intelligence</div>
+        <div class="focus-item">
+          <div class="focus-item-title">5–7yr exit pathways</div>
+          <div class="focus-item-body">AI SaaS platforms scale to strategic acquirer readiness within the fund cycle. Infrastructure giants pay premium multiples for embedded intelligence.</div>
+        </div>
+        <div class="focus-item">
+          <div class="focus-item-title">Series A–C check sizes</div>
+          <div class="focus-item-body">Growth companies raise $5M–$50M. Fund leads rounds, governs boards, drives outcomes — meaningful influence at the right scale.</div>
+        </div>
+        <div class="focus-item">
+          <div class="focus-item-title">Software compounds</div>
+          <div class="focus-item-body">70–90% gross margins. The AI model improves with every dataset — creating durable moats competitors cannot replicate with hardware alone.</div>
+        </div>
+        <div class="focus-item">
+          <div class="focus-item-title">Non-discretionary spend</div>
+          <div class="focus-item-body">EU CBAM, SEC climate disclosure, TCFD — regulation is the forcing function. Every manufacturer needs this stack. The market comes to the product.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section id="categories">
+  <div class="container">
+    <div class="section-label">Investment Categories</div>
+    <h2 class="section-title">Five investable categories in<br>AI energy intelligence</h2>
+    <div class="rule"></div>
+
+    <div class="cats-grid">
+      <div class="cat-card fade-up">
+        <div class="cat-num">01</div>
+        <div class="cat-title">Predictive Grid & Demand Forecasting</div>
+        <div class="cat-body">AI models predicting power demand 15-min to 72hrs ahead with &gt;98% accuracy. Enables pre-positioning of generation, avoids spot market exposure, reduces curtailment.</div>
+        <div class="cat-stat">$2.4B market · 2028</div>
+      </div>
+      <div class="cat-card fade-up" style="transition-delay:0.08s">
+        <div class="cat-num">02</div>
+        <div class="cat-title">Virtual Power Plant Orchestration</div>
+        <div class="cat-body">Software aggregating distributed assets — solar panels, EV batteries, industrial loads — into a single dispatchable resource. Value grows with every installation added.</div>
+        <div class="cat-stat">18% CAGR</div>
+      </div>
+      <div class="cat-card fade-up" style="transition-delay:0.16s">
+        <div class="cat-num">03</div>
+        <div class="cat-title">Industrial Energy Optimisation</div>
+        <div class="cat-body">Real-time AI optimisation of energy across manufacturing facilities. Tier-1 manufacturers committed to Scope 1/2 elimination by 2035. Proven ROI of 20–40% cost reduction.</div>
+        <div class="cat-stat">$38B wasted annually</div>
+      </div>
+      <div class="cat-card fade-up" style="transition-delay:0.24s">
+        <div class="cat-num">04</div>
+        <div class="cat-title">Carbon & Compliance Intelligence</div>
+        <div class="cat-body">Automated Scope 1/2/3 measurement, EU CBAM compliance, SEC climate disclosure, TCFD reporting. Non-discretionary spend with high switching costs.</div>
+        <div class="cat-stat">EU CBAM live 2026</div>
+      </div>
+      <div class="cat-card fade-up" style="transition-delay:0.32s">
+        <div class="cat-num">05</div>
+        <div class="cat-title">EV Fleet & Charging Intelligence</div>
+        <div class="cat-body">AI optimising when and where EV fleets charge to minimise cost and enable V2G revenue. MENA logistics operators face large efficiency gaps.</div>
+        <div class="cat-stat">40% cost reduction</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DFI ENGINE -->
+<section id="dfi">
+  <div class="container">
+    <div class="section-label">Development Finance</div>
+    <h2 class="section-title">DFIs — our growth<br>acceleration engine</h2>
+    <div class="rule"></div>
+    <p class="section-sub">DFIs are not charity — they are the most powerful returns accelerator in our toolkit. First-loss protection compresses our risk floor. Concessional debt lets portfolio companies scale 2–3× faster.</p>
+
+    <div class="dfi-status-row">
+      <div class="dfi-status">
+        <div class="dfi-status-label">Green Climate Fund</div>
+        <div class="dfi-status-value">Approved</div>
+        <div class="dfi-badge">Confirmed</div>
+      </div>
+      <div class="dfi-status">
+        <div class="dfi-status-label">New York Green Bank</div>
+        <div class="dfi-status-value">Debt approved</div>
+        <div class="dfi-badge active">Equity in discussion</div>
+      </div>
+      <div class="dfi-status">
+        <div class="dfi-status-label">Korea Development Bank</div>
+        <div class="dfi-status-value">Approved — 1:1 match</div>
+        <div class="dfi-badge">Capital match confirmed</div>
+      </div>
+      <div class="dfi-status">
+        <div class="dfi-status-label">Further equity partnerships</div>
+        <div class="dfi-status-value">Active discussions</div>
+        <div class="dfi-badge discuss">EIF · BBB · IFC</div>
+      </div>
+    </div>
+
+    <div class="dfi-cols">
+      <div class="dfi-col fade-up">
+        <div class="dfi-col-title">How DFIs accelerate growth and exits</div>
+        <div class="dfi-item">
+          <div class="dfi-item-title">Emerging market entry — compressed to 18 months</div>
+          <div class="dfi-item-body">DFI in-country infrastructure, regulatory relationships, and local credibility let portfolio companies enter MENA, Sub-Saharan Africa, and South-East Asia simultaneously.</div>
+        </div>
+        <div class="dfi-item">
+          <div class="dfi-item-title">De-risked scaling = faster, larger exits</div>
+          <div class="dfi-item-body">First-loss DFI structures mean our equity scales behind protected capital. Companies grow with less friction and exit at higher multiples.</div>
+        </div>
+        <div class="dfi-item">
+          <div class="dfi-item-title">Concessional debt = non-dilutive growth fuel</div>
+          <div class="dfi-item-body">NY Green Bank debt facilities and GCF concessional loans grow revenue without burning equity. Cleaner cap tables and higher EBITDA margins at exit.</div>
+        </div>
+      </div>
+      <div style="width:1px; background:var(--pale); margin:0 2.5rem;"></div>
+      <div class="dfi-col fade-up" style="transition-delay:0.15s">
+        <div class="dfi-col-title">Widest possible impact across every market</div>
+        <div class="dfi-item">
+          <div class="dfi-item-title">150+ countries. One investment.</div>
+          <div class="dfi-item-body">The IFC, GCF, ADB, EIB, and AIIB collectively reach every major emerging market. Portfolio companies travel their distribution networks at no additional cost.</div>
+        </div>
+        <div class="dfi-item">
+          <div class="dfi-item-title">Sovereign contracts = enterprise value</div>
+          <div class="dfi-item-body">DFI-backed utility contracts carry implicit sovereign guarantee. Companies with these contracts are more bankable — lower cost of capital, higher enterprise value.</div>
+        </div>
+        <div class="dfi-item">
+          <div class="dfi-item-title">The Vitality structural advantage</div>
+          <div class="dfi-item-body">Shariah-compliant structures unlock GCC sovereign capital. Female GP credentials access gender-lens DFI mandates. Confirmed GCF, NYGB, and KDB status signals institutional quality.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DFI MAP -->
+<section id="dfi-map">
+  <div class="container">
+    <div class="section-label">Institutional Finance Architecture</div>
+    <h2 class="section-title">DFI & institutional<br>partner map</h2>
+    <div class="rule"></div>
+    <p class="section-sub">Confirmed · In discussion · Targeted — our global finance architecture across eight institutions.</p>
+
+    <div class="dfi-map-grid">
+      <div class="dfi-institution fade-up">
+        <div class="inst-header">
+          <div class="inst-name">Green Climate Fund</div>
+          <span class="inst-tag approved">Approved</span>
+        </div>
+        <div class="inst-region">Global · UN-backed</div>
+        <div class="inst-detail">$9B committed. First-loss and concessional financing for climate mitigation in developing markets. AI grid intelligence for emerging economies is directly in mandate scope.</div>
+      </div>
+      <div class="dfi-institution fade-up" style="transition-delay:0.08s">
+        <div class="inst-header">
+          <div class="inst-name">New York Green Bank</div>
+          <span class="inst-tag approved">Debt approved · Equity active</span>
+        </div>
+        <div class="inst-region">United States</div>
+        <div class="inst-detail">$1B+ state-sponsored. Debt facilities approved — revenue-based debt, warehouse credit lines, credit enhancement confirmed. Equity partnership discussion actively underway.</div>
+      </div>
+      <div class="dfi-institution fade-up" style="transition-delay:0.04s">
+        <div class="inst-header">
+          <div class="inst-name">European Investment Fund</div>
+          <span class="inst-tag discussion">In discussion</span>
+        </div>
+        <div class="inst-region">European Union</div>
+        <div class="inst-detail">EIF deploys fund-of-funds capital into EU-focused growth equity funds. AI energy and climate tech mandate aligns directly. Exploring fund LP participation.</div>
+      </div>
+      <div class="dfi-institution fade-up" style="transition-delay:0.12s">
+        <div class="inst-header">
+          <div class="inst-name">British Business Bank</div>
+          <span class="inst-tag discussion">In discussion</span>
+        </div>
+        <div class="inst-region">United Kingdom</div>
+        <div class="inst-detail">BBB supports British-based growth funds and UK companies scaling internationally. Exploring fund investment and portfolio company debt structures.</div>
+      </div>
+      <div class="dfi-institution fade-up">
+        <div class="inst-header">
+          <div class="inst-name">Korea Development Bank</div>
+          <span class="inst-tag match">Approved — 1:1 match</span>
+        </div>
+        <div class="inst-region">Republic of Korea</div>
+        <div class="inst-detail">KDB approved with 1:1 capital match commitment. LG Electronics connection strengthens the relationship further and creates natural alignment with AI energy portfolio.</div>
+      </div>
+      <div class="dfi-institution fade-up" style="transition-delay:0.08s">
+        <div class="inst-header">
+          <div class="inst-name">IFC — World Bank Group</div>
+          <span class="inst-tag targeted">Targeted</span>
+        </div>
+        <div class="inst-region">Global · 150+ countries</div>
+        <div class="inst-detail">$7B+ annual climate finance. IFC LP participation would unlock preferred access to 150+ country portfolio company deployment networks.</div>
+      </div>
+      <div class="dfi-institution fade-up" style="transition-delay:0.04s">
+        <div class="inst-header">
+          <div class="inst-name">Asian Development Bank</div>
+          <span class="inst-tag targeted">Targeted</span>
+        </div>
+        <div class="inst-region">Asia-Pacific</div>
+        <div class="inst-detail">$100B climate commitment to 2030. AI grid management for Asia-Pacific is a stated strategic priority. ADB participation opens ASEAN and South Asia.</div>
+      </div>
+      <div class="dfi-institution fade-up" style="transition-delay:0.12s">
+        <div class="inst-header">
+          <div class="inst-name">AIIB</div>
+          <span class="inst-tag targeted">Targeted</span>
+        </div>
+        <div class="inst-region">Asia · Gulf state members</div>
+        <div class="inst-detail">$10B+ energy transition. Deep Gulf state membership creates strategic alignment with Vitality MENA thesis. Shariah-compliant structures support AIIB eligibility.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ECP + SIDF ACCELERATION -->
+<section id="acceleration">
+  <div class="container">
+    <div class="section-label">The Acceleration Partnership</div>
+    <h2 class="section-title">ECP & SIDF — piloting,<br>proving, and scaling AI together</h2>
+    <div class="rule"></div>
+    <p class="section-sub">The ECP-SIDF partnership is a deliberately engineered acceleration loop. ECP provides live North American infrastructure to trial and validate AI technologies at scale. SIDF takes those proven solutions and deploys them across Saudi industrial parks with sovereign backing.</p>
+
+    <div class="phases-grid">
+      <div class="phase-card fade-up">
+        <div class="phase-header">
+          <span class="phase-num">Phase 1</span>
+          <div class="phase-title">Trial</div>
+          <div class="phase-who">ECP North America</div>
+        </div>
+        <div class="phase-rule"></div>
+        <div class="phase-item">
+          <div class="phase-dot"></div>
+          <div class="phase-text">Portfolio company deployed across ECP Calpine, Convergent, or Terra-Gen assets under commercial pilot terms</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot"></div>
+          <div class="phase-text">AI model trained on live generation, storage, and dispatch data — the highest-quality dataset in the sector</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot"></div>
+          <div class="phase-text">ECP technical team embedded as co-development partner, not just a customer</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot"></div>
+          <div class="phase-text">Contractual pilot-to-production pathway agreed upfront</div>
+        </div>
+      </div>
+      <div class="phase-card fade-up" style="transition-delay:0.12s">
+        <div class="phase-header">
+          <span class="phase-num">Phase 2</span>
+          <div class="phase-title">Validate</div>
+          <div class="phase-who">ECP → Performance data → SIDF</div>
+        </div>
+        <div class="phase-rule"></div>
+        <div class="phase-item">
+          <div class="phase-dot"></div>
+          <div class="phase-text">Performance benchmarks: demand forecast accuracy, curtailment reduction, cost-per-MWh improvement</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot"></div>
+          <div class="phase-text">Independent technical audit underwritten by ECP operational team</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot"></div>
+          <div class="phase-text">SIDF technical team receives validated dataset before committing deployment capital</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot"></div>
+          <div class="phase-text">North American grid learnings adapted for MENA grid architecture</div>
+        </div>
+      </div>
+      <div class="phase-card fade-up" style="transition-delay:0.24s">
+        <div class="phase-header">
+          <span class="phase-num">Phase 3</span>
+          <div class="phase-title">Scale</div>
+          <div class="phase-who">SIDF Saudi Arabia → GCC → Global</div>
+        </div>
+        <div class="phase-rule"></div>
+        <div class="phase-item">
+          <div class="phase-dot"></div>
+          <div class="phase-text">SIDF deploys validated technology across NEOM, KAEC, Jubail industrial zones under sovereign procurement</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot"></div>
+          <div class="phase-text">Saudi deployment generates GCC country references — UAE, Qatar, Bahrain, Kuwait follow</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot"></div>
+          <div class="phase-text">ECP North American proof + SIDF sovereign reference = dual-continent validation stack</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot"></div>
+          <div class="phase-text">Exit positioned: "proven across 26,000MW in North America and the Saudi national industrial grid"</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flywheel-bar">
+      <div class="flywheel-label">The flywheel</div>
+      <div class="flywheel-text">ECP operational data → Vitality AI refinement → SIDF sovereign deployment → GCC replication → global exit premium → reinvested into next portfolio company pilot at ECP</div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section id="partners">
+  <div class="container">
+    <div class="section-label">Strategic LP Network</div>
+    <h2 class="section-title">Partner ecosystem</h2>
+    <div class="rule"></div>
+    <p class="section-sub">The LP network creates structural advantage in deal origination, customer access, and market entry that no amount of capital alone can replicate.</p>
+
+    <div class="partners-grid">
+      <div class="partner-card fade-up">
+        <div class="partner-header">
+          <div class="partner-name">ECP</div>
+          <span class="partner-tag">Strategic LP</span>
+        </div>
+        <div class="partner-full">Energy Capital Partners</div>
+        <div class="partner-rule"></div>
+        <div class="partner-what">$50B+ AUM. 26,000MW of physical power assets. Infrastructure Investor of the Year 2024. 20-year track record — zero AI or software investments.</div>
+        <div class="partner-why">26,000MW of assets currently run without AI. Vitality portfolio companies deploy intelligence on top of ECP infrastructure. We are not competing with our LPs — we are completing them.</div>
+      </div>
+      <div class="partner-card fade-up" style="transition-delay:0.1s">
+        <div class="partner-header">
+          <div class="partner-name">SIDF</div>
+          <span class="partner-tag">LP in Discussion</span>
+        </div>
+        <div class="partner-full">Saudi Industrial Development Fund</div>
+        <div class="partner-rule"></div>
+        <div class="partner-what">SAR 105B capital ($28B equivalent). Primary financial enabler of Saudi Vision 2030. Mandated sectors: industry, energy, mining, logistics.</div>
+        <div class="partner-why">Saudi Arabia targets 50% renewables by 2030. That grid cannot be managed without AI. Shariah-compliant structures and MENA deployment capability — rare in Western growth equity.</div>
+      </div>
+      <div class="partner-card fade-up" style="transition-delay:0.05s">
+        <div class="partner-header">
+          <div class="partner-name">NY Green Bank</div>
+          <span class="partner-tag">Debt Approved · Equity Active</span>
+        </div>
+        <div class="partner-full">New York Green Bank</div>
+        <div class="partner-rule"></div>
+        <div class="partner-what">$1B+ state-sponsored public benefit corporation. Debt facilities approved — revenue-based debt, warehouse credit lines, credit enhancement confirmed.</div>
+        <div class="partner-why">Debt approval unlocks non-dilutive growth capital from day one. Equity partnership would make NYGB a structural LP opening every institutional co-investment conversation.</div>
+      </div>
+      <div class="partner-card fade-up" style="transition-delay:0.15s">
+        <div class="partner-header">
+          <div class="partner-name">LG Electronics</div>
+          <span class="partner-tag">Strategic LP</span>
+        </div>
+        <div class="partner-full">Global Technology & Electronics Leader</div>
+        <div class="partner-rule"></div>
+        <div class="partner-what">$68B revenue. AI, home appliances, HVAC, EV components, solar. LG ThinQ AI platform spans 300M+ connected devices.</div>
+        <div class="partner-why">LG is simultaneously a customer for AI energy management software and a distribution channel into Asian and global markets. LP relationship opens procurement fast-track.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO CONSTRUCT -->
+<section id="portfolio">
+  <div class="container">
+    <div class="section-label">Portfolio Construct</div>
+    <h2 class="section-title">AI energy intelligence focus</h2>
+    <div class="rule"></div>
+
+    <div style="margin-top:2.5rem;">
+      <div class="alloc-row fade-up" data-width="100">
+        <div class="alloc-pct">35%</div>
+        <div class="alloc-bar-wrap"><div class="alloc-bar-fill" data-w="100"></div></div>
+        <div class="alloc-info">
+          <div class="alloc-cat">Predictive Grid & Demand AI</div>
+          <div class="alloc-detail">Highest near-term demand. Regulatory mandates accelerate adoption. Exits to utilities and infrastructure acquirers.</div>
+        </div>
+      </div>
+      <div class="alloc-row fade-up" data-width="71" style="transition-delay:0.06s">
+        <div class="alloc-pct">25%</div>
+        <div class="alloc-bar-wrap"><div class="alloc-bar-fill" data-w="71"></div></div>
+        <div class="alloc-info">
+          <div class="alloc-cat">Industrial Energy Optimisation</div>
+          <div class="alloc-detail">Non-discretionary spend driven by 2035 Scope 1/2 commitments. MENA industrial parks are an emerging greenfield.</div>
+        </div>
+      </div>
+      <div class="alloc-row fade-up" data-width="57" style="transition-delay:0.12s">
+        <div class="alloc-pct">20%</div>
+        <div class="alloc-bar-wrap"><div class="alloc-bar-fill" data-w="57"></div></div>
+        <div class="alloc-info">
+          <div class="alloc-cat">Carbon & Compliance Intelligence</div>
+          <div class="alloc-detail">EU CBAM 2026, SEC climate rules, TCFD — regulation is the forcing function. Strategic exits via Big 4 consolidators.</div>
+        </div>
+      </div>
+      <div class="alloc-row fade-up" data-width="43" style="transition-delay:0.18s">
+        <div class="alloc-pct">15%</div>
+        <div class="alloc-bar-wrap"><div class="alloc-bar-fill" data-w="43"></div></div>
+        <div class="alloc-info">
+          <div class="alloc-cat">EV Fleet & Charging Intelligence</div>
+          <div class="alloc-detail">MENA EV penetration near zero — first mover advantage in a $200B regional infrastructure buildout.</div>
+        </div>
+      </div>
+      <div class="alloc-row fade-up" data-width="14" style="transition-delay:0.24s">
+        <div class="alloc-pct">5%</div>
+        <div class="alloc-bar-wrap"><div class="alloc-bar-fill" data-w="14"></div></div>
+        <div class="alloc-info">
+          <div class="alloc-cat">Exploratory Reserve</div>
+          <div class="alloc-detail">Option value on breakthrough enabling technologies — advanced geothermal AI, SMR optimisation software.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONVICTION -->
+<section id="conviction">
+  <div class="container">
+    <div class="section-label" style="color:var(--light)">The Conviction</div>
+    <h2 class="section-title" style="color:var(--white);font-size:clamp(1.8rem,3.6vw,3.15rem)">The conviction<br>in four sentences</h2>
+    <div class="conviction-rule"></div>
+
+    <div class="conviction-item fade-up">
+      <div class="conviction-head">ECP owns the power plants. We own the brain.</div>
+      <div class="conviction-body">26,000MW of physical infrastructure currently runs without AI. Vitality Capital builds the intelligence layer that transforms those assets. We are not competing with our LPs — we are completing them.</div>
+    </div>
+    <div class="conviction-item fade-up" style="transition-delay:0.1s">
+      <div class="conviction-head">SIDF needs this for Vision 2030.</div>
+      <div class="conviction-body">Saudi Arabia has committed to 50% renewables by 2030. That grid is unmanageable without AI demand forecasting and VPP software. SAR 105B in capital needs a Shariah-compliant, MENA-capable fund with exactly this thesis.</div>
+    </div>
+    <div class="conviction-item fade-up" style="transition-delay:0.2s">
+      <div class="conviction-head">DFIs approved and active. KDB matches every dollar 1:1.</div>
+      <div class="conviction-body">Green Climate Fund approved. NY Green Bank debt confirmed, equity in discussion. Korea Development Bank approved with 1:1 capital match. These are not targets — they are confirmed partnerships.</div>
+    </div>
+    <div class="conviction-item fade-up" style="transition-delay:0.3s">
+      <div class="conviction-head">Hardware was the right question. Software is the right answer.</div>
+      <div class="conviction-body">$300M growth equity, 5–7yr horizons. AI SaaS compounds — margins are 80%+, exits are strategic, and the infrastructure giants who need this intelligence will pay to acquire it.</div>
+    </div>
+
+    <div class="conviction-close">
+      "The energy transition is not a market. It is the reorganisation of the physical world.<br>We invest in the intelligence that makes it possible."
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img src="https://i.postimg.cc/85sSX52y/VC-04.png" alt="Vitality Capital" class="footer-logo">
+    <span class="footer-text">Vitality Capital</span>
+  </div>
+  <div class="footer-note">vitality.capital/energy  ·  Strictly Confidential  ·  February 2026</div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('mobileMenu');
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('active');
+    menu.classList.toggle('active');
+    document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+  });
+  menu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      toggle.classList.remove('active');
+      menu.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        const fill = entry.target.querySelector('.alloc-bar-fill');
+        if (fill) {
+          const w = fill.getAttribute('data-w');
+          setTimeout(() => { fill.style.width = w + '%'; }, 100);
+        }
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.stat-num, .fade-up, .metric-card, .opp-card, .cat-card, .dfi-institution, .partner-card, .alloc-row, .phase-card').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const t = document.querySelector(link.getAttribute('href'));
+      if (t) {
+        e.preventDefault();
+        window.scrollTo({ top: t.offsetTop - 64, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
+).then(h=>{expected=h;});
+
+  const inp=document.getElementById('pwInput');
+  const btn=document.getElementById('pwBtn');
+  const err=document.getElementById('pwError');
+  const gate=document.getElementById('passwordGate');
+
+  async function check(){
+    const v=inp.value;
+    if(!v){err.textContent='Please enter the access code';err.style.opacity='1';return;}
+    const h=await sha256(v);
+    if(h===expected){
+      gate.style.opacity='0';
+      gate.style.transition='opacity 0.5s ease';
+      setTimeout(()=>{gate.style.display='none';},500);
+    } else {
+      err.textContent='Invalid access code. Please try again.';
+      err.style.opacity='1';
+      inp.value='';
+      inp.style.borderColor='#c0392b';
+      setTimeout(()=>{inp.style.borderColor='rgba(232,240,250,0.15)';err.style.opacity='0';},2500);
+    }
+  }
+  btn.addEventListener('click',check);
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter')check();});
+  inp.addEventListener('focus',function(){inp.style.borderColor='rgba(232,240,250,0.35)';});
+  inp.addEventListener('blur',function(){inp.style.borderColor='rgba(232,240,250,0.15)';});
+})();
+</script>
+
 <!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-brand">
