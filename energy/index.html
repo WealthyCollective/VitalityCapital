@@ -22,8 +22,10 @@
   #gateBox h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:#fff;margin-bottom:8px}
   #gateBox .sub{font-size:.72rem;font-weight:450;color:#8AAED0;margin-bottom:40px;letter-spacing:.06em}
   #pwWrap{position:relative}
-  #pwField{width:100%;padding:.85rem 1.2rem;font-family:inherit;font-size:.85rem;font-weight:450;background:rgba(232,240,250,.08);border:1px solid rgba(232,240,250,.15);color:#fff;outline:none;letter-spacing:.04em;transition:border-color .2s}
+  #pwField{width:100%;padding:.85rem 2.8rem .85rem 1.2rem;font-family:inherit;font-size:.85rem;font-weight:450;background:rgba(232,240,250,.08);border:1px solid rgba(232,240,250,.15);color:#fff;outline:none;letter-spacing:.04em;transition:border-color .2s}
   #pwField:focus{border-color:rgba(232,240,250,.35)}
+  #pwToggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;padding:4px;font-size:13px;color:#8AAED0;letter-spacing:.05em;font-family:inherit;transition:color .2s}
+  #pwToggle:hover{color:#fff}
   #pwErr{position:absolute;left:0;bottom:-22px;font-size:.68rem;font-weight:450;color:#e74c3c;opacity:0;transition:opacity .3s}
   #pwBtn{width:100%;margin-top:32px;padding:.8rem;font-family:inherit;font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;background:#fff;color:#0C1F4A;border:none;cursor:pointer}
   #pwBtn:hover{background:#E8F0FA}
@@ -267,6 +269,7 @@
     <p class="sub">STRICTLY CONFIDENTIAL · AUTHORIZED ACCESS ONLY</p>
     <div id="pwWrap">
       <input id="pwField" type="password" placeholder="Enter access code" autocomplete="off">
+      <button id="pwToggle" type="button" aria-label="Show password">SHOW</button>
       <div id="pwErr"></div>
     </div>
     <button id="pwBtn" type="button">Enter</button>
@@ -514,6 +517,18 @@
 // PASSWORD LOGIC
 document.getElementById('pwBtn').addEventListener('click', function() { checkPw(); });
 document.getElementById('pwField').addEventListener('keyup', function(e) { if (e.keyCode === 13) { checkPw(); } });
+document.getElementById('pwToggle').addEventListener('click', function() {
+  var field = document.getElementById('pwField');
+  var btn = document.getElementById('pwToggle');
+  if (field.type === 'password') {
+    field.type = 'text';
+    btn.textContent = 'HIDE';
+  } else {
+    field.type = 'password';
+    btn.textContent = 'SHOW';
+  }
+  field.focus();
+});
 
 function checkPw() {
   var field = document.getElementById('pwField');
