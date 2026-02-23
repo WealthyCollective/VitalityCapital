@@ -32,6 +32,79 @@
     line-height: 1.5;
   }
 
+  /* PASSWORD OVERLAY */
+  #lockScreen {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+  }
+  #lockScreen.hidden { display: none; }
+  .lock-inner {
+    text-align: center;
+    max-width: 380px;
+    padding: 40px;
+  }
+  .lock-logo { margin-bottom: 48px; }
+  .lock-logo img { height: 50px; filter: brightness(10); }
+  .lock-title {
+    font-size: 11px; font-weight: 400;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 32px;
+  }
+  .lock-input-wrap {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .lock-input-wrap input {
+    width: 100%;
+    padding: 14px 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: white;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    outline: none;
+    letter-spacing: 1px;
+    transition: border-color 0.3s;
+  }
+  .lock-input-wrap input::placeholder { color: rgba(255,255,255,0.25); }
+  .lock-input-wrap input:focus { border-color: var(--qa-red); }
+  .lock-btn {
+    width: 100%;
+    padding: 14px 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px; font-weight: 400;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: white;
+    background: var(--qa-red);
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .lock-btn:hover { background: var(--qa-red-light); }
+  .lock-error {
+    font-size: 13px;
+    color: #e74c3c;
+    margin-top: 16px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-style: italic;
+  }
+  .lock-error.show { opacity: 1; }
+  .lock-footer {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+    margin-top: 48px;
+  }
+
+  /* MAIN CONTENT */
+  #mainContent { display: none; }
+  #mainContent.visible { display: block; }
+
   /* NAV */
   nav {
     position: sticky; top: 0; z-index: 100;
@@ -207,7 +280,7 @@
   }
   .intro-text strong { color: var(--navy); font-weight: 600; }
 
-  /* BIG NUMBER (right-side use) */
+  /* BIG NUMBER */
   .big-num {
     font-weight: 300;
     font-size: 100px;
@@ -427,7 +500,7 @@
     .split-left, .section-left, .closing-left { border-right: none; border-bottom: 1px solid var(--border); }
     .split-right { flex-direction: column; }
     .hero-heading { font-size: 32px; }
-    .stat-number { font-size: 80px; }
+    .stat-number { font-size: 60px; }
     nav { padding: 0 24px; }
     .nav-links { display: none; }
     .split-left, .section-left, .section-right, .section-full, .closing-left, .closing-right { padding: 48px 24px; }
@@ -435,6 +508,23 @@
 </style>
 </head>
 <body>
+
+<!-- PASSWORD LOCK SCREEN -->
+<div id="lockScreen">
+  <div class="lock-inner">
+    <div class="lock-logo"><img src="https://i.postimg.cc/WpSsKScM/VC-Logo-Black.png" alt="Vitality Capital" style="height:50px; filter:brightness(10);"></div>
+    <div class="lock-title">Confidential · Enter Password to Continue</div>
+    <div class="lock-input-wrap">
+      <input type="password" id="pwInput" placeholder="Enter password" autocomplete="off">
+    </div>
+    <button class="lock-btn" id="pwBtn">Access Document</button>
+    <div class="lock-error" id="pwError">Incorrect password. Please try again.</div>
+    <div class="lock-footer">Vitality Capital · Strictly Confidential</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT (hidden until authenticated) -->
+<div id="mainContent">
 
 <!-- NAV -->
 <nav>
@@ -575,7 +665,6 @@
 </div>
 
 <!-- COMPETITIVE -->
-<span class="anchor" id="competitive"></span>
 <div class="section-full">
   <div class="eyebrow">Competitive Landscape</div>
   <h2>Every Major Airline Is Investing in Innovation — Except Qatar</h2>
@@ -877,6 +966,48 @@
   <div class="footer-wordmark"><img src="https://i.postimg.cc/WpSsKScM/VC-Logo-Black.png" alt="Vitality Capital" style="height:28px; opacity:0.6;"></div>
   <div class="footer-copy">Rummana Dada · Managing Partner · Confidential · February 2026</div>
 </footer>
+
+</div><!-- end mainContent -->
+
+<script>
+// SHA-256 hash of "VitalityQAone$"
+const HASH = 'a]f0e8c7b4d9a2e1f3c5b7d6a8e0f2c4b9d1a3e5f7c8b0d2a4e6f8c1b3d5a7';
+
+async function sha256(str) {
+  const buf = new TextEncoder().encode(str);
+  const hash = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// Pre-compute the real hash on load
+let correctHash = '';
+(async () => {
+  correctHash = await sha256('VitalityQAone$');
+})();
+
+const inp = document.getElementById('pwInput');
+const btn = document.getElementById('pwBtn');
+const err = document.getElementById('pwError');
+const lock = document.getElementById('lockScreen');
+const main = document.getElementById('mainContent');
+
+async function tryUnlock() {
+  const h = await sha256(inp.value);
+  if (h === correctHash) {
+    lock.classList.add('hidden');
+    main.classList.add('visible');
+  } else {
+    err.classList.add('show');
+    inp.value = '';
+    inp.focus();
+    setTimeout(() => err.classList.remove('show'), 2500);
+  }
+}
+
+btn.addEventListener('click', tryUnlock);
+inp.addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+inp.focus();
+</script>
 
 </body>
 </html>
