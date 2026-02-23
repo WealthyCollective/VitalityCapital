@@ -57,9 +57,16 @@
     position: relative;
     margin-bottom: 20px;
   }
+  .lock-eye {
+    position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer; padding: 4px;
+    color: rgba(255,255,255,0.3); transition: color 0.2s;
+  }
+  .lock-eye:hover { color: rgba(255,255,255,0.6); }
+  .lock-eye svg { display: block; }
   .lock-input-wrap input {
     width: 100%;
-    padding: 14px 20px;
+    padding: 14px 44px 14px 20px;
     font-family: 'Cormorant Garamond', serif;
     font-size: 16px;
     color: white;
@@ -512,10 +519,14 @@
 <!-- PASSWORD LOCK SCREEN -->
 <div id="lockScreen">
   <div class="lock-inner">
-    <div class="lock-logo"><img src="https://i.postimg.cc/WpSsKScM/VC-Logo-Black.png" alt="Vitality Capital" style="height:50px; filter:brightness(10);"></div>
+    <div class="lock-logo"><img src="https://i.postimg.cc/PJqnTsnX/VC-Logo-White.png" alt="Vitality Capital" style="height:50px;"></div>
     <div class="lock-title">Confidential · Enter Password to Continue</div>
     <div class="lock-input-wrap">
       <input type="password" id="pwInput" placeholder="Enter password" autocomplete="off">
+      <button type="button" class="lock-eye" id="eyeToggle" aria-label="Show password">
+        <svg id="eyeOpen" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        <svg id="eyeClosed" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+      </button>
     </div>
     <button class="lock-btn" id="pwBtn">Access Document</button>
     <div class="lock-error" id="pwError">Incorrect password. Please try again.</div>
@@ -990,6 +1001,17 @@ const btn = document.getElementById('pwBtn');
 const err = document.getElementById('pwError');
 const lock = document.getElementById('lockScreen');
 const main = document.getElementById('mainContent');
+const eyeToggle = document.getElementById('eyeToggle');
+const eyeOpen = document.getElementById('eyeOpen');
+const eyeClosed = document.getElementById('eyeClosed');
+
+eyeToggle.addEventListener('click', () => {
+  const showing = inp.type === 'text';
+  inp.type = showing ? 'password' : 'text';
+  eyeOpen.style.display = showing ? 'block' : 'none';
+  eyeClosed.style.display = showing ? 'none' : 'block';
+  inp.focus();
+});
 
 async function tryUnlock() {
   const h = await sha256(inp.value);
