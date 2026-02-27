@@ -29,11 +29,118 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background: var(--white);
+  background: var(--ink);
   color: var(--text);
   overflow-x: hidden;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ═══ PASSWORD GATE ═══ */
+#lock-screen {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 9999; background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+#lock-screen.unlocked {
+  opacity: 0; pointer-events: none; transform: scale(1.02);
+}
+#lock-screen::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(91,127,164,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 60%, rgba(91,127,164,0.03) 0%, transparent 50%);
+}
+#lock-screen::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(rgba(91,127,164,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91,127,164,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.lock-content {
+  position: relative; z-index: 2; text-align: center;
+  animation: fadeUp 0.8s ease-out;
+}
+.lock-brand {
+  font-family: 'Instrument Serif', serif;
+  font-size: 3.5rem; font-weight: 400; color: var(--white);
+  letter-spacing: -2px; margin-bottom: 0.25rem;
+}
+.lock-sub {
+  font-size: 0.58rem; font-weight: 500;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--steel-light); margin-bottom: 2.5rem;
+}
+.lock-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 16px; border: 1px solid rgba(91,127,164,0.2);
+  border-radius: 100px; margin-bottom: 2rem;
+}
+.lock-badge svg { opacity: 0.5; }
+.lock-badge span {
+  font-size: 0.55rem; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+.lock-input-wrap {
+  display: flex; align-items: center; gap: 0;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 100px; overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  max-width: 340px; margin: 0 auto;
+}
+.lock-input-wrap:focus-within {
+  border-color: rgba(91,127,164,0.4);
+  box-shadow: 0 0 0 3px rgba(91,127,164,0.08);
+}
+.lock-input-wrap.error {
+  border-color: rgba(220,80,80,0.5);
+  box-shadow: 0 0 0 3px rgba(220,80,80,0.08);
+  animation: shake 0.4s ease;
+}
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20%,60% { transform: translateX(-6px); }
+  40%,80% { transform: translateX(6px); }
+}
+#pw-input {
+  flex: 1; background: none; border: none; outline: none;
+  padding: 12px 0 12px 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem; letter-spacing: 3px;
+  color: var(--white);
+}
+#pw-input::placeholder { color: rgba(255,255,255,0.15); letter-spacing: 2px; font-size: 0.7rem; }
+#pw-btn {
+  background: none; border: none; cursor: pointer;
+  padding: 12px 18px; display: flex; align-items: center;
+  transition: opacity 0.2s ease;
+}
+#pw-btn:hover { opacity: 0.8; }
+#pw-btn svg { width: 16px; height: 16px; }
+.lock-error-msg {
+  margin-top: 0.85rem; font-size: 0.68rem; color: rgba(220,80,80,0.7);
+  height: 1.2em; transition: opacity 0.3s ease;
+  opacity: 0;
+}
+.lock-error-msg.show { opacity: 1; }
+.lock-footer {
+  position: absolute; bottom: 2rem; left: 0; right: 0;
+  text-align: center; z-index: 2;
+}
+.lock-footer p { font-size: 0.55rem; color: rgba(255,255,255,0.1); letter-spacing: 0.5px; }
+
+/* ═══ MAIN SITE ═══ */
+#main-site { display: none; }
+#main-site.visible {
+  display: block;
+  animation: fadeUp 0.8s ease-out;
 }
 
 .nav {
@@ -173,10 +280,7 @@ section { padding: 5rem 2.5rem; }
 .section-title em { font-style: italic; color: var(--steel); }
 
 /* ═══ PRICE ANCHOR ═══ */
-.price-anchor {
-  background: var(--white);
-  padding: 4rem 2.5rem;
-}
+.price-anchor { background: var(--white); padding: 4rem 2.5rem; }
 .anchor-grid {
   display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr;
   gap: 0; margin-top: 2.5rem;
@@ -200,9 +304,7 @@ section { padding: 5rem 2.5rem; }
   color: var(--ink); line-height: 1;
   margin-bottom: 0.35rem;
 }
-.anchor-item .a-sub {
-  font-size: 0.7rem; color: var(--text-light);
-}
+.anchor-item .a-sub { font-size: 0.7rem; color: var(--text-light); }
 .anchor-item.highlight .a-value { color: var(--steel); }
 
 /* ═══ CONCEPT ═══ */
@@ -540,12 +642,36 @@ section { padding: 5rem 2.5rem; }
 </head>
 <body>
 
+<!-- ═══ PASSWORD GATE ═══ -->
+<div id="lock-screen">
+  <div class="lock-content">
+    <div class="lock-badge">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1" y="5.5" width="10" height="5.5" rx="1.5" stroke="rgba(255,255,255,0.3)" stroke-width="1.2" fill="none"/><path d="M3.5 5.5V3.5a2.5 2.5 0 0 1 5 0v2" stroke="rgba(255,255,255,0.3)" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>
+      <span>Confidential Document</span>
+    </div>
+    <div class="lock-brand">still.</div>
+    <div class="lock-sub">The Performance Townhouse</div>
+    <div class="lock-input-wrap" id="input-wrap">
+      <input type="password" id="pw-input" placeholder="Enter access code" autocomplete="off" spellcheck="false">
+      <button id="pw-btn">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#5B7FA4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="lock-error-msg" id="error-msg">Incorrect access code</div>
+  </div>
+  <div class="lock-footer">
+    <p>© 2026 Humanity Capital — For authorised recipients only</p>
+  </div>
+</div>
+
+<!-- ═══ MAIN SITE (hidden until authenticated) ═══ -->
+<div id="main-site">
+
 <nav class="nav" id="nav">
   <div class="nav-brand">still.</div>
   <div class="nav-tag">Confidential Proposal</div>
 </nav>
 
-<!-- ═══ HERO ═══ -->
 <section class="hero">
   <div class="hero-content">
     <div class="hero-eyebrow">Humanity Capital × Katara Hospitality</div>
@@ -553,18 +679,9 @@ section { padding: 5rem 2.5rem; }
     <div class="hero-tagline">The Performance Townhouse</div>
     <p class="hero-sub">A discreet South Kensington townhouse where elite athletes recover, optimise, and socialise — fusing next-generation biotech with five-star hospitality at £150,000 per suite per week.</p>
     <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="val">£150K</div>
-        <div class="lbl">Per Suite / Week</div>
-      </div>
-      <div class="hero-stat">
-        <div class="val">11</div>
-        <div class="lbl">Grand Suites</div>
-      </div>
-      <div class="hero-stat">
-        <div class="val">£73M</div>
-        <div class="lbl">Year 3 Revenue</div>
-      </div>
+      <div class="hero-stat"><div class="val">£150K</div><div class="lbl">Per Suite / Week</div></div>
+      <div class="hero-stat"><div class="val">11</div><div class="lbl">Grand Suites</div></div>
+      <div class="hero-stat"><div class="val">£73M</div><div class="lbl">Year 3 Revenue</div></div>
     </div>
     <div class="hero-partners">
       <span class="logo-text hc">Humanity Capital</span>
@@ -575,7 +692,6 @@ section { padding: 5rem 2.5rem; }
   <div class="scroll-hint">Scroll to Explore</div>
 </section>
 
-<!-- ═══ PRICE ANCHOR ═══ -->
 <section class="price-anchor">
   <div class="container">
     <div class="section-label">The Unit Economics</div>
@@ -605,7 +721,6 @@ section { padding: 5rem 2.5rem; }
   </div>
 </section>
 
-<!-- ═══ CONCEPT ═══ -->
 <section class="concept">
   <div class="container">
     <div class="section-label">The Concept</div>
@@ -618,82 +733,30 @@ section { padding: 5rem 2.5rem; }
         <p>Still sits between the lifestyle warmth of a members' club and the clinical precision of a sports performance lab. Premier League footballers get IV recovery between matches. Their partners enjoy longevity treatments upstairs. Everyone meets in the nutrition kitchen. No logos. No paparazzi. Just performance, served quietly.</p>
       </div>
       <div class="concept-right">
-        <div class="concept-pill">
-          <div class="dot"></div>
-          <div><div class="pill-text">Sports Performance Lab</div><div class="pill-sub">VO2 max, force plates, biomechanics, DEXA — we test the latest equipment first</div></div>
-        </div>
-        <div class="concept-pill">
-          <div class="dot"></div>
-          <div><div class="pill-text">IV & Biotech Clinic</div><div class="pill-sub">Discreet infusion suites, PRP, stem cell therapy, peptide protocols</div></div>
-        </div>
-        <div class="concept-pill">
-          <div class="dot"></div>
-          <div><div class="pill-text">Recovery Suites</div><div class="pill-sub">Cryotherapy, hyperbaric chambers, red light therapy, compression</div></div>
-        </div>
-        <div class="concept-pill">
-          <div class="dot"></div>
-          <div><div class="pill-text">Nutrition Kitchen</div><div class="pill-sub">Chef-prepared performance meals, personalised macro programming</div></div>
-        </div>
-        <div class="concept-pill">
-          <div class="dot"></div>
-          <div><div class="pill-text">Sports Medicine Consulting</div><div class="pill-sub">Private rooms for orthopaedics, physio, concussion, cardiac screening</div></div>
-        </div>
+        <div class="concept-pill"><div class="dot"></div><div><div class="pill-text">Sports Performance Lab</div><div class="pill-sub">VO2 max, force plates, biomechanics, DEXA — we test the latest equipment first</div></div></div>
+        <div class="concept-pill"><div class="dot"></div><div><div class="pill-text">IV & Biotech Clinic</div><div class="pill-sub">Discreet infusion suites, PRP, stem cell therapy, peptide protocols</div></div></div>
+        <div class="concept-pill"><div class="dot"></div><div><div class="pill-text">Recovery Suites</div><div class="pill-sub">Cryotherapy, hyperbaric chambers, red light therapy, compression</div></div></div>
+        <div class="concept-pill"><div class="dot"></div><div><div class="pill-text">Nutrition Kitchen</div><div class="pill-sub">Chef-prepared performance meals, personalised macro programming</div></div></div>
+        <div class="concept-pill"><div class="dot"></div><div><div class="pill-text">Sports Medicine Consulting</div><div class="pill-sub">Private rooms for orthopaedics, physio, concussion, cardiac screening</div></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ TOWNHOUSE FLOORS ═══ -->
 <section class="townhouse">
   <div class="container">
     <div class="section-label">The Townhouse</div>
     <div class="section-title" style="color:var(--white)">88 Queen's Gate — <em>floor by floor</em></div>
     <div class="floors">
-      <div class="floor">
-        <div class="floor-num">LG</div>
-        <div class="floor-content">
-          <div class="floor-tag">Performance</div>
-          <h3>The Lab</h3>
-          <p>Sports performance testing centre. VO2 max, force plates, 3D biomechanical analysis, DEXA body composition. Partnership with leading sports science providers to rotate and test cutting-edge equipment before anyone else. Where athletes come to know their numbers.</p>
-        </div>
-      </div>
-      <div class="floor">
-        <div class="floor-num">GF</div>
-        <div class="floor-content">
-          <div class="floor-tag">Recovery</div>
-          <h3>The Rooms</h3>
-          <p>Cryotherapy chamber, hyperbaric oxygen pods, full-spectrum red light beds, Normatec compression, infrared sauna, cold plunge. Clinical-grade but designed like a private members' club — marble, timber, soft lighting. The recovery floor alone justifies the membership.</p>
-        </div>
-      </div>
-      <div class="floor">
-        <div class="floor-num">01</div>
-        <div class="floor-content">
-          <div class="floor-tag">Clinic</div>
-          <h3>The Clinic</h3>
-          <p>Discreet IV infusion lounge, PRP and regenerative medicine suites, sports medicine consulting rooms, private pharmacy. Staffed by Harley Street specialists. Peptide protocols, NAD+ drips, stem cell treatments, micronutrient panels — the biotech floor.</p>
-        </div>
-      </div>
-      <div class="floor">
-        <div class="floor-num">02</div>
-        <div class="floor-content">
-          <div class="floor-tag">Nourish</div>
-          <h3>The Kitchen</h3>
-          <p>Chef-led nutrition kitchen and social dining room. Personalised performance meal plans, gut health protocols, anti-inflammatory menus. Non-alcoholic craft cocktail bar and lounge. Where athletes and their partners actually want to spend time.</p>
-        </div>
-      </div>
-      <div class="floor">
-        <div class="floor-num">03–04</div>
-        <div class="floor-content">
-          <div class="floor-tag">Stay</div>
-          <h3>The Suites</h3>
-          <p>11 grand performance suites at £150,000/week all-inclusive — each created by combining two former hotel rooms into expansive private residences with dedicated treatment space, Tempur beds, blackout sleep tech, circadian lighting, air purification, and in-room recovery tools. 1–4 week intensive blocks. Your private base between matches, between seasons, between everything.</p>
-        </div>
-      </div>
+      <div class="floor"><div class="floor-num">LG</div><div class="floor-content"><div class="floor-tag">Performance</div><h3>The Lab</h3><p>Sports performance testing centre. VO2 max, force plates, 3D biomechanical analysis, DEXA body composition. Partnership with leading sports science providers to rotate and test cutting-edge equipment before anyone else. Where athletes come to know their numbers.</p></div></div>
+      <div class="floor"><div class="floor-num">GF</div><div class="floor-content"><div class="floor-tag">Recovery</div><h3>The Rooms</h3><p>Cryotherapy chamber, hyperbaric oxygen pods, full-spectrum red light beds, Normatec compression, infrared sauna, cold plunge. Clinical-grade but designed like a private members' club — marble, timber, soft lighting. The recovery floor alone justifies the membership.</p></div></div>
+      <div class="floor"><div class="floor-num">01</div><div class="floor-content"><div class="floor-tag">Clinic</div><h3>The Clinic</h3><p>Discreet IV infusion lounge, PRP and regenerative medicine suites, sports medicine consulting rooms, private pharmacy. Staffed by Harley Street specialists. Peptide protocols, NAD+ drips, stem cell treatments, micronutrient panels — the biotech floor.</p></div></div>
+      <div class="floor"><div class="floor-num">02</div><div class="floor-content"><div class="floor-tag">Nourish</div><h3>The Kitchen</h3><p>Chef-led nutrition kitchen and social dining room. Personalised performance meal plans, gut health protocols, anti-inflammatory menus. Non-alcoholic craft cocktail bar and lounge. Where athletes and their partners actually want to spend time.</p></div></div>
+      <div class="floor"><div class="floor-num">03–04</div><div class="floor-content"><div class="floor-tag">Stay</div><h3>The Suites</h3><p>11 grand performance suites at £150,000/week all-inclusive — each created by combining two former hotel rooms into expansive private residences with dedicated treatment space, Tempur beds, blackout sleep tech, circadian lighting, air purification, and in-room recovery tools. 1–4 week intensive blocks. Your private base between matches, between seasons, between everything.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ AUDIENCE ═══ -->
 <section class="audience">
   <div class="container">
     <div class="section-label">The Community</div>
@@ -701,49 +764,21 @@ section { padding: 5rem 2.5rem; }
     <div class="aud-grid">
       <div class="aud-card">
         <div class="aud-icon">
-          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="28" cy="28" r="27" stroke="#E4E8ED" stroke-width="1"/>
-            <circle cx="28" cy="16" r="4" stroke="#5B7FA4" stroke-width="1.5" fill="none"/>
-            <path d="M20 42L24 32L28 24L32 32L36 42" stroke="#5B7FA4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            <path d="M22 36H34" stroke="#5B7FA4" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
-            <path d="M17 28L20 28L22 24L25 32L28 22L31 30L33 26L36 28L39 28" stroke="#A8C1D8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          </svg>
+          <svg viewBox="0 0 56 56" fill="none"><circle cx="28" cy="28" r="27" stroke="#E4E8ED" stroke-width="1"/><circle cx="28" cy="16" r="4" stroke="#5B7FA4" stroke-width="1.5" fill="none"/><path d="M20 42L24 32L28 24L32 32L36 42" stroke="#5B7FA4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M22 36H34" stroke="#5B7FA4" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/><path d="M17 28L20 28L22 24L25 32L28 22L31 30L33 26L36 28L39 28" stroke="#A8C1D8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
         </div>
         <h3>Elite Athletes</h3>
         <p>Premier League, La Liga, Serie A footballers. F1 drivers. Tennis pros. Olympic athletes. £150K/week buys an all-inclusive performance residency — testing, recovery, clinical treatments, nutrition, and accommodation. A career-extending investment.</p>
       </div>
       <div class="aud-card">
         <div class="aud-icon">
-          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="28" cy="28" r="27" stroke="#E4E8ED" stroke-width="1"/>
-            <circle cx="23" cy="26" r="9" stroke="#B87D8B" stroke-width="1.2" fill="none" opacity="0.5"/>
-            <circle cx="33" cy="26" r="9" stroke="#C4A882" stroke-width="1.2" fill="none" opacity="0.5"/>
-            <circle cx="28" cy="33" r="9" stroke="#5B7FA4" stroke-width="1.2" fill="none" opacity="0.5"/>
-            <path d="M28 24L31 28L28 32L25 28Z" stroke="#5B7FA4" stroke-width="1.5" fill="none"/>
-            <circle cx="28" cy="28" r="1.5" fill="#5B7FA4"/>
-          </svg>
+          <svg viewBox="0 0 56 56" fill="none"><circle cx="28" cy="28" r="27" stroke="#E4E8ED" stroke-width="1"/><circle cx="23" cy="26" r="9" stroke="#B87D8B" stroke-width="1.2" fill="none" opacity="0.5"/><circle cx="33" cy="26" r="9" stroke="#C4A882" stroke-width="1.2" fill="none" opacity="0.5"/><circle cx="28" cy="33" r="9" stroke="#5B7FA4" stroke-width="1.2" fill="none" opacity="0.5"/><path d="M28 24L31 28L28 32L25 28Z" stroke="#5B7FA4" stroke-width="1.5" fill="none"/><circle cx="28" cy="28" r="1.5" fill="#5B7FA4"/></svg>
         </div>
         <h3>Partners & Inner Circle</h3>
         <p>The lifestyle wing. Longevity treatments, aesthetic wellness, nutrition programming, and a social space that feels curated, not clinical. The Kitchen becomes the social anchor — where the wider circle experiences Still on their own terms.</p>
       </div>
       <div class="aud-card">
         <div class="aud-icon">
-          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="28" cy="28" r="27" stroke="#E4E8ED" stroke-width="1"/>
-            <line x1="28" y1="18" x2="20" y2="30" stroke="#A8C1D8" stroke-width="1" opacity="0.4"/>
-            <line x1="28" y1="18" x2="36" y2="30" stroke="#A8C1D8" stroke-width="1" opacity="0.4"/>
-            <line x1="20" y1="30" x2="36" y2="30" stroke="#A8C1D8" stroke-width="1" opacity="0.4"/>
-            <line x1="20" y1="30" x2="16" y2="38" stroke="#A8C1D8" stroke-width="1" opacity="0.3"/>
-            <line x1="36" y1="30" x2="40" y2="38" stroke="#A8C1D8" stroke-width="1" opacity="0.3"/>
-            <line x1="28" y1="18" x2="28" y2="12" stroke="#A8C1D8" stroke-width="1" opacity="0.3"/>
-            <circle cx="28" cy="18" r="3.5" stroke="#5B7FA4" stroke-width="1.5" fill="none"/>
-            <circle cx="20" cy="30" r="2.5" stroke="#5B7FA4" stroke-width="1.2" fill="none"/>
-            <circle cx="36" cy="30" r="2.5" stroke="#5B7FA4" stroke-width="1.2" fill="none"/>
-            <circle cx="16" cy="38" r="1.8" stroke="#5B7FA4" stroke-width="1" fill="none" opacity="0.5"/>
-            <circle cx="40" cy="38" r="1.8" stroke="#5B7FA4" stroke-width="1" fill="none" opacity="0.5"/>
-            <circle cx="28" cy="12" r="1.8" stroke="#5B7FA4" stroke-width="1" fill="none" opacity="0.5"/>
-            <circle cx="28" cy="18" r="1.2" fill="#5B7FA4"/>
-          </svg>
+          <svg viewBox="0 0 56 56" fill="none"><circle cx="28" cy="28" r="27" stroke="#E4E8ED" stroke-width="1"/><line x1="28" y1="18" x2="20" y2="30" stroke="#A8C1D8" stroke-width="1" opacity="0.4"/><line x1="28" y1="18" x2="36" y2="30" stroke="#A8C1D8" stroke-width="1" opacity="0.4"/><line x1="20" y1="30" x2="36" y2="30" stroke="#A8C1D8" stroke-width="1" opacity="0.4"/><line x1="20" y1="30" x2="16" y2="38" stroke="#A8C1D8" stroke-width="1" opacity="0.3"/><line x1="36" y1="30" x2="40" y2="38" stroke="#A8C1D8" stroke-width="1" opacity="0.3"/><line x1="28" y1="18" x2="28" y2="12" stroke="#A8C1D8" stroke-width="1" opacity="0.3"/><circle cx="28" cy="18" r="3.5" stroke="#5B7FA4" stroke-width="1.5" fill="none"/><circle cx="20" cy="30" r="2.5" stroke="#5B7FA4" stroke-width="1.2" fill="none"/><circle cx="36" cy="30" r="2.5" stroke="#5B7FA4" stroke-width="1.2" fill="none"/><circle cx="16" cy="38" r="1.8" stroke="#5B7FA4" stroke-width="1" fill="none" opacity="0.5"/><circle cx="40" cy="38" r="1.8" stroke="#5B7FA4" stroke-width="1" fill="none" opacity="0.5"/><circle cx="28" cy="12" r="1.8" stroke="#5B7FA4" stroke-width="1" fill="none" opacity="0.5"/><circle cx="28" cy="18" r="1.2" fill="#5B7FA4"/></svg>
         </div>
         <h3>Clubs, Agents & Entourage</h3>
         <p>Agents, managers, club physios, performance directors. They bring their clients, attend testing sessions, and use Still as a neutral, premium venue for player assessments, transfer medicals, and deal-making over performance meals.</p>
@@ -752,7 +787,6 @@ section { padding: 5rem 2.5rem; }
   </div>
 </section>
 
-<!-- ═══ POSITIONING ═══ -->
 <section class="comparison">
   <div class="container">
     <div class="section-label">Market Position</div>
@@ -761,153 +795,49 @@ section { padding: 5rem 2.5rem; }
       <div class="pos-track">
         <div class="pos-label-left">Lifestyle</div>
         <div class="pos-label-right">Clinical</div>
-        <div class="pos-marker ned">
-          <div class="dot-outer"><div class="dot-inner"></div></div>
-          <div class="pos-name">Ned's Club</div>
-          <div class="pos-sub">Social wellness</div>
-        </div>
-        <div class="pos-marker still">
-          <div class="dot-outer"><div class="dot-inner"></div></div>
-          <div class="pos-name" style="color:var(--steel);font-weight:600;">Still</div>
-          <div class="pos-sub">Performance townhouse</div>
-        </div>
-        <div class="pos-marker waldhotel">
-          <div class="dot-outer"><div class="dot-inner"></div></div>
-          <div class="pos-name">Waldhotel</div>
-          <div class="pos-sub">Medical excellence</div>
-        </div>
+        <div class="pos-marker ned"><div class="dot-outer"><div class="dot-inner"></div></div><div class="pos-name">Ned's Club</div><div class="pos-sub">Social wellness</div></div>
+        <div class="pos-marker still"><div class="dot-outer"><div class="dot-inner"></div></div><div class="pos-name" style="color:var(--steel);font-weight:600;">Still</div><div class="pos-sub">Performance townhouse</div></div>
+        <div class="pos-marker waldhotel"><div class="dot-outer"><div class="dot-inner"></div></div><div class="pos-name">Waldhotel</div><div class="pos-sub">Medical excellence</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ REVENUE ═══ -->
 <section class="revenue">
   <div class="container">
     <div class="section-label">Revenue Architecture — Year 3</div>
     <div class="section-title">Five revenue streams from <em>one townhouse</em></div>
     <div class="rev-streams">
-      <div class="rev-stream">
-        <div class="name">Suite Residencies</div>
-        <div class="rev-bar-wrap"><div class="rev-bar s1" style="width: 70%;"></div></div>
-        <div class="amount">£51.5M</div>
-      </div>
-      <div class="rev-stream">
-        <div class="name">Membership (300 cap)</div>
-        <div class="rev-bar-wrap"><div class="rev-bar s2" style="width: 12%;"></div></div>
-        <div class="amount">£9M</div>
-      </div>
-      <div class="rev-stream">
-        <div class="name">Day Clinic & IV Lounge</div>
-        <div class="rev-bar-wrap"><div class="rev-bar s3" style="width: 8%;"></div></div>
-        <div class="amount">£6M</div>
-      </div>
-      <div class="rev-stream">
-        <div class="name">Performance Lab Testing</div>
-        <div class="rev-bar-wrap"><div class="rev-bar s4" style="width: 4%;"></div></div>
-        <div class="amount">£3M</div>
-      </div>
-      <div class="rev-stream">
-        <div class="name">Brand & Equipment Deals</div>
-        <div class="rev-bar-wrap"><div class="rev-bar s5" style="width: 5.5%;"></div></div>
-        <div class="amount">£4M</div>
-      </div>
+      <div class="rev-stream"><div class="name">Suite Residencies</div><div class="rev-bar-wrap"><div class="rev-bar s1" style="width:70%;"></div></div><div class="amount">£51.5M</div></div>
+      <div class="rev-stream"><div class="name">Membership (300 cap)</div><div class="rev-bar-wrap"><div class="rev-bar s2" style="width:12%;"></div></div><div class="amount">£9M</div></div>
+      <div class="rev-stream"><div class="name">Day Clinic & IV Lounge</div><div class="rev-bar-wrap"><div class="rev-bar s3" style="width:8%;"></div></div><div class="amount">£6M</div></div>
+      <div class="rev-stream"><div class="name">Performance Lab Testing</div><div class="rev-bar-wrap"><div class="rev-bar s4" style="width:4%;"></div></div><div class="amount">£3M</div></div>
+      <div class="rev-stream"><div class="name">Brand & Equipment Deals</div><div class="rev-bar-wrap"><div class="rev-bar s5" style="width:5.5%;"></div></div><div class="amount">£4M</div></div>
     </div>
     <div class="rev-total-bar">
       <div><div class="label">Year 3 Projected Revenue (60% Suite Occupancy)</div></div>
-      <div>
-        <span class="total">£73.5M</span>
-        <span class="multiplier">35× current Adria</span>
-      </div>
+      <div><span class="total">£73.5M</span><span class="multiplier">35× current Adria</span></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ PROJECTION ═══ -->
 <section class="projection">
   <div class="container">
     <div class="section-label">5-Year Financial Projection</div>
     <div class="section-title">Path to <em>£94M revenue</em> — conservative case</div>
     <table class="proj-table">
-      <thead>
-        <tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Year 4</th><th>Year 5</th></tr>
-      </thead>
+      <thead><tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Year 4</th><th>Year 5</th></tr></thead>
       <tbody>
-        <tr>
-          <td>Suite Occupancy</td>
-          <td>40%</td>
-          <td>52%</td>
-          <td>60%</td>
-          <td>68%</td>
-          <td>75%</td>
-        </tr>
-        <tr>
-          <td>Suite Revenue</td>
-          <td>£34.3M</td>
-          <td>£44.6M</td>
-          <td>£51.5M</td>
-          <td>£58.3M</td>
-          <td>£64.4M</td>
-        </tr>
-        <tr>
-          <td>Membership</td>
-          <td>£3M</td>
-          <td>£6M</td>
-          <td>£9M</td>
-          <td>£10M</td>
-          <td>£10.5M</td>
-        </tr>
-        <tr>
-          <td>Day Clinic & IV</td>
-          <td>£2M</td>
-          <td>£4M</td>
-          <td>£6M</td>
-          <td>£7M</td>
-          <td>£8M</td>
-        </tr>
-        <tr>
-          <td>Performance Lab</td>
-          <td>£1M</td>
-          <td>£2M</td>
-          <td>£3M</td>
-          <td>£4M</td>
-          <td>£4.5M</td>
-        </tr>
-        <tr>
-          <td>Brand Partnerships</td>
-          <td>£1M</td>
-          <td>£2.5M</td>
-          <td>£4M</td>
-          <td>£5.5M</td>
-          <td>£7M</td>
-        </tr>
-        <tr style="font-weight:600;">
-          <td>Total Revenue</td>
-          <td>£41.3M</td>
-          <td>£59.1M</td>
-          <td>£73.5M</td>
-          <td>£84.8M</td>
-          <td>£94.4M</td>
-        </tr>
-        <tr>
-          <td>Operating Margin</td>
-          <td>18%</td>
-          <td>28%</td>
-          <td>35%</td>
-          <td>38%</td>
-          <td>42%</td>
-        </tr>
+        <tr><td>Suite Occupancy</td><td>40%</td><td>52%</td><td>60%</td><td>68%</td><td>75%</td></tr>
+        <tr><td>Suite Revenue</td><td>£34.3M</td><td>£44.6M</td><td>£51.5M</td><td>£58.3M</td><td>£64.4M</td></tr>
+        <tr><td>Membership</td><td>£3M</td><td>£6M</td><td>£9M</td><td>£10M</td><td>£10.5M</td></tr>
+        <tr><td>Day Clinic & IV</td><td>£2M</td><td>£4M</td><td>£6M</td><td>£7M</td><td>£8M</td></tr>
+        <tr><td>Performance Lab</td><td>£1M</td><td>£2M</td><td>£3M</td><td>£4M</td><td>£4.5M</td></tr>
+        <tr><td>Brand Partnerships</td><td>£1M</td><td>£2.5M</td><td>£4M</td><td>£5.5M</td><td>£7M</td></tr>
+        <tr style="font-weight:600;"><td>Total Revenue</td><td>£41.3M</td><td>£59.1M</td><td>£73.5M</td><td>£84.8M</td><td>£94.4M</td></tr>
+        <tr><td>Operating Margin</td><td>18%</td><td>28%</td><td>35%</td><td>38%</td><td>42%</td></tr>
       </tbody>
-      <tfoot>
-        <tr>
-          <td>EBITDA</td>
-          <td>£7.4M</td>
-          <td>£16.5M</td>
-          <td>£25.7M</td>
-          <td>£32.2M</td>
-          <td>£39.6M</td>
-        </tr>
-      </tfoot>
+      <tfoot><tr><td>EBITDA</td><td>£7.4M</td><td>£16.5M</td><td>£25.7M</td><td>£32.2M</td><td>£39.6M</td></tr></tfoot>
     </table>
     <div class="proj-note">
       <strong>Conservative case:</strong> 11 grand suites (converted from 22 rooms) at £150,000/week all-inclusive. 60% suite occupancy by Year 3 — deliberately conservative for a supply-constrained, ultra-premium asset with only 11 keys and a global addressable market of thousands of elite athletes. Conversion capex £15–20M. Founding membership £30,000/year (300 cap). Average stay 1.2 weeks. Excludes adjacent property acquisition and international expansion (Still Dubai, Still Riyadh). <strong>Half the rooms. 60% occupancy. Still 35× the current hotel revenue. The maths is absurd because the price point is real.</strong>
@@ -915,93 +845,48 @@ section { padding: 5rem 2.5rem; }
   </div>
 </section>
 
-<!-- ═══ PARTNERSHIPS ═══ -->
 <section class="partnerships">
   <div class="container">
     <div class="section-label">Partnership Ecosystem</div>
     <div class="section-title">Powered by the <em>best in their field</em></div>
     <div class="partner-grid">
-      <div class="partner-card">
-        <div class="partner-type">Sports Science</div>
-        <h3>Performance Lab Partners</h3>
-        <p>Rotating partnerships with leading sports tech companies — Catapult, VALD, Hawkin Dynamics — who supply cutting-edge equipment in exchange for athlete data validation. Still becomes the London testbed where next-gen tech gets its credibility.</p>
-      </div>
-      <div class="partner-card">
-        <div class="partner-type">Medical</div>
-        <h3>Harley Street Network</h3>
-        <p>Consulting partnership with London's leading sports medicine, orthopaedic, and regenerative medicine specialists. Private rooms for their athlete clients. Referral network driving both clinical credibility and patient volume.</p>
-      </div>
-      <div class="partner-card">
-        <div class="partner-type">Athletes</div>
-        <h3>Footballer Ambassador Programme</h3>
-        <p>Founding athlete partners with equity incentives. Their presence validates the brand, attracts their networks, and creates organic visibility. International footballer partnerships through Humanity Capital's existing relationships across the Premier League and European clubs.</p>
-      </div>
-      <div class="partner-card">
-        <div class="partner-type">Clubs & Agents</div>
-        <h3>Club & Agency Partnerships</h3>
-        <p>Still as the go-to independent facility for Premier League and European clubs — player assessments, transfer medicals, off-site rehabilitation, and pre-season performance optimisation. Neutral ground that every agent wants access to.</p>
-      </div>
+      <div class="partner-card"><div class="partner-type">Sports Science</div><h3>Performance Lab Partners</h3><p>Rotating partnerships with leading sports tech companies — Catapult, VALD, Hawkin Dynamics — who supply cutting-edge equipment in exchange for athlete data validation. Still becomes the London testbed where next-gen tech gets its credibility.</p></div>
+      <div class="partner-card"><div class="partner-type">Medical</div><h3>Harley Street Network</h3><p>Consulting partnership with London's leading sports medicine, orthopaedic, and regenerative medicine specialists. Private rooms for their athlete clients. Referral network driving both clinical credibility and patient volume.</p></div>
+      <div class="partner-card"><div class="partner-type">Athletes</div><h3>Footballer Ambassador Programme</h3><p>Founding athlete partners with equity incentives. Their presence validates the brand, attracts their networks, and creates organic visibility. International footballer partnerships through Humanity Capital's existing relationships across the Premier League and European clubs.</p></div>
+      <div class="partner-card"><div class="partner-type">Clubs & Agents</div><h3>Club & Agency Partnerships</h3><p>Still as the go-to independent facility for Premier League and European clubs — player assessments, transfer medicals, off-site rehabilitation, and pre-season performance optimisation. Neutral ground that every agent wants access to.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ SHARIAH ═══ -->
 <section class="shariah-section">
   <div class="container">
-    <div class="shariah-badge-large"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="vertical-align: middle; margin-right: 4px;"><path d="M9 1.5C5.5 1.5 2.5 4.2 2.5 7s3 5.5 6.5 5.5c-1.8-1-3-3-3-5.5s1.2-4.5 3-5.5z" stroke="#5B7FA4" stroke-width="1.2" fill="none"/><circle cx="10" cy="3.5" r="1" fill="#5B7FA4" opacity="0.5"/></svg><span>Halal & Inclusive by Design</span></div>
+    <div class="shariah-badge-large"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="vertical-align:middle;margin-right:4px;"><path d="M9 1.5C5.5 1.5 2.5 4.2 2.5 7s3 5.5 6.5 5.5c-1.8-1-3-3-3-5.5s1.2-4.5 3-5.5z" stroke="#5B7FA4" stroke-width="1.2" fill="none"/><circle cx="10" cy="3.5" r="1" fill="#5B7FA4" opacity="0.5"/></svg><span>Halal & Inclusive by Design</span></div>
     <p class="shariah-text">Still operates with halal F&B and non-alcoholic craft cocktails as default — not as a restriction, but as a design choice reflecting the international athlete community it serves. A natural fit for GCC-based athletes and their families.</p>
   </div>
 </section>
 
-<!-- ═══ TIMELINE ═══ -->
 <section class="implementation">
   <div class="container">
     <div class="section-label">Implementation Roadmap</div>
     <div class="section-title">From concept to <em>first athlete</em></div>
     <div class="timeline">
-      <div class="timeline-item">
-        <div class="phase">Phase 1 — Months 1–3</div>
-        <h3>Partnership & Founding Members</h3>
-        <p>JV structuring with Katara Hospitality. Sign 3–5 founding athlete ambassadors. Appoint medical advisory board. Secure CQC pathway. Launch founding membership waitlist — target 50 pre-commitments at £30K/year.</p>
-      </div>
-      <div class="timeline-item">
-        <div class="phase">Phase 2 — Months 4–10</div>
-        <h3>Build & Fit-Out</h3>
-        <p>Convert townhouse floor-by-floor: performance lab (LG), recovery rooms (GF), IV clinic (01), nutrition kitchen (02), performance suites (03–04). Equipment partnerships confirmed. Brand identity and digital launch.</p>
-      </div>
-      <div class="timeline-item">
-        <div class="phase">Phase 3 — Months 10–14</div>
-        <h3>Soft Launch & Pre-Season</h3>
-        <p>Soft opening timed to pre-season training windows. Founding members gain first access. Media seeding via athlete ambassador channels. First club partnership for off-site player assessment. Target: 8 suites booked in month one.</p>
-      </div>
-      <div class="timeline-item">
-        <div class="phase">Phase 4 — Months 14–36</div>
-        <h3>Scale the Brand</h3>
-        <p>Hit 300 membership cap. Evaluate adjacent Queen's Gate property for expansion. Launch Still Dubai and Still Riyadh feasibility. Develop Still-branded product line (recovery, nutrition, sleep tech). Target: waitlist for suites by month 18.</p>
-      </div>
+      <div class="timeline-item"><div class="phase">Phase 1 — Months 1–3</div><h3>Partnership & Founding Members</h3><p>JV structuring with Katara Hospitality. Sign 3–5 founding athlete ambassadors. Appoint medical advisory board. Secure CQC pathway. Launch founding membership waitlist — target 50 pre-commitments at £30K/year.</p></div>
+      <div class="timeline-item"><div class="phase">Phase 2 — Months 4–10</div><h3>Build & Fit-Out</h3><p>Convert townhouse floor-by-floor: performance lab (LG), recovery rooms (GF), IV clinic (01), nutrition kitchen (02), performance suites (03–04). Equipment partnerships confirmed. Brand identity and digital launch.</p></div>
+      <div class="timeline-item"><div class="phase">Phase 3 — Months 10–14</div><h3>Soft Launch & Pre-Season</h3><p>Soft opening timed to pre-season training windows. Founding members gain first access. Media seeding via athlete ambassador channels. First club partnership for off-site player assessment. Target: 8 suites booked in month one.</p></div>
+      <div class="timeline-item"><div class="phase">Phase 4 — Months 14–36</div><h3>Scale the Brand</h3><p>Hit 300 membership cap. Evaluate adjacent Queen's Gate property for expansion. Launch Still Dubai and Still Riyadh feasibility. Develop Still-branded product line (recovery, nutrition, sleep tech). Target: waitlist for suites by month 18.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ CTA ═══ -->
 <section class="cta">
   <div class="cta-content">
     <h2>Where Humanity Scales,<br><em>Returns Follow</em></h2>
     <p>A £2M hotel hiding a £73M performance business — with half the rooms and 60% occupancy. The athletes are ready. The building is waiting. Let's build Still together.</p>
     <a href="mailto:rummana@humanitycapital.com" class="cta-btn">Request a Meeting →</a>
     <div class="cta-details">
-      <div class="cta-detail">
-        <div class="val">Rummana Dada</div>
-        <div class="lbl">Managing Partner</div>
-      </div>
-      <div class="cta-detail">
-        <div class="val">Humanity Capital</div>
-        <div class="lbl">Growth Equity</div>
-      </div>
-      <div class="cta-detail">
-        <div class="val">London · New York · Dubai · Riyadh</div>
-        <div class="lbl">Offices</div>
-      </div>
+      <div class="cta-detail"><div class="val">Rummana Dada</div><div class="lbl">Managing Partner</div></div>
+      <div class="cta-detail"><div class="val">Humanity Capital</div><div class="lbl">Growth Equity</div></div>
+      <div class="cta-detail"><div class="val">London · New York · Dubai · Riyadh</div><div class="lbl">Offices</div></div>
     </div>
   </div>
 </section>
@@ -1010,12 +895,61 @@ section { padding: 5rem 2.5rem; }
   <p>CONFIDENTIAL — © 2026 Humanity Capital. This document is for discussion purposes only and does not constitute an offer or commitment.</p>
 </footer>
 
+</div><!-- end main-site -->
+
 <script>
+// SHA-256 hash of "QIA2026"
+const HASH = '8a1f0b042e6d9aee9c5b77cfc5e3c22a4f1e8d6bc5f9a03e7d2c1b4a89f6e5d3';
+
+async function sha256(str) {
+  const buf = new TextEncoder().encode(str);
+  const hash = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// Pre-compute the real hash on load
+let correctHash = '';
+(async () => {
+  correctHash = await sha256('QIA2026');
+})();
+
+async function tryUnlock() {
+  const input = document.getElementById('pw-input').value;
+  const wrap = document.getElementById('input-wrap');
+  const err = document.getElementById('error-msg');
+
+  const inputHash = await sha256(input);
+
+  if (inputHash === correctHash) {
+    document.getElementById('lock-screen').classList.add('unlocked');
+    document.getElementById('main-site').classList.add('visible');
+    document.body.style.background = '#FFFFFF';
+    setTimeout(() => {
+      document.getElementById('lock-screen').style.display = 'none';
+    }, 600);
+  } else {
+    wrap.classList.add('error');
+    err.classList.add('show');
+    setTimeout(() => {
+      wrap.classList.remove('error');
+      err.classList.remove('show');
+    }, 1800);
+  }
+}
+
+document.getElementById('pw-btn').addEventListener('click', tryUnlock);
+document.getElementById('pw-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') tryUnlock();
+});
+document.getElementById('pw-input').focus();
+
+// Nav scroll
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 50);
 });
 
+// Scroll reveal
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
