@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Still — The Performance Townhouse | Humanity Capital × Katara Hospitality</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #FFFFFF;
+  --snow: #FAFBFC;
+  --ice: #F2F4F7;
+  --mist: #E4E8ED;
+  --steel: #5B7FA4;
+  --steel-light: #7B9DBF;
+  --steel-pale: #A8C1D8;
+  --steel-deep: #3D6180;
+  --ink: #141E29;
+  --ink-mid: #1E2D3D;
+  --text: #4A5B6D;
+  --text-light: #8899A8;
+  --sage: #6B9B7A;
+  --warm: #C4A882;
+  --rose: #B87D8B;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--text);
+  overflow-x: hidden;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: all 0.4s ease;
+}
+.nav.scrolled {
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--mist);
+  padding: 0.6rem 2.5rem;
+}
+.nav-brand {
+  font-family: 'Instrument Serif', serif;
+  font-size: 0.95rem; font-weight: 400;
+  color: var(--white); letter-spacing: 3px; text-transform: lowercase;
+}
+.nav.scrolled .nav-brand { color: var(--ink); }
+.nav-tag {
+  font-size: 0.58rem; color: rgba(255,255,255,0.4);
+  letter-spacing: 2px; text-transform: uppercase; font-weight: 500;
+}
+.nav.scrolled .nav-tag { color: var(--text-light); }
+
+/* ═══ HERO ═══ */
+.hero {
+  min-height: 100vh;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(91,127,164,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 60%, rgba(91,127,164,0.04) 0%, transparent 50%);
+}
+.hero::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(rgba(91,127,164,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91,127,164,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center; max-width: 800px; padding: 2rem;
+  animation: fadeUp 1s ease-out;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow {
+  font-size: 0.58rem; font-weight: 500;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--steel-light);
+  margin-bottom: 2rem;
+  animation: fadeUp 1s ease-out 0.1s both;
+}
+.hero-brand {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 400; color: var(--white);
+  line-height: 0.9; letter-spacing: -3px;
+  margin-bottom: 0.5rem;
+  animation: fadeUp 1s ease-out 0.25s both;
+}
+.hero-tagline {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+  font-weight: 400; font-style: italic;
+  color: var(--steel-light);
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+  animation: fadeUp 1s ease-out 0.4s both;
+}
+.hero-sub {
+  font-size: 0.8rem; font-weight: 300;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.85; max-width: 480px;
+  margin: 0 auto 2.5rem;
+  animation: fadeUp 1s ease-out 0.5s both;
+}
+.hero-stats {
+  display: flex; justify-content: center; gap: 3rem;
+  animation: fadeUp 1s ease-out 0.65s both;
+}
+.hero-stat .val {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.6rem; font-weight: 400; color: var(--white);
+}
+.hero-stat .lbl {
+  font-size: 0.55rem; color: rgba(255,255,255,0.3);
+  letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px;
+}
+.hero-partners {
+  margin-top: 3rem;
+  display: flex; align-items: center; justify-content: center; gap: 2rem;
+  animation: fadeUp 1s ease-out 0.8s both;
+}
+.hero-partners .logo-text {
+  font-size: 0.58rem; font-weight: 500;
+  letter-spacing: 2.5px; text-transform: uppercase;
+}
+.hero-partners .hc { color: var(--steel-light); }
+.hero-partners .kh { color: rgba(255,255,255,0.3); }
+.hero-partners .divider { width: 24px; height: 1px; background: rgba(255,255,255,0.1); }
+.scroll-hint {
+  position: absolute; bottom: 1.5rem; left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.15);
+  font-size: 0.55rem; letter-spacing: 3px; text-transform: uppercase;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:0.15} 50%{opacity:0.4} }
+
+section { padding: 5rem 2.5rem; }
+.container { max-width: 1020px; margin: 0 auto; }
+.section-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.55rem; font-weight: 600;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--steel); margin-bottom: 1rem;
+}
+.section-label::before { content: ''; width: 18px; height: 1px; background: var(--steel-pale); }
+.section-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  font-weight: 400; line-height: 1.25;
+  margin-bottom: 0.85rem; color: var(--ink);
+}
+.section-title em { font-style: italic; color: var(--steel); }
+
+/* ═══ PRICE ANCHOR ═══ */
+.price-anchor {
+  background: var(--white);
+  padding: 4rem 2.5rem;
+}
+.anchor-grid {
+  display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr;
+  gap: 0; margin-top: 2.5rem;
+  background: var(--snow); border-radius: 16px;
+  border: 1px solid var(--ice); overflow: hidden;
+}
+.anchor-divider { background: var(--ice); }
+.anchor-item {
+  padding: 2.5rem 2rem; text-align: center;
+  transition: background 0.3s ease;
+}
+.anchor-item:hover { background: var(--white); }
+.anchor-item .a-label {
+  font-size: 0.55rem; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-light); margin-bottom: 0.75rem;
+}
+.anchor-item .a-value {
+  font-family: 'Instrument Serif', serif;
+  font-size: 2.2rem; font-weight: 400;
+  color: var(--ink); line-height: 1;
+  margin-bottom: 0.35rem;
+}
+.anchor-item .a-sub {
+  font-size: 0.7rem; color: var(--text-light);
+}
+.anchor-item.highlight .a-value { color: var(--steel); }
+
+/* ═══ CONCEPT ═══ */
+.concept { background: var(--white); padding-top: 2rem; }
+.concept-intro {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+  margin-top: 2rem; align-items: start;
+}
+.concept-left .big-quote {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.4rem; font-weight: 400;
+  line-height: 1.5; color: var(--ink); margin-bottom: 1.5rem;
+}
+.concept-left .big-quote em { font-style: italic; color: var(--steel); }
+.concept-left p { font-size: 0.78rem; line-height: 1.8; color: var(--text-light); }
+.concept-right { display: grid; gap: 0.85rem; }
+.concept-pill {
+  display: flex; align-items: center; gap: 12px;
+  padding: 1rem 1.25rem;
+  background: var(--snow); border-radius: 10px;
+  border: 1px solid var(--ice); transition: all 0.3s ease;
+}
+.concept-pill:hover {
+  border-color: var(--steel-pale); background: var(--white);
+  box-shadow: 0 4px 16px rgba(91,127,164,0.05);
+}
+.concept-pill .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.concept-pill:nth-child(1) .dot { background: var(--steel); }
+.concept-pill:nth-child(2) .dot { background: var(--sage); }
+.concept-pill:nth-child(3) .dot { background: var(--warm); }
+.concept-pill:nth-child(4) .dot { background: var(--rose); }
+.concept-pill:nth-child(5) .dot { background: var(--steel-deep); }
+.concept-pill .pill-text { font-size: 0.78rem; font-weight: 500; color: var(--ink); }
+.concept-pill .pill-sub { font-size: 0.68rem; color: var(--text-light); margin-top: 1px; }
+
+/* ═══ TOWNHOUSE ═══ */
+.townhouse { background: var(--ink); color: var(--white); }
+.townhouse .section-title { color: var(--white); }
+.floors { margin-top: 2.5rem; display: grid; gap: 0; }
+.floor {
+  display: grid; grid-template-columns: 100px 1fr;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: all 0.3s ease;
+}
+.floor:hover { background: rgba(91,127,164,0.04); }
+.floor:last-child { border-bottom: none; }
+.floor-num {
+  padding: 1.5rem 0;
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.8rem; font-weight: 400;
+  color: rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  border-right: 1px solid rgba(255,255,255,0.04);
+}
+.floor-content { padding: 1.5rem 2rem; }
+.floor-content h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1rem; font-weight: 400;
+  color: var(--white); margin-bottom: 0.3rem;
+}
+.floor-content p { font-size: 0.72rem; line-height: 1.75; color: rgba(255,255,255,0.38); }
+.floor-tag {
+  display: inline-block; padding: 2px 10px; border-radius: 100px;
+  font-size: 0.55rem; font-weight: 500;
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem;
+}
+.floor:nth-child(1) .floor-tag { background: rgba(91,127,164,0.15); color: var(--steel-light); }
+.floor:nth-child(2) .floor-tag { background: rgba(107,155,122,0.15); color: var(--sage); }
+.floor:nth-child(3) .floor-tag { background: rgba(196,168,130,0.15); color: var(--warm); }
+.floor:nth-child(4) .floor-tag { background: rgba(184,125,139,0.15); color: var(--rose); }
+.floor:nth-child(5) .floor-tag { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.4); }
+
+/* ═══ AUDIENCE ═══ */
+.audience { background: var(--white); }
+.aud-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem; margin-top: 2.5rem;
+}
+.aud-card {
+  padding: 2rem 1.5rem; border-radius: 14px; background: var(--snow);
+  border: 1px solid var(--ice); text-align: center; transition: all 0.3s ease;
+}
+.aud-card:hover { border-color: var(--steel-pale); box-shadow: 0 8px 28px rgba(91,127,164,0.05); }
+.aud-card:hover .aud-icon svg { transform: scale(1.05); }
+.aud-icon { margin-bottom: 1.25rem; }
+.aud-icon svg { width: 56px; height: 56px; transition: transform 0.3s ease; }
+.aud-card h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1rem; font-weight: 400; color: var(--ink); margin-bottom: 0.5rem;
+}
+.aud-card p { font-size: 0.72rem; line-height: 1.75; color: var(--text-light); }
+
+/* ═══ POSITIONING ═══ */
+.comparison { background: var(--snow); }
+.positioning-bar { margin-top: 2.5rem; position: relative; padding: 2rem 0; }
+.pos-track {
+  height: 2px; background: var(--mist); border-radius: 1px;
+  position: relative; margin: 2rem 0;
+}
+.pos-label-left, .pos-label-right {
+  position: absolute; top: -1.5rem;
+  font-size: 0.58rem; font-weight: 500;
+  letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-light);
+}
+.pos-label-left { left: 0; }
+.pos-label-right { right: 0; }
+.pos-marker { position: absolute; top: 50%; transform: translateY(-50%); text-align: center; }
+.pos-marker .dot-outer {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 6px;
+}
+.pos-marker .dot-inner { width: 10px; height: 10px; border-radius: 50%; }
+.pos-marker .pos-name { font-size: 0.65rem; font-weight: 500; color: var(--ink); white-space: nowrap; }
+.pos-marker .pos-sub { font-size: 0.55rem; color: var(--text-light); }
+.pos-marker.ned { left: 12%; }
+.pos-marker.ned .dot-outer { background: rgba(196,168,130,0.15); }
+.pos-marker.ned .dot-inner { background: var(--warm); }
+.pos-marker.still { left: 48%; }
+.pos-marker.still .dot-outer { background: rgba(91,127,164,0.15); }
+.pos-marker.still .dot-inner { background: var(--steel); }
+.pos-marker.waldhotel { left: 82%; }
+.pos-marker.waldhotel .dot-outer { background: rgba(107,155,122,0.15); }
+.pos-marker.waldhotel .dot-inner { background: var(--sage); }
+
+/* ═══ REVENUE ═══ */
+.revenue { background: var(--white); }
+.rev-streams { display: grid; gap: 0.75rem; margin-top: 2.5rem; }
+.rev-stream {
+  display: grid; grid-template-columns: 180px 1fr 100px;
+  align-items: center; gap: 1.25rem;
+  padding: 1.1rem 1.4rem;
+  background: var(--snow); border-radius: 10px;
+  border: 1px solid var(--ice); transition: all 0.3s ease;
+}
+.rev-stream:hover { border-color: var(--steel-pale); }
+.rev-stream .name { font-size: 0.75rem; font-weight: 500; color: var(--ink); }
+.rev-bar-wrap { height: 20px; background: var(--ice); border-radius: 5px; overflow: hidden; }
+.rev-bar { height: 100%; border-radius: 5px; }
+.rev-bar.s1 { background: linear-gradient(90deg, var(--steel), var(--steel-light)); }
+.rev-bar.s2 { background: linear-gradient(90deg, var(--sage), #8CB89A); }
+.rev-bar.s3 { background: linear-gradient(90deg, var(--warm), #D4BE9E); }
+.rev-bar.s4 { background: linear-gradient(90deg, var(--rose), #CDA0AB); }
+.rev-bar.s5 { background: linear-gradient(90deg, var(--steel-deep), var(--steel)); }
+.rev-stream .amount {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.05rem; font-weight: 400; color: var(--ink); text-align: right;
+}
+.rev-total-bar {
+  margin-top: 1.25rem; padding: 1.4rem 1.75rem;
+  background: var(--ink); border-radius: 12px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.rev-total-bar .label {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase;
+}
+.rev-total-bar .total {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.6rem; font-weight: 400; color: var(--white);
+}
+.rev-total-bar .multiplier {
+  display: inline-block; background: rgba(91,127,164,0.2);
+  padding: 3px 10px; border-radius: 100px;
+  font-size: 0.68rem; font-weight: 500;
+  color: var(--steel-light); margin-left: 0.6rem;
+}
+
+/* ═══ PROJECTION ═══ */
+.projection { background: var(--snow); }
+.proj-table { width: 100%; border-collapse: collapse; margin-top: 2.5rem; }
+.proj-table thead th {
+  text-align: left; font-size: 0.55rem; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-light); padding: 0.75rem 1rem;
+  border-bottom: 2px solid var(--mist);
+}
+.proj-table thead th:first-child { padding-left: 0; }
+.proj-table thead th:not(:first-child) { text-align: right; }
+.proj-table tbody td {
+  padding: 0.85rem 1rem; border-bottom: 1px solid var(--ice);
+  font-size: 0.78rem; color: var(--text);
+}
+.proj-table tbody td:first-child { font-weight: 500; padding-left: 0; color: var(--ink); }
+.proj-table tbody td:not(:first-child) {
+  text-align: right; font-family: 'Instrument Serif', serif; font-size: 0.9rem;
+}
+.proj-table tfoot td {
+  padding: 1.1rem 1rem; border-top: 2px solid var(--ink);
+  font-weight: 600; font-size: 0.8rem;
+}
+.proj-table tfoot td:first-child { padding-left: 0; color: var(--ink); }
+.proj-table tfoot td:not(:first-child) {
+  text-align: right; font-family: 'Instrument Serif', serif;
+  font-size: 1.05rem; color: var(--steel-deep);
+}
+.proj-note {
+  margin-top: 1.25rem; padding: 1.1rem 1.4rem;
+  background: var(--white); border-radius: 8px;
+  border-left: 2px solid var(--steel-pale);
+  font-size: 0.7rem; line-height: 1.75; color: var(--text-light);
+}
+
+/* ═══ PARTNERSHIPS ═══ */
+.partnerships { background: var(--white); }
+.partner-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 1.1rem; margin-top: 2.5rem;
+}
+.partner-card {
+  padding: 1.5rem; border-radius: 12px; background: var(--snow);
+  border: 1px solid var(--ice); transition: all 0.3s ease;
+}
+.partner-card:hover { border-color: var(--steel-pale); box-shadow: 0 6px 20px rgba(91,127,164,0.04); }
+.partner-card h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 0.95rem; font-weight: 400; color: var(--ink); margin-bottom: 0.4rem;
+}
+.partner-card p { font-size: 0.7rem; line-height: 1.75; color: var(--text-light); }
+.partner-card .partner-type {
+  display: inline-block; padding: 2px 8px; border-radius: 100px;
+  font-size: 0.55rem; font-weight: 500; letter-spacing: 1px;
+  text-transform: uppercase; background: var(--ice); color: var(--steel);
+  margin-bottom: 0.75rem;
+}
+
+/* ═══ TIMELINE ═══ */
+.implementation { background: var(--snow); }
+.timeline { margin-top: 2.5rem; position: relative; padding-left: 2.25rem; }
+.timeline::before {
+  content: ''; position: absolute;
+  left: 4px; top: 5px; bottom: 5px; width: 1.5px;
+  background: linear-gradient(to bottom, var(--steel), var(--steel-pale), var(--mist));
+}
+.timeline-item { position: relative; padding-bottom: 2.25rem; }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-item::before {
+  content: ''; position: absolute;
+  left: -2.12rem; top: 4px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--white); border: 2px solid var(--steel);
+}
+.timeline-item:nth-child(2)::before { border-color: var(--steel-light); }
+.timeline-item:nth-child(3)::before { border-color: var(--sage); }
+.timeline-item:nth-child(4)::before { border-color: var(--warm); }
+.timeline-item .phase {
+  font-size: 0.55rem; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--steel); margin-bottom: 0.3rem;
+}
+.timeline-item h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1rem; font-weight: 400; color: var(--ink); margin-bottom: 0.3rem;
+}
+.timeline-item p {
+  font-size: 0.72rem; line-height: 1.75; color: var(--text-light); max-width: 540px;
+}
+
+/* ═══ SHARIAH ═══ */
+.shariah-section { background: var(--white); padding: 3.5rem 2.5rem; text-align: center; }
+.shariah-badge-large {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 24px; border: 1px solid var(--steel-pale);
+  border-radius: 100px; margin-bottom: 1.25rem;
+}
+.shariah-badge-large span {
+  font-size: 0.62rem; font-weight: 500;
+  color: var(--steel); letter-spacing: 2px; text-transform: uppercase;
+}
+.shariah-text {
+  max-width: 540px; margin: 0 auto;
+  font-size: 0.78rem; line-height: 1.85; color: var(--text-light);
+}
+
+/* ═══ CTA ═══ */
+.cta {
+  background: var(--ink); text-align: center;
+  padding: 5rem 2.5rem; position: relative; overflow: hidden;
+}
+.cta::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(91,127,164,0.06) 0%, transparent 60%);
+}
+.cta-content { position: relative; z-index: 2; }
+.cta h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 400; color: var(--white); margin-bottom: 0.6rem;
+}
+.cta h2 em { font-style: italic; color: var(--steel-light); }
+.cta p {
+  font-size: 0.78rem; color: rgba(255,255,255,0.35);
+  margin-bottom: 1.75rem; max-width: 420px;
+  margin-left: auto; margin-right: auto; line-height: 1.8;
+}
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 28px; background: var(--steel);
+  color: var(--white); text-decoration: none;
+  border-radius: 100px; font-weight: 500;
+  font-size: 0.68rem; letter-spacing: 1.5px;
+  text-transform: uppercase; transition: all 0.3s ease;
+}
+.cta-btn:hover {
+  background: var(--steel-light); transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(91,127,164,0.2);
+}
+.cta-details {
+  margin-top: 2.25rem;
+  display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;
+}
+.cta-detail .val { font-size: 0.72rem; font-weight: 400; color: rgba(255,255,255,0.65); }
+.cta-detail .lbl {
+  font-size: 0.55rem; color: rgba(255,255,255,0.2);
+  letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px;
+}
+.footer {
+  background: var(--ink); border-top: 1px solid rgba(255,255,255,0.03);
+  padding: 1.25rem 2.5rem; text-align: center;
+}
+.footer p { font-size: 0.58rem; color: rgba(255,255,255,0.15); letter-spacing: 0.5px; }
+
+@media (max-width: 900px) {
+  .concept-intro { grid-template-columns: 1fr; gap: 2rem; }
+  .aud-grid, .partner-grid { grid-template-columns: 1fr; }
+  .rev-stream { grid-template-columns: 1fr; gap: 0.5rem; }
+  .rev-stream .amount { text-align: left; }
+  .floor { grid-template-columns: 60px 1fr; }
+  .hero-stats { gap: 1.5rem; }
+  .anchor-grid { grid-template-columns: 1fr; }
+  .anchor-divider { height: 1px; width: 100%; }
+  section { padding: 3.5rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-brand">still.</div>
+  <div class="nav-tag">Confidential Proposal</div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Humanity Capital × Katara Hospitality</div>
+    <div class="hero-brand">still.</div>
+    <div class="hero-tagline">The Performance Townhouse</div>
+    <p class="hero-sub">A discreet South Kensington townhouse where elite athletes recover, optimise, and socialise — fusing next-generation biotech with five-star hospitality at £150,000 per suite per week.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="val">£150K</div>
+        <div class="lbl">Per Suite / Week</div>
+      </div>
+      <div class="hero-stat">
+        <div class="val">11</div>
+        <div class="lbl">Grand Suites</div>
+      </div>
+      <div class="hero-stat">
+        <div class="val">£73M</div>
+        <div class="lbl">Year 3 Revenue</div>
+      </div>
+    </div>
+    <div class="hero-partners">
+      <span class="logo-text hc">Humanity Capital</span>
+      <span class="divider"></span>
+      <span class="logo-text kh">Katara Hospitality</span>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll to Explore</div>
+</section>
+
+<!-- ═══ PRICE ANCHOR ═══ -->
+<section class="price-anchor">
+  <div class="container">
+    <div class="section-label">The Unit Economics</div>
+    <div class="section-title">£150,000 per suite, per week — <em>and they'll queue</em></div>
+    <div class="anchor-grid">
+      <div class="anchor-item">
+        <div class="a-label">Suite Rate</div>
+        <div class="a-value">£150K</div>
+        <div class="a-sub">per week, all-inclusive</div>
+      </div>
+      <div class="anchor-divider"></div>
+      <div class="anchor-item highlight">
+        <div class="a-label">11 Grand Suites</div>
+        <div class="a-value">£85.8M</div>
+        <div class="a-sub">max annual capacity</div>
+      </div>
+      <div class="anchor-divider"></div>
+      <div class="anchor-item">
+        <div class="a-label">At 60% Occupancy</div>
+        <div class="a-value">£51.5M</div>
+        <div class="a-sub">from suites alone — vs £2.1M today</div>
+      </div>
+    </div>
+    <p style="font-size:0.78rem; line-height:1.85; color:var(--text-light); max-width:620px; margin-top:2rem;">
+      By converting 22 small hotel rooms into 11 grand performance suites, each stay becomes a fully private residence with dedicated treatment space, personal recovery equipment, and concierge clinical team. This isn't a hotel room rate — it's an all-inclusive performance residency. Each week includes full sports performance testing, daily IV and recovery protocols, bespoke nutrition programming, unlimited clinical access, and private suite accommodation. For a Premier League footballer earning £300K+ per week, this is a career-extending investment. For their clubs, it's insurance on a £100M asset. Even at a conservative 60% occupancy, the suites alone generate 25× the entire current hotel revenue.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ CONCEPT ═══ -->
+<section class="concept">
+  <div class="container">
+    <div class="section-label">The Concept</div>
+    <div class="section-title">Where elite athletes come to <em>be still</em></div>
+    <div class="concept-intro">
+      <div class="concept-left">
+        <div class="big-quote">
+          Not a hospital. Not a spa.<br>A <em>performance townhouse</em> — where the world's best athletes access next-generation recovery, biotech healing, and sports science under one discreet roof.
+        </div>
+        <p>Still sits between the lifestyle warmth of a members' club and the clinical precision of a sports performance lab. Premier League footballers get IV recovery between matches. Their partners enjoy longevity treatments upstairs. Everyone meets in the nutrition kitchen. No logos. No paparazzi. Just performance, served quietly.</p>
+      </div>
+      <div class="concept-right">
+        <div class="concept-pill">
+          <div class="dot"></div>
+          <div><div class="pill-text">Sports Performance Lab</div><div class="pill-sub">VO2 max, force plates, biomechanics, DEXA — we test the latest equipment first</div></div>
+        </div>
+        <div class="concept-pill">
+          <div class="dot"></div>
+          <div><div class="pill-text">IV & Biotech Clinic</div><div class="pill-sub">Discreet infusion suites, PRP, stem cell therapy, peptide protocols</div></div>
+        </div>
+        <div class="concept-pill">
+          <div class="dot"></div>
+          <div><div class="pill-text">Recovery Suites</div><div class="pill-sub">Cryotherapy, hyperbaric chambers, red light therapy, compression</div></div>
+        </div>
+        <div class="concept-pill">
+          <div class="dot"></div>
+          <div><div class="pill-text">Nutrition Kitchen</div><div class="pill-sub">Chef-prepared performance meals, personalised macro programming</div></div>
+        </div>
+        <div class="concept-pill">
+          <div class="dot"></div>
+          <div><div class="pill-text">Sports Medicine Consulting</div><div class="pill-sub">Private rooms for orthopaedics, physio, concussion, cardiac screening</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TOWNHOUSE FLOORS ═══ -->
+<section class="townhouse">
+  <div class="container">
+    <div class="section-label">The Townhouse</div>
+    <div class="section-title" style="color:var(--white)">88 Queen's Gate — <em>floor by floor</em></div>
+    <div class="floors">
+      <div class="floor">
+        <div class="floor-num">LG</div>
+        <div class="floor-content">
+          <div class="floor-tag">Performance</div>
+          <h3>The Lab</h3>
+          <p>Sports performance testing centre. VO2 max, force plates, 3D biomechanical analysis, DEXA body composition. Partnership with leading sports science providers to rotate and test cutting-edge equipment before anyone else. Where athletes come to know their numbers.</p>
+        </div>
+      </div>
+      <div class="floor">
+        <div class="floor-num">GF</div>
+        <div class="floor-content">
+          <div class="floor-tag">Recovery</div>
+          <h3>The Rooms</h3>
+          <p>Cryotherapy chamber, hyperbaric oxygen pods, full-spectrum red light beds, Normatec compression, infrared sauna, cold plunge. Clinical-grade but designed like a private members' club — marble, timber, soft lighting. The recovery floor alone justifies the membership.</p>
+        </div>
+      </div>
+      <div class="floor">
+        <div class="floor-num">01</div>
+        <div class="floor-content">
+          <div class="floor-tag">Clinic</div>
+          <h3>The Clinic</h3>
+          <p>Discreet IV infusion lounge, PRP and regenerative medicine suites, sports medicine consulting rooms, private pharmacy. Staffed by Harley Street specialists. Peptide protocols, NAD+ drips, stem cell treatments, micronutrient panels — the biotech floor.</p>
+        </div>
+      </div>
+      <div class="floor">
+        <div class="floor-num">02</div>
+        <div class="floor-content">
+          <div class="floor-tag">Nourish</div>
+          <h3>The Kitchen</h3>
+          <p>Chef-led nutrition kitchen and social dining room. Personalised performance meal plans, gut health protocols, anti-inflammatory menus. Non-alcoholic craft cocktail bar and lounge. Where athletes and their partners actually want to spend time.</p>
+        </div>
+      </div>
+      <div class="floor">
+        <div class="floor-num">03–04</div>
+        <div class="floor-content">
+          <div class="floor-tag">Stay</div>
+          <h3>The Suites</h3>
+          <p>11 grand performance suites at £150,000/week all-inclusive — each created by combining two former hotel rooms into expansive private residences with dedicated treatment space, Tempur beds, blackout sleep tech, circadian lighting, air purification, and in-room recovery tools. 1–4 week intensive blocks. Your private base between matches, between seasons, between everything.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AUDIENCE ═══ -->
+<section class="audience">
+  <div class="container">
+    <div class="section-label">The Community</div>
+    <div class="section-title">Built for the <em>inner circle</em></div>
+    <div class="aud-grid">
+      <div class="aud-card">
+        <div class="aud-icon">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="27" stroke="#E4E8ED" stroke-width="1"/>
+            <circle cx="28" cy="16" r="4" stroke="#5B7FA4" stroke-width="1.5" fill="none"/>
+            <path d="M20 42L24 32L28 24L32 32L36 42" stroke="#5B7FA4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M22 36H34" stroke="#5B7FA4" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+            <path d="M17 28L20 28L22 24L25 32L28 22L31 30L33 26L36 28L39 28" stroke="#A8C1D8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <h3>Elite Athletes</h3>
+        <p>Premier League, La Liga, Serie A footballers. F1 drivers. Tennis pros. Olympic athletes. £150K/week buys an all-inclusive performance residency — testing, recovery, clinical treatments, nutrition, and accommodation. A career-extending investment.</p>
+      </div>
+      <div class="aud-card">
+        <div class="aud-icon">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="27" stroke="#E4E8ED" stroke-width="1"/>
+            <circle cx="23" cy="26" r="9" stroke="#B87D8B" stroke-width="1.2" fill="none" opacity="0.5"/>
+            <circle cx="33" cy="26" r="9" stroke="#C4A882" stroke-width="1.2" fill="none" opacity="0.5"/>
+            <circle cx="28" cy="33" r="9" stroke="#5B7FA4" stroke-width="1.2" fill="none" opacity="0.5"/>
+            <path d="M28 24L31 28L28 32L25 28Z" stroke="#5B7FA4" stroke-width="1.5" fill="none"/>
+            <circle cx="28" cy="28" r="1.5" fill="#5B7FA4"/>
+          </svg>
+        </div>
+        <h3>Partners & Inner Circle</h3>
+        <p>The lifestyle wing. Longevity treatments, aesthetic wellness, nutrition programming, and a social space that feels curated, not clinical. The Kitchen becomes the social anchor — where the wider circle experiences Still on their own terms.</p>
+      </div>
+      <div class="aud-card">
+        <div class="aud-icon">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="27" stroke="#E4E8ED" stroke-width="1"/>
+            <line x1="28" y1="18" x2="20" y2="30" stroke="#A8C1D8" stroke-width="1" opacity="0.4"/>
+            <line x1="28" y1="18" x2="36" y2="30" stroke="#A8C1D8" stroke-width="1" opacity="0.4"/>
+            <line x1="20" y1="30" x2="36" y2="30" stroke="#A8C1D8" stroke-width="1" opacity="0.4"/>
+            <line x1="20" y1="30" x2="16" y2="38" stroke="#A8C1D8" stroke-width="1" opacity="0.3"/>
+            <line x1="36" y1="30" x2="40" y2="38" stroke="#A8C1D8" stroke-width="1" opacity="0.3"/>
+            <line x1="28" y1="18" x2="28" y2="12" stroke="#A8C1D8" stroke-width="1" opacity="0.3"/>
+            <circle cx="28" cy="18" r="3.5" stroke="#5B7FA4" stroke-width="1.5" fill="none"/>
+            <circle cx="20" cy="30" r="2.5" stroke="#5B7FA4" stroke-width="1.2" fill="none"/>
+            <circle cx="36" cy="30" r="2.5" stroke="#5B7FA4" stroke-width="1.2" fill="none"/>
+            <circle cx="16" cy="38" r="1.8" stroke="#5B7FA4" stroke-width="1" fill="none" opacity="0.5"/>
+            <circle cx="40" cy="38" r="1.8" stroke="#5B7FA4" stroke-width="1" fill="none" opacity="0.5"/>
+            <circle cx="28" cy="12" r="1.8" stroke="#5B7FA4" stroke-width="1" fill="none" opacity="0.5"/>
+            <circle cx="28" cy="18" r="1.2" fill="#5B7FA4"/>
+          </svg>
+        </div>
+        <h3>Clubs, Agents & Entourage</h3>
+        <p>Agents, managers, club physios, performance directors. They bring their clients, attend testing sessions, and use Still as a neutral, premium venue for player assessments, transfer medicals, and deal-making over performance meals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ POSITIONING ═══ -->
+<section class="comparison">
+  <div class="container">
+    <div class="section-label">Market Position</div>
+    <div class="section-title">More medicinal than a members' club.<br><em>More human than a hospital.</em></div>
+    <div class="positioning-bar">
+      <div class="pos-track">
+        <div class="pos-label-left">Lifestyle</div>
+        <div class="pos-label-right">Clinical</div>
+        <div class="pos-marker ned">
+          <div class="dot-outer"><div class="dot-inner"></div></div>
+          <div class="pos-name">Ned's Club</div>
+          <div class="pos-sub">Social wellness</div>
+        </div>
+        <div class="pos-marker still">
+          <div class="dot-outer"><div class="dot-inner"></div></div>
+          <div class="pos-name" style="color:var(--steel);font-weight:600;">Still</div>
+          <div class="pos-sub">Performance townhouse</div>
+        </div>
+        <div class="pos-marker waldhotel">
+          <div class="dot-outer"><div class="dot-inner"></div></div>
+          <div class="pos-name">Waldhotel</div>
+          <div class="pos-sub">Medical excellence</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ REVENUE ═══ -->
+<section class="revenue">
+  <div class="container">
+    <div class="section-label">Revenue Architecture — Year 3</div>
+    <div class="section-title">Five revenue streams from <em>one townhouse</em></div>
+    <div class="rev-streams">
+      <div class="rev-stream">
+        <div class="name">Suite Residencies</div>
+        <div class="rev-bar-wrap"><div class="rev-bar s1" style="width: 70%;"></div></div>
+        <div class="amount">£51.5M</div>
+      </div>
+      <div class="rev-stream">
+        <div class="name">Membership (300 cap)</div>
+        <div class="rev-bar-wrap"><div class="rev-bar s2" style="width: 12%;"></div></div>
+        <div class="amount">£9M</div>
+      </div>
+      <div class="rev-stream">
+        <div class="name">Day Clinic & IV Lounge</div>
+        <div class="rev-bar-wrap"><div class="rev-bar s3" style="width: 8%;"></div></div>
+        <div class="amount">£6M</div>
+      </div>
+      <div class="rev-stream">
+        <div class="name">Performance Lab Testing</div>
+        <div class="rev-bar-wrap"><div class="rev-bar s4" style="width: 4%;"></div></div>
+        <div class="amount">£3M</div>
+      </div>
+      <div class="rev-stream">
+        <div class="name">Brand & Equipment Deals</div>
+        <div class="rev-bar-wrap"><div class="rev-bar s5" style="width: 5.5%;"></div></div>
+        <div class="amount">£4M</div>
+      </div>
+    </div>
+    <div class="rev-total-bar">
+      <div><div class="label">Year 3 Projected Revenue (60% Suite Occupancy)</div></div>
+      <div>
+        <span class="total">£73.5M</span>
+        <span class="multiplier">35× current Adria</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROJECTION ═══ -->
+<section class="projection">
+  <div class="container">
+    <div class="section-label">5-Year Financial Projection</div>
+    <div class="section-title">Path to <em>£94M revenue</em> — conservative case</div>
+    <table class="proj-table">
+      <thead>
+        <tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Year 4</th><th>Year 5</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Suite Occupancy</td>
+          <td>40%</td>
+          <td>52%</td>
+          <td>60%</td>
+          <td>68%</td>
+          <td>75%</td>
+        </tr>
+        <tr>
+          <td>Suite Revenue</td>
+          <td>£34.3M</td>
+          <td>£44.6M</td>
+          <td>£51.5M</td>
+          <td>£58.3M</td>
+          <td>£64.4M</td>
+        </tr>
+        <tr>
+          <td>Membership</td>
+          <td>£3M</td>
+          <td>£6M</td>
+          <td>£9M</td>
+          <td>£10M</td>
+          <td>£10.5M</td>
+        </tr>
+        <tr>
+          <td>Day Clinic & IV</td>
+          <td>£2M</td>
+          <td>£4M</td>
+          <td>£6M</td>
+          <td>£7M</td>
+          <td>£8M</td>
+        </tr>
+        <tr>
+          <td>Performance Lab</td>
+          <td>£1M</td>
+          <td>£2M</td>
+          <td>£3M</td>
+          <td>£4M</td>
+          <td>£4.5M</td>
+        </tr>
+        <tr>
+          <td>Brand Partnerships</td>
+          <td>£1M</td>
+          <td>£2.5M</td>
+          <td>£4M</td>
+          <td>£5.5M</td>
+          <td>£7M</td>
+        </tr>
+        <tr style="font-weight:600;">
+          <td>Total Revenue</td>
+          <td>£41.3M</td>
+          <td>£59.1M</td>
+          <td>£73.5M</td>
+          <td>£84.8M</td>
+          <td>£94.4M</td>
+        </tr>
+        <tr>
+          <td>Operating Margin</td>
+          <td>18%</td>
+          <td>28%</td>
+          <td>35%</td>
+          <td>38%</td>
+          <td>42%</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>EBITDA</td>
+          <td>£7.4M</td>
+          <td>£16.5M</td>
+          <td>£25.7M</td>
+          <td>£32.2M</td>
+          <td>£39.6M</td>
+        </tr>
+      </tfoot>
+    </table>
+    <div class="proj-note">
+      <strong>Conservative case:</strong> 11 grand suites (converted from 22 rooms) at £150,000/week all-inclusive. 60% suite occupancy by Year 3 — deliberately conservative for a supply-constrained, ultra-premium asset with only 11 keys and a global addressable market of thousands of elite athletes. Conversion capex £15–20M. Founding membership £30,000/year (300 cap). Average stay 1.2 weeks. Excludes adjacent property acquisition and international expansion (Still Dubai, Still Riyadh). <strong>Half the rooms. 60% occupancy. Still 35× the current hotel revenue. The maths is absurd because the price point is real.</strong>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PARTNERSHIPS ═══ -->
+<section class="partnerships">
+  <div class="container">
+    <div class="section-label">Partnership Ecosystem</div>
+    <div class="section-title">Powered by the <em>best in their field</em></div>
+    <div class="partner-grid">
+      <div class="partner-card">
+        <div class="partner-type">Sports Science</div>
+        <h3>Performance Lab Partners</h3>
+        <p>Rotating partnerships with leading sports tech companies — Catapult, VALD, Hawkin Dynamics — who supply cutting-edge equipment in exchange for athlete data validation. Still becomes the London testbed where next-gen tech gets its credibility.</p>
+      </div>
+      <div class="partner-card">
+        <div class="partner-type">Medical</div>
+        <h3>Harley Street Network</h3>
+        <p>Consulting partnership with London's leading sports medicine, orthopaedic, and regenerative medicine specialists. Private rooms for their athlete clients. Referral network driving both clinical credibility and patient volume.</p>
+      </div>
+      <div class="partner-card">
+        <div class="partner-type">Athletes</div>
+        <h3>Footballer Ambassador Programme</h3>
+        <p>Founding athlete partners with equity incentives. Their presence validates the brand, attracts their networks, and creates organic visibility. International footballer partnerships through Humanity Capital's existing relationships across the Premier League and European clubs.</p>
+      </div>
+      <div class="partner-card">
+        <div class="partner-type">Clubs & Agents</div>
+        <h3>Club & Agency Partnerships</h3>
+        <p>Still as the go-to independent facility for Premier League and European clubs — player assessments, transfer medicals, off-site rehabilitation, and pre-season performance optimisation. Neutral ground that every agent wants access to.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SHARIAH ═══ -->
+<section class="shariah-section">
+  <div class="container">
+    <div class="shariah-badge-large"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="vertical-align: middle; margin-right: 4px;"><path d="M9 1.5C5.5 1.5 2.5 4.2 2.5 7s3 5.5 6.5 5.5c-1.8-1-3-3-3-5.5s1.2-4.5 3-5.5z" stroke="#5B7FA4" stroke-width="1.2" fill="none"/><circle cx="10" cy="3.5" r="1" fill="#5B7FA4" opacity="0.5"/></svg><span>Halal & Inclusive by Design</span></div>
+    <p class="shariah-text">Still operates with halal F&B and non-alcoholic craft cocktails as default — not as a restriction, but as a design choice reflecting the international athlete community it serves. A natural fit for GCC-based athletes and their families.</p>
+  </div>
+</section>
+
+<!-- ═══ TIMELINE ═══ -->
+<section class="implementation">
+  <div class="container">
+    <div class="section-label">Implementation Roadmap</div>
+    <div class="section-title">From concept to <em>first athlete</em></div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="phase">Phase 1 — Months 1–3</div>
+        <h3>Partnership & Founding Members</h3>
+        <p>JV structuring with Katara Hospitality. Sign 3–5 founding athlete ambassadors. Appoint medical advisory board. Secure CQC pathway. Launch founding membership waitlist — target 50 pre-commitments at £30K/year.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="phase">Phase 2 — Months 4–10</div>
+        <h3>Build & Fit-Out</h3>
+        <p>Convert townhouse floor-by-floor: performance lab (LG), recovery rooms (GF), IV clinic (01), nutrition kitchen (02), performance suites (03–04). Equipment partnerships confirmed. Brand identity and digital launch.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="phase">Phase 3 — Months 10–14</div>
+        <h3>Soft Launch & Pre-Season</h3>
+        <p>Soft opening timed to pre-season training windows. Founding members gain first access. Media seeding via athlete ambassador channels. First club partnership for off-site player assessment. Target: 8 suites booked in month one.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="phase">Phase 4 — Months 14–36</div>
+        <h3>Scale the Brand</h3>
+        <p>Hit 300 membership cap. Evaluate adjacent Queen's Gate property for expansion. Launch Still Dubai and Still Riyadh feasibility. Develop Still-branded product line (recovery, nutrition, sleep tech). Target: waitlist for suites by month 18.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta">
+  <div class="cta-content">
+    <h2>Where Humanity Scales,<br><em>Returns Follow</em></h2>
+    <p>A £2M hotel hiding a £73M performance business — with half the rooms and 60% occupancy. The athletes are ready. The building is waiting. Let's build Still together.</p>
+    <a href="mailto:rummana@humanitycapital.com" class="cta-btn">Request a Meeting →</a>
+    <div class="cta-details">
+      <div class="cta-detail">
+        <div class="val">Rummana Dada</div>
+        <div class="lbl">Managing Partner</div>
+      </div>
+      <div class="cta-detail">
+        <div class="val">Humanity Capital</div>
+        <div class="lbl">Growth Equity</div>
+      </div>
+      <div class="cta-detail">
+        <div class="val">London · New York · Dubai · Riyadh</div>
+        <div class="lbl">Offices</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>CONFIDENTIAL — © 2026 Humanity Capital. This document is for discussion purposes only and does not constitute an offer or commitment.</p>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.concept-pill, .floor, .aud-card, .rev-stream, .partner-card, .timeline-item, .anchor-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(16px)';
+  el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
