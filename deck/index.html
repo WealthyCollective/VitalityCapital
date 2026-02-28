@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Humanity Capital — Healthcare · AI · Energy</title>
-<link rel="icon" type="image/x-icon" href="https://i.postimg.cc/wMsWb95x/HC-08.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -42,22 +41,33 @@ body{background:var(--white);color:var(--text);font-family:var(--sans);font-weig
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 56px;background:rgba(255,255,255,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--divider)}
-.nav-brand{display:flex;align-items:center;gap:14px;text-decoration:none}
-.nav-monogram{font-family:var(--display);font-size:28px;font-weight:500;color:var(--navy);letter-spacing:-0.04em;line-height:1}
-.nav-name{font-size:10px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--text);line-height:1.4}
-.nav-name span{display:block;font-size:8px;letter-spacing:0.28em;color:var(--text-body)}
+.nav-brand{display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0}
+.nav-monogram{font-family:var(--display);font-size:28px;font-weight:500;color:var(--navy);letter-spacing:-0.04em;line-height:1;flex-shrink:0}
+.nav-name{font-size:10px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--text);line-height:1.4;white-space:nowrap}
+.nav-name span{display:block;font-size:8px;letter-spacing:0.28em;color:var(--text-body);white-space:nowrap}
 .nav-links{display:flex;gap:36px;align-items:center}
 .nav-links a{font-size:10px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:var(--text);text-decoration:none;transition:color 0.2s}
 .nav-links a:hover{color:var(--navy)}
 .nav-cta{font-size:10px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:var(--white);background:var(--navy);padding:10px 24px;text-decoration:none;transition:background 0.25s}
 .nav-cta:hover{background:var(--navy-mid)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.hamburger{display:none;background:none;border:1px solid var(--divider);width:38px;height:38px;cursor:pointer;flex-shrink:0;padding:0;align-items:center;justify-content:center}
+.ham-lines{display:flex;flex-direction:column;gap:4px;width:16px;align-items:center}
+.ham-lines i{display:block;width:16px;height:1.5px;background:var(--navy);transition:all 0.3s;transform-origin:center}
+.hamburger.open .ham-lines i:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.hamburger.open .ham-lines i:nth-child(2){opacity:0}
+.hamburger.open .ham-lines i:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+.mobile-nav{display:none;position:fixed;top:68px;left:0;right:0;bottom:0;background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;visibility:hidden;transition:opacity 0.3s,visibility 0.3s}
+.mobile-nav.open{opacity:1;visibility:visible}
+.mobile-nav a{font-size:12px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--text);text-decoration:none;transition:color 0.2s;padding:8px 0}
+.mobile-nav a:hover{color:var(--navy)}
 
 #hero{min-height:100vh;display:grid;grid-template-columns:55% 45%;padding-top:68px}
 .hero-left{padding:90px 72px 80px;display:flex;flex-direction:column;justify-content:center}
 .hero-eyebrow{font-size:9.5px;font-weight:400;letter-spacing:0.3em;text-transform:uppercase;color:var(--navy);margin-bottom:32px}
 .hero-logo{font-family:var(--display);font-size:60px;font-weight:500;color:var(--navy);line-height:1;letter-spacing:-0.03em;margin-bottom:6px}
 .hero-tagline{font-size:11px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--text);margin-bottom:36px}
-.hero-title{font-family:var(--serif);font-size:clamp(26px,3.5vw,42px);font-weight:300;line-height:1.25;color:var(--text);margin-bottom:24px;letter-spacing:0.12em;text-transform:uppercase}
+.hero-title{font-family:var(--serif);font-size:clamp(22px,3vw,36px);font-weight:300;line-height:1.25;color:var(--text);margin-bottom:24px;letter-spacing:0.12em;text-transform:uppercase}
 .hero-rule{width:40px;height:2px;background:var(--navy);margin-bottom:24px}
 .hero-body{font-size:14px;font-weight:300;line-height:1.85;color:var(--text-body);max-width:440px;margin-bottom:44px}
 .hero-body strong{font-weight:500;color:var(--text)}
@@ -90,14 +100,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .thesis-body strong{font-weight:500;color:var(--text)}
 .thesis-pillars{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--divider);border:1px solid var(--divider);margin-top:48px}
 .tp{background:var(--white);padding:32px 24px;text-align:center}
-.tp-icon{font-size:24px;margin-bottom:12px}
+.tp-icon{font-size:24px;margin-bottom:12px;color:var(--navy)}
 .tp-title{font-family:var(--serif);font-size:16px;font-weight:500;color:var(--text);margin-bottom:8px;letter-spacing:0.06em}
 .tp-sub{font-size:11px;font-weight:300;color:var(--text-body);line-height:1.6}
 
 #triad{background:var(--navy);position:relative;overflow:hidden}
 .triad-visual{display:flex;align-items:center;justify-content:center;margin:60px auto 40px;max-width:800px;position:relative}
 .triad-node{flex:1;text-align:center;padding:40px 20px;position:relative;z-index:1}
-.triad-icon{font-size:28px;width:64px;height:64px;line-height:64px;border-radius:50%;margin:0 auto 16px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.05)}
+.triad-icon{font-size:28px;width:64px;height:64px;line-height:64px;border-radius:50%;margin:0 auto 16px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.05);color:var(--white)}
 .triad-title{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--white);margin-bottom:8px}
 .triad-sub{font-size:11px;font-weight:300;color:rgba(255,255,255,0.7);line-height:1.6;max-width:200px;margin:0 auto}
 .triad-line{width:60px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);flex-shrink:0;align-self:center;margin-top:-30px}
@@ -157,9 +167,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .gt td{padding:14px 28px;font-size:12.5px;font-weight:300;vertical-align:middle;border-bottom:1px solid rgba(255,255,255,0.06);color:rgba(255,255,255,0.8)}
 .gt td:first-child{font-family:var(--serif);font-size:15px;color:var(--white)}
 .gt td:last-child{text-align:right;font-family:var(--display);font-size:22px;font-weight:400;color:var(--white)}
-.gt tfoot td{font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.70);border-bottom:none;padding-top:20px}
+.gt tfoot td{font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.70);border-bottom:none;padding-top:20px;text-align:left}
 .gt .pil{color:rgba(255,255,255,0.5);font-size:10px;font-family:var(--sans);letter-spacing:0.12em;text-transform:uppercase}
-.gt thead th{text-align:left;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.65);padding:0 28px 12px;font-weight:400}
+.gt thead th{text-align:left;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.65);padding:14px 28px 12px;font-weight:400}
 .gt thead th:last-child{text-align:right}
 .perf-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid rgba(255,255,255,0.1);margin-top:64px}
 .pb{padding:32px;border-right:1px solid rgba(255,255,255,0.08)}
@@ -231,22 +241,88 @@ footer{background:var(--navy-dk);padding:52px 72px;display:grid;grid-template-co
 
 @media(max-width:900px){
   #hero{grid-template-columns:1fr}
-  .hero-right{padding:60px 40px}
+  .hero-left{padding:60px 28px 24px}
+  .hero-right{padding:40px 28px 60px}
   .hero-right::before{display:none}
+  .hero-logo{font-size:44px}
+  .hero-title{letter-spacing:0.06em}
   nav{padding:16px 24px}
   .nav-links{display:none}
+  .hamburger{display:flex}
+  .mobile-nav{display:flex}
+  .nav-cta{padding:8px 16px;font-size:9px}
   .si{padding:72px 28px}
   .frontier-grid,.gp-grid,.pipe-grid,.thesis-pillars{grid-template-columns:1fr}
   .tr-hl-grid,.perf-bar{grid-template-columns:1fr 1fr}
   .energy-grid{grid-template-columns:1fr}
   .mrow{grid-template-columns:1fr}
+  .mrow .ms{border-right:none;border-bottom:1px solid var(--divider)}
+  .mrow .ms:last-child{border-bottom:none}
   .impact-grid{grid-template-columns:1fr 1fr}
-  .gp-profile,.thesis-grid{grid-template-columns:1fr}
+  .gp-profile{grid-template-columns:1fr}
+  .gp-stats{border-left:none;padding-left:0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1)}
+  .thesis-grid{grid-template-columns:1fr}
   .triad-visual{flex-direction:column}
   .triad-line{width:1px;height:40px;background:linear-gradient(180deg,transparent,rgba(255,255,255,0.3),transparent)}
   footer{grid-template-columns:1fr;gap:24px;text-align:center}
   .f-right{text-align:center}
   .login-card{padding:48px 28px}
+  /* ── RESPONSIVE TABLES ── */
+  .gtw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-left:-8px;margin-right:-8px;padding:0 8px}
+  .gt{min-width:580px}
+  .gt td{padding:12px 16px;font-size:11px}
+  .gt td:first-child{font-size:13px}
+  .gt td:last-child{font-size:18px}
+  .gt thead th{padding:20px 16px 10px;font-size:8px}
+  .gt tfoot td{font-size:8.5px;padding:16px 16px 12px}
+  .gt .pil{font-size:8px}
+  /* Unpipeline table */
+  .upt{min-width:600px}
+  div:has(> .upt){overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .upt td{padding:16px 12px;font-size:12px}
+  .upt td:first-child{font-size:15px}
+  .upt th{font-size:8px;padding:0 12px 12px}
+  .upt .rc{font-size:20px}
+  /* Fund terms */
+  .terms-card{padding:32px 24px}
+  .term-row{grid-template-columns:1fr;gap:8px;padding:16px 0}
+  .term-key{font-size:9px;padding-top:0}
+  .term-val{font-size:12.5px}
+  /* Pipeline cards */
+  .pc{padding:24px 20px}
+  .pc-body{font-size:12px}
+  .pc-stats{grid-template-columns:1fr 1fr;gap:12px}
+  /* Dependency chain */
+  .dep-chain{padding:24px 20px}
+  .dep-chain-row{flex-direction:column;gap:8px;align-items:stretch}
+  .dep-step{text-align:center}
+  .dep-arrow{transform:rotate(90deg);text-align:center}
+  /* Energy cards */
+  .ec{padding:28px 24px}
+  .ec-stat{font-size:40px}
+  /* Stat blocks */
+  .stat-num{font-size:48px}
+  /* Tab buttons */
+  .tabs-nav{gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;padding-bottom:1px}
+  .tab-btn{white-space:nowrap;padding:12px 16px;font-size:9px}
+  /* Market stats */
+  .ms-num{font-size:40px}
+  .mbig{font-size:26px}
+  .mtag{font-size:11px}
+  /* Track record highlights */
+  .tr-hl{padding:24px 20px}
+  .tr-hl-num{font-size:40px}
+  .tr-hl-label{font-size:9px}
+  /* Perf bar */
+  .pb{padding:24px 20px}
+  .pb-num{font-size:32px}
+  .pb-label{font-size:9px}
+  /* Closing */
+  #closing{padding:72px 28px}
+  footer{padding:40px 28px}
+  /* GP stats row */
+  .gs-val{font-size:26px}
+  .gs-row{gap:20px}
 }
 </style>
 </head>
@@ -283,8 +359,21 @@ footer{background:var(--navy-dk);padding:52px 72px;display:grid;grid-template-co
     <a href="#team">Team</a>
     <a href="#terms">Terms</a>
   </div>
-  <a class="nav-cta" href="#terms">Contact</a>
+  <div class="nav-right">
+    <a class="nav-cta" href="#terms">Contact</a>
+    <button class="hamburger" id="hamburger-btn" onclick="toggleMenu()"><div class="ham-lines"><i></i><i></i><i></i></div></button>
+  </div>
 </nav>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#thesis" onclick="closeMenu()">Thesis</a>
+  <a href="#triad" onclick="closeMenu()">Triad</a>
+  <a href="#energy" onclick="closeMenu()">Energy × AI</a>
+  <a href="#sectors" onclick="closeMenu()">Sectors</a>
+  <a href="#track-record" onclick="closeMenu()">Track Record</a>
+  <a href="#pipeline" onclick="closeMenu()">Pipeline</a>
+  <a href="#team" onclick="closeMenu()">Team</a>
+  <a href="#terms" onclick="closeMenu()">Terms</a>
+</div>
 
 <section id="hero">
   <div class="hero-left">
@@ -313,7 +402,7 @@ footer{background:var(--navy-dk);padding:52px 72px;display:grid;grid-template-co
     <div class="thesis-pillars stagger">
       <div class="tp rv"><div class="tp-icon">⚕</div><div class="tp-title">Healthcare</div><div class="tp-sub">Disease interception, precision medicine, women's health, foodtech, longevity biotech</div></div>
       <div class="tp rv"><div class="tp-icon">◈</div><div class="tp-title">AI</div><div class="tp-sub">Diagnostics, drug discovery, clinical decision support, venture intelligence platforms</div></div>
-      <div class="tp rv"><div class="tp-icon">⚡</div><div class="tp-title">Energy</div><div class="tp-sub">The foundational dependency — clean compute power, grid infrastructure, storage, next-gen nuclear</div></div>
+      <div class="tp rv"><div class="tp-icon">☉</div><div class="tp-title">Energy</div><div class="tp-sub">The foundational dependency — clean compute power, grid infrastructure, storage, next-gen nuclear</div></div>
     </div>
   </div>
 </section>
@@ -326,7 +415,7 @@ footer{background:var(--navy-dk);padding:52px 72px;display:grid;grid-template-co
       <div class="triad-line"></div>
       <div class="triad-node"><div class="triad-icon">◈</div><div class="triad-title">AI</div><div class="triad-sub">Diagnostics, drug discovery, clinical AI platforms</div></div>
       <div class="triad-line"></div>
-      <div class="triad-node"><div class="triad-icon">⚡</div><div class="triad-title">Energy</div><div class="triad-sub">Clean compute, grid infrastructure, next-gen nuclear</div></div>
+      <div class="triad-node"><div class="triad-icon">☉</div><div class="triad-title">Energy</div><div class="triad-sub">Clean compute, grid infrastructure, next-gen nuclear</div></div>
     </div>
     <div class="triad-quote rv">"Every AI model running a cancer diagnosis requires energy. Every data centre powering precision medicine needs clean power. Energy is not a separate vertical — it is the prerequisite for everything else in our portfolio."</div>
   </div>
@@ -579,7 +668,7 @@ footer{background:var(--navy-dk);padding:52px 72px;display:grid;grid-template-co
       <div class="pc rv"><div class="pc-flag">🇬🇧</div><div class="pc-name">UNTIL</div><div class="pc-pil">Healthcare · B2B</div><div class="pc-body">World's first wellness members club — co-founded by Steven Bartlett. 600+ experts, 4 London locations.</div><div class="pc-stats"><div><div class="pc-sl">Locations</div><div class="pc-sv">4 · London</div></div><div><div class="pc-sl">Community</div><div class="pc-sv">600+</div></div><div><div class="pc-sl">Co-Founded</div><div class="pc-eb">S. Bartlett</div></div><div><div class="pc-sl">Category</div><div class="pc-sv">Wellness B2B</div></div></div></div>
       <div class="pc rv"><div class="pc-flag">🇺🇸</div><div class="pc-name">Elixir MD</div><div class="pc-pil">Healthcare + AI</div><div class="pc-body">AI-powered post-operative recovery. Reduces post-op care time by 50%.</div><div class="pc-stats"><div><div class="pc-sl">2026 ARR</div><div class="pc-sv">$25M</div></div><div><div class="pc-sl">Valuation</div><div class="pc-sv">$12M excl.</div></div><div><div class="pc-sl">EBITDA</div><div class="pc-eb">66%</div></div><div><div class="pc-sl">Target</div><div class="pc-eb">80%</div></div></div></div>
       <div class="pc rv"><div class="pc-flag">🇩🇪</div><div class="pc-name">Gharieni</div><div class="pc-pil">Healthcare · Infrastructure</div><div class="pc-body">German-engineered premium spa, wellness, and medical equipment.</div><div class="pc-stats"><div><div class="pc-sl">2026 ARR</div><div class="pc-sv">$20M</div></div><div><div class="pc-sl">Valuation</div><div class="pc-sv">$10M excl.</div></div><div><div class="pc-sl">EBITDA</div><div class="pc-eb">75%</div></div><div><div class="pc-sl">Market Val</div><div class="pc-sv">$60M</div></div></div></div>
-      <div class="pc rv" style="background:var(--off-white)"><div class="pc-flag">⚡</div><div class="pc-name">Energy Pipeline</div><div class="pc-pil">Energy · AI Compute</div><div class="pc-body">Actively sourcing energy deals: clean compute power, grid-scale storage, next-gen nuclear, data centre energy — the foundational layer enabling every AI healthcare platform in our portfolio.</div><div class="pc-stats"><div><div class="pc-sl">Focus</div><div class="pc-sv">Clean Compute</div></div><div><div class="pc-sl">Market</div><div class="pc-eb">$4.5T</div></div><div><div class="pc-sl">Stage</div><div class="pc-sv">Growth · Infra</div></div><div><div class="pc-sl">Geography</div><div class="pc-sv">US · EU · MENA</div></div></div></div>
+      <div class="pc rv" style="background:var(--off-white)"><div class="pc-flag">☉</div><div class="pc-name">Energy Pipeline</div><div class="pc-pil">Energy · AI Compute</div><div class="pc-body">Actively sourcing energy deals: clean compute power, grid-scale storage, next-gen nuclear, data centre energy — the foundational layer enabling every AI healthcare platform in our portfolio.</div><div class="pc-stats"><div><div class="pc-sl">Focus</div><div class="pc-sv">Clean Compute</div></div><div><div class="pc-sl">Market</div><div class="pc-eb">$4.5T</div></div><div><div class="pc-sl">Stage</div><div class="pc-sv">Growth · Infra</div></div><div><div class="pc-sl">Geography</div><div class="pc-sv">US · EU · MENA</div></div></div></div>
       <div class="pc rv"><div class="pc-flag">🇬🇧</div><div class="pc-name">Othership</div><div class="pc-pil">Healthcare · Nutrition</div><div class="pc-body">Functional mushroom and adaptogen coffee blends. Fast-growing DTC wellness brand.</div><div class="pc-stats"><div><div class="pc-sl">2026 ARR</div><div class="pc-sv">$60M+</div></div><div><div class="pc-sl">Market Val</div><div class="pc-sv">$120M</div></div><div><div class="pc-sl">EBITDA</div><div class="pc-eb">40%</div></div><div><div class="pc-sl">2025 Rev</div><div class="pc-sv">$30M</div></div></div></div>
       <div class="pc rv"><div class="pc-flag">🇦🇪</div><div class="pc-name">Sloane Wellness</div><div class="pc-pil">Healthcare · GCC</div><div class="pc-body">Middle East's first premium wellness distribution platform for the GCC.</div><div class="pc-stats"><div><div class="pc-sl">Market</div><div class="pc-sv">GCC · MENA</div></div><div><div class="pc-sl">Category</div><div class="pc-sv">Distribution</div></div><div><div class="pc-sl">Stage</div><div class="pc-eb">Active</div></div><div><div class="pc-sl">Target</div><div class="pc-sv">5×</div></div></div></div>
       <div class="pc rv"><div class="pc-flag">🇺🇸</div><div class="pc-name">Frame Reformer</div><div class="pc-pil">Healthcare · Fitness</div><div class="pc-body">Co-founded by Dua Lipa. Connected Pilates platform — the Peloton of Pilates.</div><div class="pc-stats"><div><div class="pc-sl">2026 Exp.</div><div class="pc-sv">$25M</div></div><div><div class="pc-sl">Valuation</div><div class="pc-sv">$25M</div></div><div><div class="pc-sl">EBITDA</div><div class="pc-eb">70%</div></div><div><div class="pc-sl">Market Val</div><div class="pc-sv">$35M</div></div></div></div>
@@ -710,6 +799,16 @@ document.getElementById('pwd-btn').addEventListener('click', verifyPassword);
 document.getElementById('pwd-input').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') verifyPassword();
 });
+
+// ── HAMBURGER MENU ──
+function toggleMenu() {
+  document.getElementById('hamburger-btn').classList.toggle('open');
+  document.getElementById('mobile-nav').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('hamburger-btn').classList.remove('open');
+  document.getElementById('mobile-nav').classList.remove('open');
+}
 
 // ── TABS ──
 function sw(b, id) {
