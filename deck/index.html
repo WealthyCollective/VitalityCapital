@@ -74,10 +74,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .hero-meta{font-size:9.5px;letter-spacing:0.24em;text-transform:uppercase;color:var(--navy)}
 .hero-right{display:flex;flex-direction:column;justify-content:center;padding:100px 64px 80px 48px;position:relative}
 .hero-right::before{content:'';position:absolute;left:0;top:15%;bottom:15%;width:1px;background:var(--divider)}
-.stat-block{padding:44px 0;border-bottom:1px solid var(--divider)}
+.stat-block{padding:32px 0;border-bottom:1px solid var(--divider)}
 .stat-block:first-child{border-top:1px solid var(--divider)}
-.stat-num{font-family:var(--display);font-size:clamp(52px,5.5vw,72px);font-weight:400;color:var(--navy);line-height:1;letter-spacing:-0.02em;margin-bottom:10px}
-.stat-label{font-size:12px;font-weight:300;font-style:italic;color:var(--text-body)}
+.stat-num{font-family:var(--display);font-size:clamp(44px,5vw,64px);font-weight:400;color:var(--navy);line-height:1;letter-spacing:-0.02em;margin-bottom:8px}
+.stat-label{font-size:11px;font-weight:300;font-style:italic;color:var(--text-body)}
 
 .si{max-width:1240px;margin:0 auto;padding:100px 72px}
 .sl{font-size:9.5px;letter-spacing:0.3em;text-transform:uppercase;color:var(--navy);margin-bottom:14px}
@@ -95,7 +95,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 #thesis{background:var(--off-white)}
 .thesis-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
-.thesis-callout{font-family:var(--display);font-style:italic;font-size:22px;font-weight:400;color:var(--text);line-height:1.5;padding:40px 0;border-top:2px solid var(--navy);border-bottom:1px solid var(--divider)}
+.thesis-callout{font-family:var(--display);font-style:italic;font-size:17px;font-weight:400;color:var(--text);line-height:1.55;padding:36px 0;border-top:2px solid var(--navy);border-bottom:1px solid var(--divider)}
 .thesis-body{font-size:14px;font-weight:300;line-height:1.85;color:var(--text-body)}
 .thesis-body strong{font-weight:500;color:var(--text)}
 .thesis-pillars{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--divider);border:1px solid var(--divider);margin-top:48px}
@@ -378,7 +378,6 @@ footer{background:var(--navy-dk);padding:52px 72px;display:grid;grid-template-co
 <section id="hero">
   <div class="hero-left">
     <div class="hero-eyebrow">$500M Life Fund I · Healthcare · AI · Energy · February 2026</div>
-    <div class="hero-logo">HC</div>
     <div class="hero-tagline">Humanity Capital — Where Humanity Scales, Returns Follow</div>
     <h1 class="hero-title">Growth Capital<br>Powering the<br>Intelligence Era</h1>
     <div class="hero-rule"></div>
@@ -398,11 +397,6 @@ footer{background:var(--navy-dk);padding:52px 72px;display:grid;grid-template-co
     <div class="thesis-grid rv">
       <div><div class="thesis-callout">"Modern chronic disease originates in metabolic dysfunction — seeded by industrial food systems, sedentary lifestyles, and environmental toxins. Intercepting disease upstream delivers better outcomes at lower cost."</div></div>
       <div><div class="thesis-body">The future is not treating illness faster — it's <strong>preventing decline at the root</strong>. Healthcare is moving upstream, from treatment to prediction, optimisation, and longevity. AI enables continuous personalisation, turning health from episodic care into an always-on prevention system. But AI demands energy at a scale the world has never seen. <strong>Energy is the foundational dependency.</strong> Without clean, abundant power, the AI revolution — and every healthcare platform it enables — stalls. We invest across the full continuum: from early-stage foodtech and preventive medtech, through AI diagnostics and clinical platforms, to the energy infrastructure powering it all.</div></div>
-    </div>
-    <div class="thesis-pillars stagger">
-      <div class="tp rv"><div class="tp-icon">⚕</div><div class="tp-title">Healthcare</div><div class="tp-sub">Disease interception, precision medicine, women's health, foodtech, longevity biotech</div></div>
-      <div class="tp rv"><div class="tp-icon">◈</div><div class="tp-title">AI</div><div class="tp-sub">Diagnostics, drug discovery, clinical decision support, venture intelligence platforms</div></div>
-      <div class="tp rv"><div class="tp-icon">☉</div><div class="tp-title">Energy</div><div class="tp-sub">The foundational dependency — clean compute power, grid infrastructure, storage, next-gen nuclear</div></div>
     </div>
   </div>
 </section>
@@ -502,8 +496,8 @@ footer{background:var(--navy-dk);padding:52px 72px;display:grid;grid-template-co
     <div class="rv">
       <div class="tabs-nav">
         <button class="tab-btn active" onclick="sw(this,'rummana')">Rummana Dada</button>
-        <button class="tab-btn" onclick="sw(this,'maha')">Maha Al Fahim</button>
         <button class="tab-btn" onclick="sw(this,'nathalie')">Dr. Nathalie Jeneral</button>
+        <button class="tab-btn" onclick="sw(this,'maha')">Maha Al Fahim</button>
         <button class="tab-btn" onclick="sw(this,'bernhard')">Dr. Bernhard Klemen</button>
         <button class="tab-btn" onclick="sw(this,'andrea')">Andrea Neuböck-Escher</button>
         <button class="tab-btn" onclick="sw(this,'mauricio')">Mauricio Serna</button>
