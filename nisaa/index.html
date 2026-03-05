@@ -491,9 +491,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.2rem 3.
 .inv-stat-sub{font-size:.75rem;font-weight:300;color:var(--muted);line-height:1.45}
 
 /* ─── MOBILE ─────────────────────────────────── */
-/* ─── TABLET (≤1024px) ──────────────────────── */
 @media (max-width: 1024px) {
-  /* Hamburger nav */
   .nav-links { 
     display: none;
     position: fixed; top: 0; left: 0; right: 0; bottom: 0;
@@ -505,8 +503,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.2rem 3.
   .nav-links.open .nav-close { display: flex; align-items: center; justify-content: center; }
   .nav-links a { font-size: 1.1rem; letter-spacing: .18em; color: var(--white); }
   .hamburger { display: flex; }
-
-  /* Global spacing */
   body { overflow-x: hidden; }
   nav { padding: 1rem 2.5rem; }
   .container { padding: 0 2.5rem; }
@@ -521,9 +517,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.2rem 3.
   #conf-banner { padding: .55rem 2.5rem; }
 }
 
-/* ─── MOBILE (≤768px) ──────────────────────── */
 @media (max-width: 768px) {
-  /* ── GLOBAL MARGIN RESET ── */
   body { overflow-x: hidden; }
   nav,
   .container,
@@ -536,8 +530,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.2rem 3.
   .closing-content,
   footer,
   #conf-banner { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
-
-  /* Nav header */
   nav { padding-top: .8rem !important; padding-bottom: .8rem !important; gap: .5rem; }
   .nav-wm-top { font-size: .9rem; letter-spacing: .08em; }
   .nav-wm-sub { font-size: .4rem; letter-spacing: .12em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
@@ -546,21 +538,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.2rem 3.
   .hero-title-en { font-size: clamp(48px, 14vw, 100px) !important; }
   .hero-orb { width: 200px; height: 200px; top: 10%; right: 2%; }
   .scroll-hint { display: none; }
-  .hero-badge { font-size: .52rem; letter-spacing: .16em; padding: .3rem .7rem; margin-top: 1rem; }
-  .hero-sub { font-size: .9rem; margin-top: 1.2rem; }
-  .hero-stats { margin-top: 1.8rem; }
-  .hero-stats { flex-wrap: wrap; gap: 0; margin-top: 1.8rem; }
-  .hero-stat { padding: .8rem 1.2rem 0 0; margin-right: 1rem; }
-  .hero-stat-n { font-size: 1.5rem; }
-  .hero-stat-l { font-size: .52rem; }
-  .lang-toggle { margin-bottom: 1rem; }
-
-  /* Password gate */
-  .pw-box { width: calc(100vw - 3rem); padding: 2rem 1.6rem; }
-  .pw-logo { font-size: 1.5rem; }
-  .pw-logo-ar { font-size: 1.3rem; }
-
-  /* Hero content */
   .opp-layout { grid-template-columns: 1fr; gap: 2.5rem; }
   .three-cols { grid-template-columns: 1fr; }
   .three-col { border-right: none; border-bottom: 1px solid var(--border); }
@@ -568,8 +545,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.2rem 3.
   .nuttall-inner { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
   .strip-pills { flex-direction: column; }
   .strip-pill { border-right: none; border-bottom: 1px solid var(--border); padding: 1.2rem 1.5rem; }
-
-  /* Three-col grids → 1 col */
   .pak-six { grid-template-columns: 1fr 1fr; }
   .pak-cell:nth-child(2n) { border-right: none; }
   .equity-tiers { grid-template-columns: 1fr; }
@@ -581,14 +556,10 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.2rem 3.
   .returns-row { grid-template-columns: 1fr 1fr; }
   .ret-cell:nth-child(2n) { border-right: none; }
   .ret-cell { border-bottom: 1px solid var(--border); }
-
-  /* Four-col → 2 col */
   .steps-four { grid-template-columns: 1fr 1fr; }
   .step:nth-child(2n) { border-right: none; }
   .vert-grid { grid-template-columns: 1fr 1fr; }
   .vert:nth-child(2n) { border-right: none; }
-
-  /* Teams → 1 col */
   .team-grid { grid-template-columns: 1fr 1fr; }
   .team-card:nth-child(2n) { border-right: none; }
   .advisory-grid { grid-template-columns: 1fr 1fr; }
@@ -598,12 +569,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.2rem 3.
   .ic-mandate { flex-direction: column; }
   .ic-mandate-cell { border-right: none; border-bottom: 1px solid var(--border); }
   .ic-mandate-cell:last-child { border-bottom: none; }
-
-  /* Steps two */
   .steps-two { grid-template-columns: 1fr; }
   .step-card { border-right: none; }
-
-  /* Investment */
   .inv-top { flex-direction: column; align-items: flex-start; gap: 2rem; }
   .inv-right-stats { grid-template-columns: 1fr; margin-left: 0; width: 100%; }
   .inv-stat-box { border-right: none; border-bottom: 1px solid var(--border); }
@@ -615,77 +582,15 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.2rem 3.
   .matched-strip { flex-direction: column; gap: 1.5rem; }
   .matched-nums { flex-wrap: wrap; justify-content: center; gap: 1rem; }
   .matched-val { font-size: 1.5rem; }
-
-  /* Closing */
   .closing-content { padding: 6rem 1.5rem; }
-
-  /* Footer - inherited */
   .footer-links { flex-wrap: wrap; justify-content: center; gap: 1.2rem; }
-
-  /* Confidential banner - inherited */
-  .conf-text { font-size: .52rem; letter-spacing: .12em; }
-  #pw-gate { padding: 1.5rem; }
-  .pw-box { width: 100%; max-width: 440px; padding: 1.8rem 1.5rem; }
-  .pw-notice { font-size: .88rem; line-height: 1.65; }
-
-  /* Hero mobile */
-  .hero-title-en { font-size: clamp(60px, 18vw, 120px) !important; }
-  .hero-stats { grid-template-columns: 1fr 1fr; }
-  .lang-toggle { margin-bottom: 1rem; }
-
-  /* Nuttall section */
-  .nuttall-quote { font-size: clamp(1rem, 3.5vw, 1.4rem); }
-
-  /* Team 5-col → 2-col */
-  .team-grid { grid-template-columns: 1fr 1fr !important; }
-  .team-card:nth-child(odd):last-child { grid-column: 1 / -1; }
-
-  /* IC grid */
   .ic-grid { grid-template-columns: 1fr !important; }
   .ic-card { border-right: none !important; }
-
-  /* Advisory 2-col */
   .advisory-grid { grid-template-columns: 1fr !important; }
-
-  /* Investment stats */
   .inv-right-stats { grid-template-columns: 1fr 1fr; }
-
-  /* Cohort verticals */
   .vert-grid { grid-template-columns: 1fr; }
   .vert { border-right: none; border-bottom: 1px solid var(--border); }
-
-  /* Partner strip */
-  .strip-pill { padding: 1.2rem 1.5rem; }
-
-  /* Closing */
-  .closing-content { padding-top: 6rem !important; padding-bottom: 6rem !important; }
-  .closing-h { font-size: clamp(36px, 10vw, 80px); }
-  .closing-sub { font-size: clamp(14px, 3vw, 24px); }
-  .closing-cta { font-size: .7rem; padding: .8rem 1.8rem; }
-  .closing-quote { font-size: clamp(1.2rem, 4vw, 1.6rem); }
 }
-
-  /* Confidential banner */
-  .conf-text { font-size: .52rem; letter-spacing: .12em; }
-
-  /* Timeline */
-  .tl-track { flex-direction: column; gap: 1.5rem; padding-top: 0; }
-  .tl-track::before { display: none; }
-  .tl-item::before { display: none; }
-  .tl-item { padding-right: 0; padding-left: 1rem; border-left: 2px solid var(--border); }
-
-  /* Nuttall pillars */
-  .nuttall-pillars { flex-direction: column; }
-  .nuttall-pillar { border-right: none; border-bottom: 1px solid var(--border); }
-  .nuttall-pillar:last-child { border-bottom: none; }
-
-  /* Model footer */
-  .model-footer { flex-direction: column; gap: 1.5rem; }
-  .model-kicker { text-align: left; }
-
-  /* Apply band - inherited */
-
-  /* Closing quote */
 
 @media (max-width: 480px) {
   nav,
@@ -699,10 +604,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.2rem 3.
   .closing-content,
   footer,
   #conf-banner { padding-left: 1rem !important; padding-right: 1rem !important; }
-  .nav-wm-sub { max-width: 100px; font-size: .36rem; }
-  .nav-cta { font-size: .48rem; padding: .25rem .55rem; }
   .hero-title-en { font-size: clamp(40px, 13vw, 80px) !important; }
-  .hero-badge { font-size: .46rem; letter-spacing: .1em; }
   .team-grid { grid-template-columns: 1fr; }
   .team-card { border-right: none; border-bottom: 1px solid var(--border); }
   .team-card:last-child { border-bottom: none; }
@@ -725,8 +627,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.2rem 3.
 </style>
 </head>
 <body>
-
-<!-- NAV -->
 
 <!-- PASSWORD GATE -->
 <div id="pw-gate">
@@ -1049,7 +949,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.2rem 3.
         <div class="team-avatar">MK</div>
         <div class="team-name">Mona Kattan</div>
         <div class="team-title">Advisor · Co-Founder, Huda Beauty &amp; Kayali</div>
-        <div class="team-bio">Co-founder of Huda Beauty — the world's largest independent beauty company. Founder of Kayali Fragrances. Investor and entrepreneur with unparalleled reach across women in the MENA region. Brings brand-building expertise, consumer insight, and a direct line to the communities Nisaa Studio is built to serve.</div>
+        <div class="team-bio">Co-founder of Huda Beauty — the world's largest independent beauty company. Founder of Kayali Fragrances. Investor and entrepreneur with unparalleled reach across women in the MENA region.</div>
       </div>
       <div class="team-card">
         <div class="team-tag">Investor · CFO</div>
@@ -1065,43 +965,35 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.2rem 3.
       <div class="advisory-grid">
         <div class="adv-cell">
           <div class="adv-name">Huda Kattan</div>
-          <div class="adv-role">Founder &amp; CEO, Huda Beauty — one of the world's most influential beauty entrepreneurs. 55M+ Instagram following. Unparalleled access to women across MENA &amp; South Asia.</div>
-          <div style="margin-top:.6rem"><a href="https://www.linkedin.com/in/huda-kattan-8953a518/" target="_blank" style="font-family:'Jost',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);text-decoration:none;opacity:.7;transition:opacity .2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.7">LinkedIn ↗</a></div>
+          <div class="adv-role">Founder &amp; CEO, Huda Beauty — one of the world's most influential beauty entrepreneurs. 55M+ Instagram following.</div>
         </div>
         <div class="adv-cell">
           <div class="adv-name">Mona Kattan</div>
-          <div class="adv-role">Co-founder, Huda Beauty &amp; Kayali Fragrances. Global beauty investor and entrepreneur. Born in the MENA region — deeply aligned with Nisaa Studio's mission to invest in women across the Arab world.</div>
-          <div style="margin-top:.6rem"><a href="https://www.linkedin.com/in/mona-kattan/" target="_blank" style="font-family:'Jost',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);text-decoration:none;opacity:.7;transition:opacity .2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.7">LinkedIn ↗</a></div>
+          <div class="adv-role">Co-founder, Huda Beauty &amp; Kayali Fragrances. Global beauty investor and entrepreneur.</div>
         </div>
         <div class="adv-cell">
           <div class="adv-name">Sara Al Madani</div>
-          <div class="adv-role">UAE serial entrepreneur, Shark Tank UAE investor, and one of the most visible female voices in Gulf business. Co-founder of multiple ventures. Champion of women in entrepreneurship across the GCC.</div>
-          <div style="margin-top:.6rem"><a href="https://www.linkedin.com/in/sara-al-madani/" target="_blank" style="font-family:'Jost',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);text-decoration:none;opacity:.7;transition:opacity .2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.7">LinkedIn ↗</a></div>
+          <div class="adv-role">UAE serial entrepreneur, Shark Tank UAE investor, and one of the most visible female voices in Gulf business.</div>
         </div>
         <div class="adv-cell">
           <div class="adv-name">Serena Williams</div>
-          <div class="adv-role">23× Grand Slam champion. Founder of Serena Ventures — $111M fund investing in diverse founders. Maternal health advocate who publicly survived life-threatening postpartum complications. Perfect mission alignment.</div>
-          <div style="margin-top:.6rem"><a href="https://www.linkedin.com/in/serenawilliams/" target="_blank" style="font-family:'Jost',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);text-decoration:none;opacity:.7;transition:opacity .2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.7">LinkedIn ↗</a></div>
+          <div class="adv-role">23× Grand Slam champion. Founder of Serena Ventures — $111M fund investing in diverse founders. Maternal health advocate.</div>
         </div>
         <div class="adv-cell">
           <div class="adv-name">Allyson Felix</div>
-          <div class="adv-role">Most decorated US track &amp; field athlete. Founder of Saysh. Near-fatal emergency C-section turned her into America's leading maternal health advocate. Testified before US Congress on maternal mortality. Mission-perfect for Nisaa Studio.</div>
-          <div style="margin-top:.6rem"><a href="https://www.linkedin.com/in/allyson-felix/" target="_blank" style="font-family:'Jost',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);text-decoration:none;opacity:.7;transition:opacity .2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.7">LinkedIn ↗</a></div>
+          <div class="adv-role">Most decorated US track &amp; field athlete. Founder of Saysh. America's leading maternal health advocate.</div>
         </div>
         <div class="adv-cell">
           <div class="adv-name">Naomi Osaka</div>
-          <div class="adv-role">4× Grand Slam champion and mental health advocate. Founder of KINLÒ skincare. Openly discusses women's mental health &amp; postpartum experiences. Her advocacy directly mirrors Nisaa Studio's mental health vertical.</div>
-          <div style="margin-top:.6rem"><a href="https://www.linkedin.com/in/naomi-osaka/" target="_blank" style="font-family:'Jost',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);text-decoration:none;opacity:.7;transition:opacity .2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.7">LinkedIn ↗</a></div>
+          <div class="adv-role">4× Grand Slam champion and mental health advocate. Founder of KINLÒ skincare.</div>
         </div>
         <div class="adv-cell">
           <div class="adv-name">Billie Jean King</div>
-          <div class="adv-role">Tennis legend. Founder of the Women's Sports Foundation and World TeamTennis. Lifelong champion of women's equality and healthcare access. Iconic cross-generational voice for women's rights globally.</div>
-          <div style="margin-top:.6rem"><a href="https://www.linkedin.com/in/billiejeanking/" target="_blank" style="font-family:'Jost',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);text-decoration:none;opacity:.7;transition:opacity .2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.7">LinkedIn ↗</a></div>
+          <div class="adv-role">Tennis legend. Founder of the Women's Sports Foundation. Lifelong champion of women's equality and healthcare access.</div>
         </div>
         <div class="adv-cell">
           <div class="adv-name">Dr. Jen Gunter</div>
-          <div class="adv-role">OB/GYN. Author of <em>The Vagina Bible</em> &amp; <em>The Menopause Manifesto</em>. The world's most trusted debunker of women's health misinformation. 1M+ social following. Clinical credibility + global reach.</div>
-          <div style="margin-top:.6rem"><a href="https://www.linkedin.com/in/jen-gunter-md/" target="_blank" style="font-family:'Jost',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);text-decoration:none;opacity:.7;transition:opacity .2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.7">LinkedIn ↗</a></div>
+          <div class="adv-role">OB/GYN. Author of The Vagina Bible &amp; The Menopause Manifesto. The world's most trusted voice on women's health misinformation.</div>
         </div>
       </div>
     </div>
@@ -1145,7 +1037,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.2rem 3.
     <div class="closing-sub">NISAA STUDIO IS HOW IT SERVES THE NEXT 70.</div>
     <p class="closing-body">The world's first women's health venture studio — built in Pakistan, by Pakistan, for the world. $5M committed. $10M total pool. Nuttall Women's Health as international research partner. Cohort I now open.</p>
     <div class="closing-quote">"We don't predict the future.<br>We fund the founders bold enough to build it."</div>
-    <a href="/cdn-cgi/l/email-protection#b2c0c7dfdfd3dcd3f2c4dbc6d3dedbc6cbd1d3c2dbc6d3de9cd1dd" class="closing-cta">Apply to Cohort I <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a href="mailto:rummana@vitalitycapital.co" class="closing-cta">Apply to Cohort I <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </div>
 </section>
 
@@ -1154,23 +1046,21 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.2rem 3.
   <div class="footer-wm">NISAA <span>STUDIO</span><span class="ar">نساء</span></div>
   <ul class="footer-links">
     <li><a href="https://vitalitycapital.co" target="_blank">vitalitycapital.co</a></li>
-    <li><a href="/cdn-cgi/l/email-protection#bac8cfd7d7dbd4dbfaccd3cedbd6d3cec3d9dbcad3cedbd694d9d5">Contact</a></li>
+    <li><a href="mailto:rummana@vitalitycapital.co">Contact</a></li>
     <li><a href="#hero">Back to Top ↑</a></li>
   </ul>
-  <div class="footer-credit"><a href="https://www.linkedin.com/in/rummana-dada/" target="_blank" style="color:var(--muted);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--muted)'">Rummana Dada</a> · Managing Partner, Vitality Capital</div>
+  <div class="footer-credit">Rummana Dada · Managing Partner, Vitality Capital</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // Password gate
 function checkPw() {
   const val = document.getElementById('pw-input').value.trim().toLowerCase();
   const err = document.getElementById('pw-error');
-  // Password: nisaa2026202
   if (val === 'nisaa2026202' || val === 'nisaa2026' || val === 'nisaa') {
     document.getElementById('pw-gate').style.display = 'none';
     document.getElementById('conf-banner').style.display = 'flex';
     document.getElementById('pw-error').style.display = 'none';
-    // Resume hero animations
     document.querySelectorAll('.hero-title-en,.lang-toggle,.hero-badge,.hero-sub,.hero-stats,.scroll-hint').forEach(el => {
       el.style.animationPlayState = 'running';
     });
